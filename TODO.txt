@@ -1,0 +1,14 @@
+﻿---- TO DO ----
+
+make GUI
+finish stuff regarding cells and field
+maybe make graphical assets 
+settings 
+menu
+save/load
+
+-- Ideas --
+sound effects?
+timer?
+score?
+
