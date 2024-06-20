@@ -1,5 +1,8 @@
 namespace Minesweeper
 {
+    /// <summary>
+    /// Die Grenzen des Spielfelds, um zu überprüfen, ob eine Zelle innerhalb des Spielfelds liegt
+    /// </summary>
     public struct Bounds
     {
         public int Rows { get; }
