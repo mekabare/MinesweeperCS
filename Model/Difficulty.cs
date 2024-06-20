@@ -1,13 +1,16 @@
 ﻿using System;
 
 namespace Minesweeper
-{
+{/// <summary>
+/// Difficulty als Klasse, die die Schwierigkeit des Spiels definiert und die Feldgröße und die Anzahl der Minen festlegt
+/// </summary>
     public class Difficulty
     {
         public int Rows;
         public int Columns;
         public int Mines;
 
+        // Enum der Schwierigkeitsstufen für developerfreundliche Auswahl
         public enum Level
         {
             Easy = '0',
@@ -15,6 +18,8 @@ namespace Minesweeper
             Hard = '2'
 
         }
+
+        // Konstruktor, der die Feldgroesse des Spiels festlegt
         public Difficulty(Level lvl)
         {
             switch (lvl)

@@ -7,18 +7,31 @@ using System.Windows.Controls.Primitives;
 
 namespace Minesweeper
 {
+    /// <summary>
+    /// Klasse, die das Spielfeld repräsentiert
+    /// <param name= "Cell">Objektinstanz für Kästchen</field>
+    /// <param name="Field">Liste von Zellen, die das Spielfeld repräsentieren</param>
+    /// <param name="Rows">Anzahl der Zeilen des Spielfelds</param>
+    /// <param name="Columns">Anzahl der Spalten des Spielfelds</param>
+    /// <param name="Difficulty">Schwierigkeitsgrad der Session</param>
+    /// <param name="Bounds">Objektinstanz für die Grenzen des Spielfelds</param>
+    /// </summary>
     public class MineField
     {
         public Cell Cell { get; set; } 
         public List<List<Cell>> Field { get; set; }
         public int Rows { get; set; }
         public int Columns { get; set; }
-
         public Difficulty Difficulty { get; set; }
+
+        private CellHelper = new MineField(Cell);
+
+
 
         // In MineField class
         public Bounds Bounds => new Bounds(Rows, Columns);
 
+        // Konstruktor, der das Spielfeld erstellt
         public MineField(Difficulty difficulty)
         {
             Difficulty = difficulty;
@@ -33,6 +46,7 @@ namespace Minesweeper
                     Field[i].Add(new Cell(i, j));
                 }
             }
+            // TODO: Erst nach dem ersten Klicken werden die Minen platziert!! 
             PlaceMines();
             CalculateAdjacentMines();
         }
@@ -58,7 +72,7 @@ namespace Minesweeper
         }
 
         /// <summary>   
-        /// Checks for mines directly adjacent to a cell and returns number to display
+        /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
         /// </summary>
         private void CalculateAdjacentMines(Cell cell)
         {
@@ -66,7 +80,13 @@ namespace Minesweeper
             int column = cell.Column;
             int adjacentMines = 0;
 
-            foreach 
+            foreach Cell in Field
+            {
+                if (Field[row][column].IsMine)
+                {
+                    adjacentMines++;
+                }
+            }
 
             // Check all 8 directions for mines
 

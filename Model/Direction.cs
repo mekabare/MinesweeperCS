@@ -2,33 +2,33 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// This class automates the process of getting the adjacent cells of a cell
+/// Automatisiert die Lokalisierung der benachbarten Zellen
 /// </summary>
 namespace Minesweeper
 {
 static class CellHelper
     {
         // Dictionary of offsets for each direction from enum DirectionType
-        private static readonly Dictionary<CellHelper, (int rowOffset, int colOffset)> DirectionOffsets = new Dictionary<CellHelper, (int, int)>
+        private static readonly Dictionary<Direction, (int rowOffset, int colOffset)> DirectionOffsets = new Dictionary<Direction, (int, int)>
         {
-            { CellHelper.N, (-1, 0) },
-            { CellHelper.NE, (-1, 1) },
-            { CellHelper.E, (0, 1) },
-            { CellHelper.SE, (1, 1) },
-            { CellHelper.S, (1, 0) },
-            { CellHelper.SW, (1, -1) },
-            { CellHelper.W, (0, -1) },
-            { CellHelper.NW, (-1, -1) }
+            { Direction.N, (-1, 0) },
+            { Direction.NE, (-1, 1) },
+            { Direction.E, (0, 1) },
+            { Direction.SE, (1, 1) },
+            { Direction.S, (1, 0) },
+            { Direction.SW, (1, -1) },
+            { Direction.W, (0, -1) },
+            { Direction.NW, (-1, -1) }
         };
 
         // Enum for shorthand names for directions
-        public enum CellHelper
+        public enum Direction
         {
             N, NE, E, SE, S, SW, W, NW
         }
 
         // Method to get adjacent cells based on a given cell
-        public static List<Cell> GetAdjacentCells(Cell cell, MineField)
+        public static List<Cell> GetAdjacentCells(Cell cell)
         {
             var adjacentCells = new List<Cell>();
 
@@ -42,8 +42,6 @@ static class CellHelper
                 {
                     adjacentCells.Add(new Cell(newRow, newColumn));
                 }
-            }
-
             return adjacentCells;
         }
     }
