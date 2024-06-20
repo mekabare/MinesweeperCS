@@ -8,19 +8,77 @@ namespace Minesweeper
 {
     public class Cell
     {
-        public int[,] Position { get; set; }
-        public int Row { get; set; }
-        public int Column { get; set; }
-        public bool IsMine { get; set; }
-        public bool IsRevealed { get; set; }
-        public bool IsFlagged { get; set; }
+        //Felder
+        private int[,] position;                        //Position (2D-Array)
 
+        private int row, column;                        //Reihe, Spalte
+
+        private bool isMine, isRevealed, isFlagged;     //Hat Mine, Ist Aufgedeckt, Hat Flagge
+
+
+        //Methoden
+
+        /// <summary>
+        /// Reihe, Spalte - Konstruktor
+        /// </summary>
+        /// <param name="row">Reihe</param>
+        /// <param name="column">Spalte</param>
+        /// <exception cref="ArgumentOutOfRangeException">Reihe und Spalte müssen positiv sein!</exception>
         public Cell(int row, int column)
         {
             Position = new int[row, column];
             IsMine = false;
             IsRevealed = false;
             IsFlagged = false;
-        }
-    }
-}
+        }//public Cell
+
+
+
+        //Getter und Setter
+
+        public int[,] Position
+        {
+            get => position;
+            set { value = position; }
+        }//Position
+
+        public int Row
+        {
+            get => row;
+            set
+            {
+                if (value < 0) { throw new ArgumentOutOfRangeException(nameof(value), "row of Cell cannot be negative!"); }
+                else { row = value; }
+            }
+        }//Row
+
+        public int Column
+        {
+            get => column;
+            set
+            {
+                if (value < 0) { throw new ArgumentOutOfRangeException(nameof(value), "column of Cell cannot be negative!"); }
+                else { column = value; }
+            }
+        }//Column
+
+        public bool IsMine
+        {
+            get => isMine;
+            set { isMine = value; }
+        }//IsMine
+
+        public bool IsRevealed
+        {
+            get => isRevealed;
+            set { isRevealed = value; }
+        }//IsRevealed
+
+        public bool IsFlagged
+        {
+            get => isFlagged;
+            set { isFlagged = value; }
+        }//IsFlagged
+        
+    }//Class
+}//Namespace

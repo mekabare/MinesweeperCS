@@ -42,8 +42,9 @@ static class CellHelper
                 {
                     adjacentCells.Add(new Cell(newRow, newColumn));
                 }
+            }
             return adjacentCells;
         }
-    }
 
-}
+    }//Klasse
+}//Namespace
