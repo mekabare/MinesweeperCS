@@ -2,9 +2,9 @@
 
 namespace Minesweeper
 {/// <summary>
-/// Difficulty als Klasse, die die Schwierigkeit des Spiels definiert und die Feldgröße und die Anzahl der Minen festlegt
+/// GameDifficulty als Klasse, die die Schwierigkeit des Spiels definiert und die Feldgröße und die Anzahl der Minen festlegt
 /// </summary>
-    public abstract class Difficulty
+    public abstract class GameDifficulty
     {
         private int[,] fieldSize;
         private int totalMines;
@@ -14,7 +14,7 @@ namespace Minesweeper
         public int TotalMines { get => totalMines; set => totalMines = value; }
         public string NameString { get => nameString; set => nameString = value; }
 
-        public Difficulty()
+        public GameDifficulty()
         {
             FieldSize = new int[0, 0];
             TotalMines = 0;
@@ -22,7 +22,7 @@ namespace Minesweeper
         }
     }
 
-    public class Easy : Difficulty
+    public class Easy : GameDifficulty
     {
         public Easy() : base()
         {
@@ -32,7 +32,7 @@ namespace Minesweeper
         }
     }
 
-    public class Medium : Difficulty
+    public class Medium : GameDifficulty
     {
         public Medium() : base()
         {
@@ -42,7 +42,7 @@ namespace Minesweeper
         }
     }
 
-    public class Hard : Difficulty
+    public class Hard : GameDifficulty
     {
         public Hard() : base()
         {
@@ -58,7 +58,7 @@ namespace Minesweeper
 // IDEE: Man kann den User eigene Schwierigkeitsgrade erstellen lassen
 
 /* 
- * public class Custom : Difficulty 
+ * public class Custom : GameDifficulty 
  * {
  *  public Custom(int rows, int columns, int mines) : base()
  *  {
