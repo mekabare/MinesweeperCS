@@ -4,46 +4,69 @@ namespace Minesweeper
 {/// <summary>
 /// Difficulty als Klasse, die die Schwierigkeit des Spiels definiert und die Feldgröße und die Anzahl der Minen festlegt
 /// </summary>
-    public class Difficulty
+    public abstract class Difficulty
     {
-        public int Rows;
-        public int Columns;
-        public int Mines;
+        private int[,] fieldSize;
+        private int totalMines;
+        private string nameString;
 
-        // Enum der Schwierigkeitsstufen für developerfreundliche Auswahl
-        public enum Level
+        public int[,] FieldSize { get => fieldSize; set => fieldSize = value; }
+        public int TotalMines { get => totalMines; set => totalMines = value; }
+        public string NameString { get => nameString; set => nameString = value; }
+
+        public Difficulty()
         {
-            Easy = '0',
-            Medium = '1',
-            Hard = '2'
-
-        }
-
-        // Konstruktor, der die Feldgroesse des Spiels festlegt
-        public Difficulty(Level lvl)
-        {
-            switch (lvl)
-            {
-                case Level.Easy:
-                    Rows = 9;
-                    Columns = 9;
-                    Mines = 10;
-                    break;
-                case Level.Medium:
-                    Rows = 16;
-                    Columns = 16;
-                    Mines = 40;
-                    break;
-                case Level.Hard:
-                    Rows = 16;
-                    Columns = 30;
-                    Mines = 99;
-                    break;
-            }
+            FieldSize = new int[0, 0];
+            TotalMines = 0;
+            NameString = "";
         }
     }
-  
+
+    public class Easy : Difficulty
+    {
+        public Easy() : base()
+        {
+            FieldSize = new int[9, 9];
+            TotalMines = 10;
+            NameString = "Easy";
+        }
+    }
+
+    public class Medium : Difficulty
+    {
+        public Medium() : base()
+        {
+            FieldSize = new int[16, 16];
+            TotalMines = 40;
+            NameString = "Medium";
+        }
+    }
+
+    public class Hard : Difficulty
+    {
+        public Hard() : base()
+        {
+            FieldSize = new int[16, 30];
+            TotalMines = 99;
+            NameString = "Hard";
+        }
+    }
 }
 
 
+#region
+// IDEE: Man kann den User eigene Schwierigkeitsgrade erstellen lassen
 
+/* 
+ * public class Custom : Difficulty 
+ * {
+ *  public Custom(int rows, int columns, int mines) : base()
+ *  {
+ *      this.FieldSize = new int[rows, columns];
+ *      this.TotalMines = mines;
+ *      this.NameString = "Custom";
+ *  }
+ * 
+ * }
+ */
+#endregion
