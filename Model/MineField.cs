@@ -18,13 +18,11 @@ namespace Minesweeper
     /// </summary>
     public class MineField
     {
-        public Cell Cell { get; set; } 
-        public List<List<Cell>> Field { get; set; }
-        public int Rows { get; set; }
-        public int Columns { get; set; }
-        public Difficulty Difficulty { get; set; }
-
-        private CellHelper = new MineField(Cell);
+        private int[,] size { set => [int rows, int columns]};
+        public Tile Tile { get; set; } 
+        public List<List<Tile>> Field { get; set; }
+        
+        public GameDifficulty Difficulty { get; set; }
 
 
 
@@ -32,18 +30,17 @@ namespace Minesweeper
         public Bounds Bounds => new Bounds(Rows, Columns);
 
         // Konstruktor, der das Spielfeld erstellt
-        public MineField(Difficulty difficulty)
+        public MineField(GameDifficulty difficulty)
         {
             Difficulty = difficulty;
-            Rows = difficulty.Rows;
-            Columns = difficulty.Columns;
-            Field = new List<List<Cell>>();
+            
+            Field = new List<List<Tile>>();
             for (int i = 0; i < Rows; i++)
             {
-                Field.Add(new List<Cell>());
+                Field.Add(new List<Tile>());
                 for (int j = 0; j < Columns; j++)
                 {
-                    Field[i].Add(new Cell(i, j));
+                    Field[i].Add(new Tile(i, j));
                 }
             }
             // TODO: Erst nach dem ersten Klicken werden die Minen platziert!! 
@@ -74,13 +71,13 @@ namespace Minesweeper
         /// <summary>   
         /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
         /// </summary>
-        private void CalculateAdjacentMines(Cell cell)
+        private void CalculateAdjacentMines(Tile cell)
         {
             int row = cell.Row;
             int column = cell.Column;
             int adjacentMines = 0;
 
-            foreach (Cell in Field)
+            foreach SingleTile in Field
             {
                 if (Field[row][column].IsMine)
                 {

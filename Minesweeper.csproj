@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\TileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,16 +67,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\TileControl.xaml.cs">
+      <DependentUpon>TileControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Bounds.cs" />
-    <Compile Include="Model\Difficulty.cs" />
-    <Compile Include="Model\Direction.cs" />
+    <Compile Include="Model\GameDifficulty.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Cell.cs" />
+    <Compile Include="Model\Tile.cs" />
     <Compile Include="Model\MineField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
