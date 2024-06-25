@@ -18,5 +18,5 @@ namespace Minesweeper
         {
             return row >= 0 && row < Rows && column >= 0 && column < Columns;
         }
-    }
-}
+    }//Struct
+}//Namespace

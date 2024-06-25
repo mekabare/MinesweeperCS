@@ -6,9 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Minesweeper { 
-    namespace Tile { 
-
+namespace Minesweeper
+{
         public class Tile
         {
             #region Properties
@@ -71,8 +70,9 @@ namespace Minesweeper {
                 get => neighboringTiles;
                 set { neighboringTiles = value; }
             }//NeighboringTiles
-
             #endregion
+
+
 
             #region Konstruktoren
 
@@ -103,6 +103,7 @@ namespace Minesweeper {
             #endregion
 
         }//Klasse
+        #region Aufgeräumt
         abstract class TileHelper
         {
 
@@ -141,10 +142,9 @@ namespace Minesweeper {
                     }
                 }
                 return neighboringTiles;
-            }
+            }//GetNeighboringTiles
 
         }//Klasse
-
-    }//Namespace
+        #endregion
 }//Namespace
 

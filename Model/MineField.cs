@@ -18,12 +18,29 @@ namespace Minesweeper
     /// </summary>
     public class MineField
     {
-        private int[,] size { set => [int rows, int columns]};
-        public Tile Tile { get; set; } 
+        #region Felder
+        private int[,] size;                    //Groesse des Spielfelds
+        private int maxRow = 0, maxColumn = 0;  //Groesse des Spielfleds
+
+        private Tile[,] field;                  //Das Spielfeld
+
+        private GameDifficulty difficulty;      //Schwierigkeitsgrad
+        #endregion
+
+
+        #region Getter und Setter
+        public int[,] Size
+        {
+            get => Size;
+            set { }
+        }
+                    //ANTO: HIER WEITERMACHEN -ANTO
+
+
         public List<List<Tile>> Field { get; set; }
         
         public GameDifficulty Difficulty { get; set; }
-
+        #endregion
 
 
         // In MineField class
@@ -94,6 +111,5 @@ namespace Minesweeper
     }//Klasse
   
 }//Namespace
-
 
 
