@@ -80,7 +80,7 @@ namespace Minesweeper
             int column = cell.Column;
             int adjacentMines = 0;
 
-            foreach Cell in Field
+            foreach (Cell in Field)
             {
                 if (Field[row][column].IsMine)
                 {
@@ -94,9 +94,9 @@ namespace Minesweeper
 
 
 
-    }
+    }//Klasse
   
-}
+}//Namespace
 
 
 

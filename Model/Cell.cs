@@ -15,15 +15,15 @@ namespace Minesweeper
 
         private bool isMine, isRevealed, isFlagged;     //Hat Mine, Ist Aufgedeckt, Hat Flagge
 
-
-        //Methoden
+        //---------------------------------------------------------------------------------------------------------------
+        //Kontruktoren
 
         /// <summary>
         /// Reihe, Spalte - Konstruktor
         /// </summary>
         /// <param name="row">Reihe</param>
         /// <param name="column">Spalte</param>
-        /// <exception cref="ArgumentOutOfRangeException">Reihe und Spalte müssen positiv sein!</exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public Cell(int row, int column)
         {
             Position = new int[row, column];
@@ -32,8 +32,7 @@ namespace Minesweeper
             IsFlagged = false;
         }//public Cell
 
-
-
+        //---------------------------------------------------------------------------------------------------------------
         //Getter und Setter
 
         public int[,] Position
