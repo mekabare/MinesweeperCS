@@ -47,7 +47,6 @@ namespace Minesweeper
     public class MineField
     {
         #region Felder
-        private int[,] size;                    //Groesse des Spielfelds
         private int maxRow = 0, maxColumn = 0;  //Groesse des Spielfleds
 
         private Tile[,] field;                  //Das Spielfeld
@@ -58,18 +57,14 @@ namespace Minesweeper
 
         //Hier muss noch was gemacht werden
         #region Getter und Setter
-        public int[,] Size
-        {
-            get => Size;
-            set { }
-        }//Size
         
         public int MaxRow
         {
             get => maxRow;
             set
             {
-                maxRow = value;
+                if (value >= 0) { maxRow = value; }
+                else { throw new ArgumentOutOfRangeException("maxRow", "Value must be larger or equal than zero!"); }
             }
         }//MaxRow
 
@@ -78,7 +73,8 @@ namespace Minesweeper
             get => maxColumn;
             set
             {
-                maxColumn = value;
+                if (value >= 0) { maxColumn = value; }
+                else { throw new ArgumentOutOfRangeException("maxColumn", "Value must be larger or equal than zero!"); }
             }
         }//MaxColumn
 
@@ -96,7 +92,15 @@ namespace Minesweeper
             get => difficulty;
             set
             {
-                difficulty = value;
+                if (value == null) { throw new ArgumentNullException("difficulty", "Difficulty object cannot be null!"); }
+                else if (value is Easy ||
+                    value is Medium ||
+                    value is Hard ||
+                    value is Custom)
+                {
+                    difficulty = value;
+                }
+                else { throw new ArgumentException("Difficulty object must be an Easy-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
             }
         }//Difficulty
         #endregion Getter und Setter
@@ -106,48 +110,64 @@ namespace Minesweeper
         // In MineField class
         //public Bounds Bounds => new Bounds(Rows, Columns);
 
-        /*
-        // Konstruktor, der das Spielfeld erstellt
-        public MineField(GameDifficulty difficulty)
-        {
-            Difficulty = difficulty;
-            
-            Field = new List<List<Tile>>();
-            for (int i = 0; i < Rows; i++)
-            {
-                Field.Add(new List<Tile>());
-                for (int j = 0; j < Columns; j++)
-                {
-                    Field[i].Add(new Tile(i, j));
-                }
-            }
-            // TODO: Erst nach dem ersten Klicken werden die Minen platziert!! 
-            PlaceMines();
-            CalculateAdjacentMines();
-        }
-        */
-
-
-
+        
 
         #region Konstruktoren
 
+        /// <summary>
+        /// Allg. Konstruktor. Erzeugt ein leeres Feld.
+        /// </summary>
+        /// <param name="difficulty"></param>
         public MineField(GameDifficulty difficulty)
         {
             Difficulty = difficulty;
+            MaxRow = difficulty.RowSize;
+            MaxColumn = difficulty.ColumnSize;
 
+            Field = new Tile[difficulty.RowSize, difficulty.ColumnSize];    //Arraygroesse setzen
 
+            for (int i = 0; i < difficulty.RowSize; i++)
+            {
+                for (int j = 0; j < difficulty.ColumnSize; j++)
+                {
+                    Field[i, j] = new Tile(i, j);                           //Alle Felder einsetzen
+                }//for Column
+            }//for Row
 
-
-        }
+        }//Allg.
 
         #endregion Konstruktoren
 
 
 
+        #region Methoden
+
+        private void PlaceMines(int Row, int Column)
+        {
+            //Zufallsgenerator
+            Random random = new Random(2349);
+
+            //Feld durchlaufen
+            //  Wenn RandGen über Schwellenwert, Bomb platzieren; Mitzählen
+            for (int i = 0; i < difficulty.RowSize; i++)
+            {
+                for (int j = 0; j < difficulty.ColumnSize; j++)
+                {
+                    //pruefen, ob man in der Umgebung des Coursors ist
+                    //  wenn nein, Generator laufen lassen.
+                    //    Wenn über Schwelle laufen lassen Bombe platzieren, Bombe abziehen
+                    //
+
+                }//for Column
+            }//for Row
+
+            //AdjacentMines zählen
+        }
+
+
+        #endregion Methoden
 
         /*
-
         /// <summary>
         /// Places mines randomly on field in accordance to difficulty
         /// </summary>
@@ -168,6 +188,8 @@ namespace Minesweeper
             }
         }//PlaceMines
         */
+
+
         /// <summary>   
         /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
         /// </summary>

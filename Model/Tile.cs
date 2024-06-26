@@ -90,16 +90,6 @@ namespace Minesweeper
                 IsFlagged = false;
                 NeighboringTiles = TileHelper.GetNeighboringTiles(this);
             }
-
-            public Tile(int[,] position)
-            {
-                Position = position;
-                IsMine = false;
-                IsRevealed = false;
-                IsFlagged = false;
-                NeighboringTiles = TileHelper.GetNeighboringTiles(this);
-
-            }//public SingleTile
             #endregion
 
         }//Klasse
