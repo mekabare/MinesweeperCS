@@ -1,28 +1,76 @@
 ﻿using System;
 
 namespace Minesweeper
-{/// <summary>
-/// GameDifficulty als Klasse, die die Schwierigkeit des Spiels definiert und die Feldgröße und die Anzahl der Minen festlegt
-/// </summary>
+{   
+    /// <summary>
+    /// GameDifficulty als Klasse, die die Schwierigkeit des Spiels definiert und die Feldgröße und die Anzahl der Minen festlegt
+    /// </summary>
     public abstract class GameDifficulty
     {
+        #region Felder
         private int[,] fieldSize;
         private int totalMines;
-        private string nameString;
+        //private string nameString;    //wird durch ToString() Methode ersetzt, für die abstract Programmierung.
+        #endregion Felder
 
-        public int[,] FieldSize { get => fieldSize; set => fieldSize = value; }
-        public int TotalMines { get => totalMines; set => totalMines = value; }
-        public string NameString { get => nameString; set => nameString = value; }
 
+        #region Getter und Setter
+
+        public int[,] FieldSize
+        {
+            get => fieldSize;
+            set { fieldSize = value; }      //pot. set Leer setzen und durch extra Funktion ersetzen.
+        }//FieldSize
+
+        public int TotalMines
+        {
+            get => totalMines;
+            set { totalMines = value; }     //Eingabepruefung einfügen, oder set Leer setzen und durch extra Funktion ersetzen
+        }//TotalMines
+
+        #endregion Getter und Setter
+
+
+
+        #region Konstruktoren
+
+        /// <summary>
+        /// default - Konstruktor
+        /// </summary>
         public GameDifficulty()
         {
             FieldSize = new int[0, 0];
             TotalMines = 0;
-            NameString = "";
-        }
+        }//default
+
+        /// <summary>
+        /// Allg. Konstruktor
+        /// </summary>
+        /// <param name="fieldSize"></param>
+        /// <param name="totalMines"></param>
+        public GameDifficulty(int[,] fieldSize, int totalMines)
+        {
+            FieldSize = fieldSize;
+            TotalMines = totalMines;
+        }//Allg.
+
+        #endregion Konstruktoren
+
+
+
+        #region abstract Methoden
+
+        /// <summary>
+        /// Gibt den Schwierigkeitsgrad als String zurück.
+        /// </summary>
+        /// <returns></returns>
+        public abstract override string ToString();
+
+        #endregion abstract Methoden
+
     }//abstract Class
 
-
+    //---------------------------------------------------------------------------------------------------
 
     public class Easy : GameDifficulty
     {
@@ -30,9 +78,12 @@ namespace Minesweeper
         {
             FieldSize = new int[9, 9];
             TotalMines = 10;
-            NameString = "Easy";
         }
-    }
+
+        public override string ToString() { return "Easy"; }
+
+    }//Klasse
+
 
     public class Medium : GameDifficulty
     {
@@ -40,9 +91,12 @@ namespace Minesweeper
         {
             FieldSize = new int[16, 16];
             TotalMines = 40;
-            NameString = "Medium";
         }
-    }
+
+        public override string ToString() { return "Medium"; }
+
+    }//Klasse
+
 
     public class Hard : GameDifficulty
     {
@@ -50,25 +104,25 @@ namespace Minesweeper
         {
             FieldSize = new int[16, 30];
             TotalMines = 99;
-            NameString = "Hard";
         }
-    }
-}
+
+        public override string ToString() { return "Hard"; }
+
+    }//Klasse
 
 
-#region
-// IDEE: Man kann den User eigene Schwierigkeitsgrade erstellen lassen
+    public class Custom : GameDifficulty
+    {
+        /// <summary>
+        /// Allg. Konstruktor
+        /// </summary>
+        /// <param name="rows">Menge an Reihen des Spielfelds</param>
+        /// <param name="columns">Menge an Spalten des Spielfelds</param>
+        /// <param name="mines">Menge an Minen</param>
+        public Custom(int rows, int columns, int mines) : base(new int[rows, columns], mines) { }
 
-/* 
- * public class Custom : GameDifficulty 
- * {
- *  public Custom(int rows, int columns, int mines) : base()
- *  {
- *      this.FieldSize = new int[rows, columns];
- *      this.TotalMines = mines;
- *      this.NameString = "Custom";
- *  }
- * 
- * }
- */
-#endregion
+        public override string ToString() { return "Custom"; }
+
+    }//Klasse
+
+}//Namespace

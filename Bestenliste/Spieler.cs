@@ -1,11 +1,12 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace Minesweeper.Bestenliste
+namespace Minesweeper
 {
     /// <summary>
     /// Ein Spieler kann eine Bestenzeit haben und so in die Bestenliste einsortiert werden
@@ -30,7 +31,7 @@ namespace Minesweeper.Bestenliste
         /// </summary>
         public Spieler()
         {
-            Name = "Nul";
+            Name = "NUL";
             Time = 0;
             difficulty = new Easy();
         }//Default
@@ -68,16 +69,31 @@ namespace Minesweeper.Bestenliste
 
 
         #region Methoden
+        /*
         public void calculateScore()    //Wenn score implementiert wird
         {
-            //diffculty.value / time    oder so
-            if (difficulty is Easy)
-            {
-                //diffculty.ToString()   --> "Easy"
-                //return 1 / time;
-            }
-        }
+            int diffValue = 0;
 
+            switch(Difficulty.ToString())   //Bestimmung des Rechenfaktors
+            {
+                case "Easy": {
+                        diffValue = 1;
+                        break;
+                    }
+                case "Medium": {
+                        diffValue = 2;
+                        break;
+                    }
+                case "Hard": {
+                        diffValue = 3;
+                        break;
+                    }
+                default: { break; }
+            }//switch
+
+            Score = diffValue / Time;   //Berechnung des Scores
+        }*///calculateScore()
+        
 
         #endregion Methoden
 
@@ -166,8 +182,15 @@ namespace Minesweeper.Bestenliste
             get => difficulty;
             set
             {
-                if (value != null) { difficulty = value; }
-                else { throw new ArgumentNullException("difficulty", "Difficulty object cannot be null!"); }
+                if (value == null) { throw new ArgumentNullException("difficulty", "Difficulty object cannot be null!"); }
+                else if (value is Easy ||
+                    value is Medium ||
+                    value is Hard ||
+                    value is Custom)
+                {
+                    difficulty = value;
+                }
+                else { throw new ArgumentException("Difficulty object must be an Easy-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
             }
         }//Difficulty
         #endregion Getter und Setter
