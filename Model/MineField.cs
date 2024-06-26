@@ -56,6 +56,7 @@ namespace Minesweeper
         #endregion
 
 
+        //Hier muss noch was gemacht werden
         #region Getter und Setter
         public int[,] Size
         {
@@ -83,19 +84,29 @@ namespace Minesweeper
 
         public Tile[,] Field
         {
-
-        }
-
-
-        public List<List<Tile>> Field { get; set; }
+            get => field;
+            set
+            { 
+                field = value;
+            }
+        }//Field
         
-        public GameDifficulty Difficulty { get; set; }
-        #endregion
+        public GameDifficulty Difficulty
+        {
+            get => difficulty;
+            set
+            {
+                difficulty = value;
+            }
+        }//Difficulty
+        #endregion Getter und Setter
+
 
 
         // In MineField class
-        public Bounds Bounds => new Bounds(Rows, Columns);
+        //public Bounds Bounds => new Bounds(Rows, Columns);
 
+        /*
         // Konstruktor, der das Spielfeld erstellt
         public MineField(GameDifficulty difficulty)
         {
@@ -114,6 +125,28 @@ namespace Minesweeper
             PlaceMines();
             CalculateAdjacentMines();
         }
+        */
+
+
+
+
+        #region Konstruktoren
+
+        public MineField(GameDifficulty difficulty)
+        {
+            Difficulty = difficulty;
+
+
+
+
+        }
+
+        #endregion Konstruktoren
+
+
+
+
+        /*
 
         /// <summary>
         /// Places mines randomly on field in accordance to difficulty
@@ -133,8 +166,8 @@ namespace Minesweeper
                     minesPlaced++;
                 }
             }
-        }
-
+        }//PlaceMines
+        */
         /// <summary>   
         /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
         /// </summary>
@@ -144,9 +177,9 @@ namespace Minesweeper
             int column = cell.Column;
             int adjacentMines = 0;
 
-            foreach Tile SingleTile in Field
+            foreach (Tile SingleTile in Field)
             {
-                if (Field[row][column].IsMine)
+                if (Field[row,column].IsMine)
                 {
                     adjacentMines++;
                 }
@@ -154,7 +187,7 @@ namespace Minesweeper
 
             // Check all 8 directions for mines
 
-        }
+        }//CalculateAdjacentMines
 
 
 
