@@ -22,13 +22,12 @@ namespace Minesweeper.View
     public partial class EasyMode : Page
     {
         GameDifficulty difficulty = new Easy();
+        FieldGrid fieldGrid;
         public EasyMode()
         {
             InitializeComponent();
 
-            FieldGrid fieldGrid = new FieldGrid();
-            fieldGrid.Rows = difficulty.FieldSize[0, 0];
-            fieldGrid.Columns = difficulty.FieldSize[0, 1];
+            fieldGrid = new FieldGrid(9,9);
             fieldGrid.AddTiles();
         }
     }
@@ -71,7 +70,7 @@ namespace Minesweeper.View
         public int Rows { get; set; }
         public int Columns { get; set; }
 
-        public FieldGrid()
+        public FieldGrid(int Rows, int Columns)
         {
             for (int i = 0; i < Rows; i++)
             {

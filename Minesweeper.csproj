@@ -80,7 +80,6 @@
     <Compile Include="Controls\TileControl.xaml.cs">
       <DependentUpon>TileControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Bounds.cs" />
     <Compile Include="Model\GameDifficulty.cs" />
     <Compile Include="View\Easy.xaml.cs">
       <DependentUpon>Easy.xaml</DependentUpon>

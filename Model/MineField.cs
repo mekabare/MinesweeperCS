@@ -7,6 +7,34 @@ using System.Windows.Controls.Primitives;
 
 namespace Minesweeper
 {
+    /*
+    /// <summary>
+    /// Die Grenzen des Spielfelds, um zu überprüfen, ob eine Zelle innerhalb des Spielfelds liegt
+    /// </summary>
+    public struct Bounds
+    {
+        private int rows;
+        private int columns;
+
+        public int Rows { get => rows; set {  rows = value; } }
+        public int Columns { get => columns; set { columns = value; } }
+
+        public Bounds(int rows, int columns)
+        {
+            Rows = rows;
+            Columns = columns;
+        }
+
+        public bool IsWithin(int row, int column)
+        {
+            return row >= 0 && row < Rows && column >= 0 && column < Columns;
+        }
+    }//Struct
+    */
+
+
+
+
     /// <summary>
     /// Klasse, die das Spielfeld repräsentiert
     /// <param name= "Cell">Objektinstanz für Kästchen</field>
@@ -28,19 +56,97 @@ namespace Minesweeper
         #endregion
 
 
+        //Hier muss noch was gemacht werden
         #region Getter und Setter
         public int[,] Size
         {
             get => Size;
             set { }
-        }
-                    //ANTO: HIER WEITERMACHEN -ANTO
-
-
-        public List<List<Tile>> Field { get; set; }
+        }//Size
         
-        public GameDifficulty Difficulty { get; set; }
-        #endregion
+        public int MaxRow
+        {
+            get => maxRow;
+            set
+            {
+                maxRow = value;
+            }
+        }//MaxRow
+
+        public int MaxColumn
+        {
+            get => maxColumn;
+            set
+            {
+                maxColumn = value;
+            }
+        }//MaxColumn
+
+        public Tile[,] Field
+        {
+            get => field;
+            set
+            { 
+                field = value;
+            }
+        }//Field
+        
+        public GameDifficulty Difficulty
+        {
+            get => difficulty;
+            set
+            {
+                difficulty = value;
+            }
+        }//Difficulty
+        #endregion Getter und Setter
+
+
+
+        // In MineField class
+        //public Bounds Bounds => new Bounds(Rows, Columns);
+
+        /*
+        // Konstruktor, der das Spielfeld erstellt
+        public MineField(GameDifficulty difficulty)
+        {
+            Difficulty = difficulty;
+            
+            Field = new List<List<Tile>>();
+            for (int i = 0; i < Rows; i++)
+            {
+                Field.Add(new List<Tile>());
+                for (int j = 0; j < Columns; j++)
+                {
+                    Field[i].Add(new Tile(i, j));
+                }
+            }
+            // TODO: Erst nach dem ersten Klicken werden die Minen platziert!! 
+            PlaceMines();
+            CalculateAdjacentMines();
+        }
+        */
+
+
+
+
+        #region Konstruktoren
+
+        public MineField(GameDifficulty difficulty)
+        {
+            Difficulty = difficulty;
+
+
+
+
+        }
+
+        #endregion Konstruktoren
+
+
+
+
+        /*
 
         /// <summary>
         /// Places mines randomly on field in accordance to difficulty
@@ -60,8 +166,8 @@ namespace Minesweeper
                     minesPlaced++;
                 }
             }
-        }
-
+        }//PlaceMines
+        */
         /// <summary>   
         /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
         /// </summary>
@@ -71,9 +177,9 @@ namespace Minesweeper
             int column = cell.Column;
             int adjacentMines = 0;
 
-            foreach SingleTile in Field
+            foreach (Tile SingleTile in Field)
             {
-                if (Field[row][column].IsMine)
+                if (Field[row,column].IsMine)
                 {
                     adjacentMines++;
                 }
@@ -81,7 +187,7 @@ namespace Minesweeper
 
             // Check all 8 directions for mines
 
-        }
+        }//CalculateAdjacentMines
 
 
 

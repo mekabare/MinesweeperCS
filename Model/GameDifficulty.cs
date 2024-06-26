@@ -8,26 +8,31 @@ namespace Minesweeper
     public abstract class GameDifficulty
     {
         #region Felder
-        private int[,] fieldSize;
+        //private int[,] fieldSize;
+        private int rowSize, columnSize;
         private int totalMines;
-        //private string nameString;    //wird durch ToString() Methode ersetzt, für die abstract Programmierung.
         #endregion Felder
 
 
-        #region Getter und Setter
 
-        public int[,] FieldSize
+        #region Getter und Setter
+        public int RowSize
         {
-            get => fieldSize;
-            set { fieldSize = value; }      //pot. set Leer setzen und durch extra Funktion ersetzen.
-        }//FieldSize
+            get => rowSize;
+            set { rowSize = value; }      //pot. set Leer setzen und durch extra Funktion ersetzen.
+        }//RowSize
+
+        public int ColumnSize
+        {
+            get => columnSize;
+            set { columnSize = value; }      //pot. set Leer setzen und durch extra Funktion ersetzen.
+        }//ColumnSize
 
         public int TotalMines
         {
             get => totalMines;
             set { totalMines = value; }     //Eingabepruefung einfügen, oder set Leer setzen und durch extra Funktion ersetzen
         }//TotalMines
-
         #endregion Getter und Setter
 
 
@@ -39,7 +44,8 @@ namespace Minesweeper
         /// </summary>
         public GameDifficulty()
         {
-            FieldSize = new int[0, 0];
+            RowSize = 0;
+            ColumnSize = 0;
             TotalMines = 0;
         }//default
 
@@ -48,9 +54,10 @@ namespace Minesweeper
         /// </summary>
         /// <param name="fieldSize"></param>
         /// <param name="totalMines"></param>
-        public GameDifficulty(int[,] fieldSize, int totalMines)
+        public GameDifficulty(int rowSize, int ColumnSize, int totalMines)
         {
-            FieldSize = fieldSize;
+            RowSize = rowSize;
+            ColumnSize = columnSize;
             TotalMines = totalMines;
         }//Allg.
 
@@ -76,7 +83,8 @@ namespace Minesweeper
     {
         public Easy() : base()
         {
-            FieldSize = new int[9, 9];
+            RowSize = 9;
+            ColumnSize = 9;
             TotalMines = 10;
         }
 
@@ -89,7 +97,8 @@ namespace Minesweeper
     {
         public Medium() : base()
         {
-            FieldSize = new int[16, 16];
+            RowSize = 16;
+            ColumnSize = 16;
             TotalMines = 40;
         }
 
@@ -102,7 +111,8 @@ namespace Minesweeper
     {
         public Hard() : base()
         {
-            FieldSize = new int[16, 30];
+            RowSize = 16;
+            ColumnSize = 30;
             TotalMines = 99;
         }
 
@@ -119,7 +129,7 @@ namespace Minesweeper
         /// <param name="rows">Menge an Reihen des Spielfelds</param>
         /// <param name="columns">Menge an Spalten des Spielfelds</param>
         /// <param name="mines">Menge an Minen</param>
-        public Custom(int rows, int columns, int mines) : base(new int[rows, columns], mines) { }
+        public Custom(int rows, int columns, int mines) : base(rows, columns, mines) { }
 
         public override string ToString() { return "Custom"; }
 
