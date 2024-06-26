@@ -13,16 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Minesweeper.Controls
+namespace Minesweeper.View
 {
     /// <summary>
-    /// Interaction logic for TileControl.xaml
+    /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class TileControl : UserControl
+    public partial class MainMenu : Page
     {
-        public TileControl()
+        public MainMenu()
         {
             InitializeComponent();
+        }
+
+        internal GameDifficulty GetSelectedDifficulty()
+        {
+            GameDifficulty gameDifficulty = new Easy();
+            return gameDifficulty;
         }
     }
 }

@@ -169,7 +169,7 @@ namespace Minesweeper
 
         /*
         /// <summary>
-        /// Places mines randomly on field in accordance to difficulty
+        /// Places mines randomly on field in accordance to selectedDifficulty
         /// </summary>
         private void PlaceMines()
         {

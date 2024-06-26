@@ -108,9 +108,9 @@ namespace Minesweeper
 
                                             switch (items[2])
                                             {
-                                                case "EasyMode":
+                                                case "MineFieldPage":
                                                     {
-                                                        spieler.Difficulty = new Easy();        //difficulty
+                                                        spieler.Difficulty = new Easy();        //selectedDifficulty
 
                                                         //in die Liste
                                                         Array.Resize<Spieler>(ref easyList, easyCount + 1);
@@ -121,7 +121,7 @@ namespace Minesweeper
 
                                                 case "Medium":
                                                     {
-                                                        spieler.Difficulty = new Medium();      //difficulty
+                                                        spieler.Difficulty = new Medium();      //selectedDifficulty
 
                                                         //in die Liste
                                                         Array.Resize<Spieler>(ref mediumList, mediumCount + 1);
@@ -132,7 +132,7 @@ namespace Minesweeper
 
                                                 case "Hard":
                                                     {
-                                                        spieler.Difficulty = new Hard();        //difficulty
+                                                        spieler.Difficulty = new Hard();        //selectedDifficulty
 
                                                         //in die Liste
                                                         Array.Resize<Spieler>(ref hardList, hardCount + 1);
@@ -238,7 +238,7 @@ namespace Minesweeper
                  *     wird der Platz der Stelle in int platz eingetragen und ok = true gesetzt.
                  * - Wenn keine Stelle past, bleibt ok = false.
                  */
-                case "EasyMode":
+                case "MineFieldPage":
                     {
                         arrLength = easyList.Length;
                         for (int i = 0; i < arrLength; i++) {
@@ -249,7 +249,7 @@ namespace Minesweeper
                             }
                         }
                         break;
-                    }//EasyMode
+                    }//MineFieldPage
                 case "Medium": {
                         arrLength = mediumList.Length;
                         for (int i = 0; i < arrLength; i++) {
@@ -272,7 +272,7 @@ namespace Minesweeper
                         }
                         break;
                     }//Hard
-                default: { ok = false; break; } //Wenn weder EasyMode, Medium oder Hard.
+                default: { ok = false; break; } //Wenn weder MineFieldPage, Medium oder Hard.
             }//switch
 
             return ok;
@@ -310,7 +310,7 @@ namespace Minesweeper
                      *     geziehlt verloren.
                      * - Am Ende wird das neue Element an der Stelle Array[platzierung] eingesetzt
                      */
-                    case "EasyMode": {
+                    case "MineFieldPage": {
                             if(easyList == null) { ok = false; break; }
                             arrLength = easyList.Length;
                             if (arrLength == 1) { easyList[platzierung] = new Spieler(player); break; }
@@ -319,7 +319,7 @@ namespace Minesweeper
                             }
                             easyList[platzierung] = new Spieler(player);
                             break;
-                        }//EasyMode
+                        }//MineFieldPage
                     case "Medium": {
                             if (mediumList == null) { ok = false; break; }
                             arrLength = mediumList.Length;
@@ -340,8 +340,8 @@ namespace Minesweeper
                             hardList[platzierung] = new Spieler(player);
                             break;
                         }//Hard
-                    default: { ok = false; break; } //Wenn das Spieler-Objekt weder EasyMode, Medium oder Hard ist.
-                }//switch(difficulty)
+                    default: { ok = false; break; } //Wenn das Spieler-Objekt weder MineFieldPage, Medium oder Hard ist.
+                }//switch(selectedDifficulty)
             }//if(CheckBest)
             else { ok = false; }    //Wenn CheckBest sagt, Nein.
             return ok;
