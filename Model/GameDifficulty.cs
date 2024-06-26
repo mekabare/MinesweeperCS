@@ -20,7 +20,9 @@ namespace Minesweeper
             TotalMines = 0;
             NameString = "";
         }
-    }
+    }//abstract Class
+
+
 
     public class Easy : GameDifficulty
     {
