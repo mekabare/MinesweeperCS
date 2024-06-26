@@ -75,7 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bestenliste\Bestenliste.cs" />
+    <Compile Include="Bestenliste\Bestenlisten.cs" />
     <Compile Include="Bestenliste\Spieler.cs" />
     <Compile Include="Controls\TileControl.xaml.cs">
       <DependentUpon>TileControl.xaml</DependentUpon>
