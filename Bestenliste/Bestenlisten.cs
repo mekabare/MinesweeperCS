@@ -26,7 +26,15 @@ namespace Minesweeper
 
 
         #region Konstruktoren
-        // nicht nötig.
+
+        /// <summary>
+        /// Default-Konstruktor
+        /// </summary>
+        public Bestenlisten()   //Hier macht nur ein Default-Konstruktor sinn, weil die Klasse effektiv nur mit Dateien arbeitet
+        {
+            ReadLists();        //Bestückt die Listen.
+        }//default
+
         #endregion Konstruktoren
 
 
@@ -55,7 +63,6 @@ namespace Minesweeper
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="FileNotFoundException"></exception>
         /// <exception cref="IOException"></exception>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         /// <exception cref="UnauthorizedAccessException"></exception>
         /// <exception cref="PathTooLongException"></exception>
         public bool ReadLists()
@@ -156,10 +163,52 @@ namespace Minesweeper
             return ok;
         }//ReadLists
 
-        
-        public bool SaveBest()   //Speichert die Bestenlisten in die Bestenlisten.txt (überschreibt alte)
+        /// <summary>
+        /// Speichert die Bestenlisten in die Bestenlisten.txt (überschreibt alte)
+        /// </summary>
+        /// <returns>boolsches True, wenn alles funktioniert hat</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="UnauthorizedAccessException"></exception>
+        /// <exception cref="PathTooLongException"></exception>
+        public bool SaveBest()
         {
             bool ok = false;
+
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write)) {
+                if (fs.CanWrite)    //Kann die Datei zum Schreiben geöffnet werden? 
+                {
+                    foreach (Spieler player in easyList) {  //easyList speichern
+                        using (StreamWriter sw = new StreamWriter(fs)) {
+                            sw.Write("{0};{1};{2}#",
+                                    player.Name,
+                                    player.Time.ToString(),
+                                    player.Difficulty.ToString());
+                            sw.Flush();
+                        }//using
+                    }//froeach easyList
+                    foreach (Spieler player in mediumList) {    //mediumList speichern
+                        using (StreamWriter sw = new StreamWriter(fs)) {
+                            sw.Write("{0};{1};{2}#",
+                                    player.Name,
+                                    player.Time.ToString(),
+                                    player.Difficulty.ToString());
+                            sw.Flush();
+                        }//using
+                    }//froeach mediumList
+                    foreach (Spieler player in hardList) {  //hardList speichern
+                        using (StreamWriter sw = new StreamWriter(fs)) {
+                            sw.Write("{0};{1};{2}#",
+                                    player.Name,
+                                    player.Time.ToString(),
+                                    player.Difficulty.ToString());
+                            sw.Flush();
+                        }//using
+                    }//froeach hardList
+                    ok = true;  //alles hat geklappt
+                }//if
+            }//using
             return ok;
         }//SaveBest
 
