@@ -42,29 +42,6 @@ namespace Minesweeper
         public GameDifficulty Difficulty { get; set; }
         #endregion
 
-
-        // In MineField class
-        public Bounds Bounds => new Bounds(Rows, Columns);
-
-        // Konstruktor, der das Spielfeld erstellt
-        public MineField(GameDifficulty difficulty)
-        {
-            Difficulty = difficulty;
-            
-            Field = new List<List<Tile>>();
-            for (int i = 0; i < Rows; i++)
-            {
-                Field.Add(new List<Tile>());
-                for (int j = 0; j < Columns; j++)
-                {
-                    Field[i].Add(new Tile(i, j));
-                }
-            }
-            // TODO: Erst nach dem ersten Klicken werden die Minen platziert!! 
-            PlaceMines();
-            CalculateAdjacentMines();
-        }
-
         /// <summary>
         /// Places mines randomly on field in accordance to difficulty
         /// </summary>

@@ -80,7 +80,7 @@ namespace Minesweeper
             TotalMines = 10;
         }
 
-        public override string ToString() { return "Easy"; }
+        public override string ToString() { return "EasyMode"; }
 
     }//Klasse
 
