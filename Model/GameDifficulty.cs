@@ -10,12 +10,11 @@ namespace Minesweeper
         #region Felder
         private int[,] fieldSize;
         private int totalMines;
-        //private string nameString;    //wird durch ToString() Methode ersetzt, für die abstract Programmierung.
         #endregion Felder
 
 
-        #region Getter und Setter
 
+        #region Getter und Setter
         public int[,] FieldSize
         {
             get => fieldSize;
@@ -27,7 +26,6 @@ namespace Minesweeper
             get => totalMines;
             set { totalMines = value; }     //Eingabepruefung einfügen, oder set Leer setzen und durch extra Funktion ersetzen
         }//TotalMines
-
         #endregion Getter und Setter
 
 

@@ -72,7 +72,6 @@
     <Compile Include="Controls\TileControl.xaml.cs">
       <DependentUpon>TileControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Bounds.cs" />
     <Compile Include="Model\GameDifficulty.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

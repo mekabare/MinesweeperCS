@@ -103,7 +103,9 @@ namespace Minesweeper
             #endregion
 
         }//Klasse
-        #region Aufgeräumt
+
+
+
         abstract class TileHelper
         {
 
@@ -136,7 +138,7 @@ namespace Minesweeper
                     int newColumn = tile.Column + direction.Value.colOffset;
 
                     // Check if the new position is within the bounds of the field
-                    if (tile.)
+                    if (/*tile.*/ true)                                                 //UNFERTIG!!!!!!!!!!!!!
                     {
                         neighboringTiles.Add(new Tile(newRow, newColumn));
                     }
@@ -145,6 +147,7 @@ namespace Minesweeper
             }//GetNeighboringTiles
 
         }//Klasse
-        #endregion
+
+
 }//Namespace
 

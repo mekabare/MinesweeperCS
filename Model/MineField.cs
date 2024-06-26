@@ -7,6 +7,34 @@ using System.Windows.Controls.Primitives;
 
 namespace Minesweeper
 {
+    /*
+    /// <summary>
+    /// Die Grenzen des Spielfelds, um zu überprüfen, ob eine Zelle innerhalb des Spielfelds liegt
+    /// </summary>
+    public struct Bounds
+    {
+        private int rows;
+        private int columns;
+
+        public int Rows { get => rows; set {  rows = value; } }
+        public int Columns { get => columns; set { columns = value; } }
+
+        public Bounds(int rows, int columns)
+        {
+            Rows = rows;
+            Columns = columns;
+        }
+
+        public bool IsWithin(int row, int column)
+        {
+            return row >= 0 && row < Rows && column >= 0 && column < Columns;
+        }
+    }//Struct
+    */
+
+
+
+
     /// <summary>
     /// Klasse, die das Spielfeld repräsentiert
     /// <param name= "Cell">Objektinstanz für Kästchen</field>
@@ -33,8 +61,30 @@ namespace Minesweeper
         {
             get => Size;
             set { }
+        }//Size
+        
+        public int MaxRow
+        {
+            get => maxRow;
+            set
+            {
+                maxRow = value;
+            }
+        }//MaxRow
+
+        public int MaxColumn
+        {
+            get => maxColumn;
+            set
+            {
+                maxColumn = value;
+            }
+        }//MaxColumn
+
+        public Tile[,] Field
+        {
+
         }
-                    //ANTO: HIER WEITERMACHEN -ANTO
 
 
         public List<List<Tile>> Field { get; set; }
@@ -94,7 +144,7 @@ namespace Minesweeper
             int column = cell.Column;
             int adjacentMines = 0;
 
-            foreach SingleTile in Field
+            foreach Tile SingleTile in Field
             {
                 if (Field[row][column].IsMine)
                 {
