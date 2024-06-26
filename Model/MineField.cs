@@ -47,7 +47,6 @@ namespace Minesweeper
     public class MineField
     {
         #region Felder
-        private int[,] size;                    //Groesse des Spielfelds
         private int maxRow = 0, maxColumn = 0;  //Groesse des Spielfleds
 
         private Tile[,] field;                  //Das Spielfeld
@@ -108,9 +107,9 @@ namespace Minesweeper
 
         /*
         // Konstruktor, der das Spielfeld erstellt
-        public MineField(GameDifficulty difficulty)
+        public MineField(GameDifficulty selectedDifficulty)
         {
-            Difficulty = difficulty;
+            Difficulty = selectedDifficulty;
             
             Field = new List<List<Tile>>();
             for (int i = 0; i < Rows; i++)
@@ -149,7 +148,7 @@ namespace Minesweeper
         /*
 
         /// <summary>
-        /// Places mines randomly on field in accordance to difficulty
+        /// Places mines randomly on field in accordance to selectedDifficulty
         /// </summary>
         private void PlaceMines()
         {

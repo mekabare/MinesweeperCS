@@ -76,7 +76,7 @@ namespace Minesweeper
 
             switch(Difficulty.ToString())   //Bestimmung des Rechenfaktors
             {
-                case "EasyMode": {
+                case "MineFieldPage": {
                         diffValue = 1;
                         break;
                     }
@@ -108,7 +108,7 @@ namespace Minesweeper
                 int strlen = value.Length;
                 bool ok = true;
 
-                for(int i = 0; i < strlen; i++)
+                for (int i = 0; i < strlen; i++)
                 {
                     if (value[i] == '0' ||
                         value[i] == '1' ||
@@ -158,14 +158,16 @@ namespace Minesweeper
                         value[i] == '}' ||
                         value[i] == '\n' ||
                         value[i] == '\t')
-                    { 
+                     { 
                         ok = false;
                         throw new ArgumentException("Name is not allowed to contain numbers or special characters!", "Name");
-                    }//if
+                     }//if
+                 
                 }//for
-                if (ok) { Name = value; }
+                if (ok) { name = value; }
             }//set
         }//Name
+
 
         public int Time
         {
@@ -182,7 +184,7 @@ namespace Minesweeper
             get => difficulty;
             set
             {
-                if (value == null) { throw new ArgumentNullException("difficulty", "Difficulty object cannot be null!"); }
+                if (value == null) { throw new ArgumentNullException("selectedDifficulty", "Difficulty object cannot be null!"); }
                 else if (value is Easy ||
                     value is Medium ||
                     value is Hard ||
@@ -190,7 +192,7 @@ namespace Minesweeper
                 {
                     difficulty = value;
                 }
-                else { throw new ArgumentException("Difficulty object must be an EasyMode-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
+                else { throw new ArgumentException("Difficulty object must be an MineFieldPage-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
             }
         }//Difficulty
         #endregion Getter und Setter
