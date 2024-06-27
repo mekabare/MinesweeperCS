@@ -100,51 +100,5 @@ namespace Minesweeper
         #endregion
 
     }//Klasse
-
-
-
-    abstract class TileHelper
-    {
-
-        // Enum for shorthand names for directions
-        public enum Abkuerzung
-        {
-            N, NE, E, SE, S, SW, W, NW
-        }
-        // rowOffset, colOffset => Verschiebung in Zeile, Verschiebung in Spalte
-        private static readonly Dictionary<Abkuerzung, (int rowOffset, int colOffset)> DirectionOffsets = new Dictionary<Abkuerzung, (int, int)>
-            {
-                { Abkuerzung.N, (-1, 0) },
-                { Abkuerzung.NE, (-1, 1) },
-                { Abkuerzung.E, (0, 1) },
-                { Abkuerzung.SE, (1, 1) },
-                { Abkuerzung.S, (1, 0) },
-                { Abkuerzung.SW, (1, -1) },
-                { Abkuerzung.W, (0, -1) },
-                { Abkuerzung.NW, (-1, -1) }
-            };
-
-        // Method to get adjacent cells based on a given tile
-        public static List<Tile> GetNeighboringTiles(Tile tile)
-        {
-            var neighboringTiles = new List<Tile>();
-
-            foreach (var direction in DirectionOffsets)
-            {
-                int newRow = tile.Row + direction.Value.rowOffset;
-                int newColumn = tile.Column + direction.Value.colOffset;
-
-                // Check if the new position is within the bounds of the field
-                if (/*tile.*/ true)                                                 //UNFERTIG!!!!!!!!!!!!!
-                {
-                    neighboringTiles.Add(new Tile(newRow, newColumn));
-                }
-            }
-            return neighboringTiles;
-        }//GetNeighboringTiles
-
-    }//Klasse
-
-
 }//Namespace
 

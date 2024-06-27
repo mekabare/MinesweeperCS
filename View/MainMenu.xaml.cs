@@ -12,45 +12,59 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Minesweeper;
 
 namespace Minesweeper.View
 {
     /// <summary>
     /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class MainMenu : Page
+    public partial class MainMenu : UserControl
     {
+        // Events
+        public event EventHandler NewGameRequested;
+        public event EventHandler ExitRequested;
+        public event EventHandler HighscoreRequested;
+
+
         public MainMenu()
         {
             InitializeComponent();
         }
 
-        internal GameDifficulty GetSelectedDifficulty()
+
+        // Event raisers
+        protected virtual void OnHighscoreRequested()
         {
-            GameDifficulty gameDifficulty = new Easy();
-            return gameDifficulty;
+            HighscoreRequested?.Invoke(this, EventArgs.Empty);
+        }
+        protected virtual void OnNewGameRequested()
+        {
+            NewGameRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnExitRequested()
+        {
+            ExitRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+
+
+
+        // Eventhandlers
+        private void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            OnNewGameRequested();
         }
 
         private void HighscoreDialogButton_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            OnHighscoreRequested();
         }
 
         private void ExitGameButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
-        }
-
-        public void NewGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            // opens diaglog to choose difficulty
-            DifficultyDialog difficultyDialog = new DifficultyDialog();
-            difficultyDialog.ShowDialog();
-            if (difficultyDialog.DialogResult == true)
-            {
-                GameInstancePage gameInstancePage = new GameInstancePage(difficultyDialog.GameDifficulty);
-            }
-
+            OnExitRequested();
         }
     }
 }

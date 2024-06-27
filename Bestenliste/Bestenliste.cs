@@ -13,10 +13,10 @@ namespace Minesweeper
     /// Bestenliste enthält Spieler als Member-Objekte, um daraus eine Bestenliste zu Formen
     /// Die 10 besten Spieler für die jeweiligen Schwierigkeitsgrade
     /// </summary>
-    public class Bestenlisten
+    public class Bestenliste
     {
         #region Felder
-        private const string path = @"Bestenlisten.txt";
+        private const string path = @"Bestenliste.txt";
 
         private Spieler[] easyList = null;
         private Spieler[] mediumList = null;
@@ -30,7 +30,7 @@ namespace Minesweeper
         /// <summary>
         /// Default-Konstruktor
         /// </summary>
-        public Bestenlisten()   //Hier macht nur ein Default-Konstruktor sinn, weil die Klasse effektiv nur mit Dateien arbeitet
+        public Bestenliste()   //Hier macht nur ein Default-Konstruktor sinn, weil die Klasse effektiv nur mit Dateien arbeitet
         {
             ReadLists();        //Bestückt die Listen.
         }//default
@@ -51,7 +51,7 @@ namespace Minesweeper
          *   items[0] = Name
          *   items[1] = Time
          *   items[2] = Difficulty.ToString()
-         * - Insgesamt sollte es 30 Datensätze geben (3 Bestenlisten á 10 Spielern)
+         * - Insgesamt sollte es 30 Datensätze geben (3 Bestenliste á 10 Spielern)
          */
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Minesweeper
         {
             bool ok = false;
             string line = "";
-            int number; //Hilfsvariable für numerische Konvertierungen mit TryParse()
+            int number;             //Hilfsvariable für numerische Konvertierungen mit TryParse()
             Spieler spieler = null;
             int easyCount = 0;
             int mediumCount = 0;
@@ -108,7 +108,7 @@ namespace Minesweeper
 
                                             switch (items[2])
                                             {
-                                                case "GameInstancePage":
+                                                case "MineFieldPage":
                                                     {
                                                         spieler.Difficulty = new Easy();        //selectedDifficulty
 
@@ -164,7 +164,7 @@ namespace Minesweeper
         }//ReadLists
 
         /// <summary>
-        /// Speichert die Bestenlisten in die Bestenlisten.txt (überschreibt alte)
+        /// Speichert die Bestenliste in die Bestenliste.txt (überschreibt alte)
         /// </summary>
         /// <returns>boolsches True, wenn alles funktioniert hat</returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -238,7 +238,7 @@ namespace Minesweeper
                  *     wird der Platz der Stelle in int platz eingetragen und ok = true gesetzt.
                  * - Wenn keine Stelle past, bleibt ok = false.
                  */
-                case "GameInstancePage":
+                case "GameInstance":
                     {
                         arrLength = easyList.Length;
                         for (int i = 0; i < arrLength; i++) {
@@ -249,7 +249,7 @@ namespace Minesweeper
                             }
                         }
                         break;
-                    }//GameInstancePage
+                    }//GameInstance
                 case "Medium": {
                         arrLength = mediumList.Length;
                         for (int i = 0; i < arrLength; i++) {
@@ -272,7 +272,7 @@ namespace Minesweeper
                         }
                         break;
                     }//Hard
-                default: { ok = false; break; } //Wenn weder GameInstancePage, Medium oder Hard.
+                default: { ok = false; break; } //Wenn weder GameInstance, Medium oder Hard.
             }//switch
 
             return ok;
@@ -310,7 +310,7 @@ namespace Minesweeper
                      *     geziehlt verloren.
                      * - Am Ende wird das neue Element an der Stelle Array[platzierung] eingesetzt
                      */
-                    case "GameInstancePage": {
+                    case "GameInstance": {
                             if(easyList == null) { ok = false; break; }
                             arrLength = easyList.Length;
                             if (arrLength == 1) { easyList[platzierung] = new Spieler(player); break; }
@@ -319,7 +319,7 @@ namespace Minesweeper
                             }
                             easyList[platzierung] = new Spieler(player);
                             break;
-                        }//GameInstancePage
+                        }//GameInstance
                     case "Medium": {
                             if (mediumList == null) { ok = false; break; }
                             arrLength = mediumList.Length;
@@ -340,7 +340,7 @@ namespace Minesweeper
                             hardList[platzierung] = new Spieler(player);
                             break;
                         }//Hard
-                    default: { ok = false; break; } //Wenn das Spieler-Objekt weder GameInstancePage, Medium oder Hard ist.
+                    default: { ok = false; break; } //Wenn das Spieler-Objekt weder GameInstance, Medium oder Hard ist.
                 }//switch(selectedDifficulty)
             }//if(CheckBest)
             else { ok = false; }    //Wenn CheckBest sagt, Nein.

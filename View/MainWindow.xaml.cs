@@ -1,5 +1,4 @@
-﻿using Minesweeper.View;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Schema;
 
-namespace Minesweeper
+namespace Minesweeper.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -25,8 +24,11 @@ namespace Minesweeper
     {
         private GameDifficulty selectedDifficulty;
         private Spieler spieler;
-        private GameInstancePage gameWindowInstance;
+        private GameInstance gameInstance;
         private MainMenu mainMenu;
+        private Bestenliste bestenlisten;
+        private BestenlisteDialog bestenListeDialog;
+        private DifficultyDialog difficultyDialog;
 
         public Spieler Spieler
         {
@@ -34,16 +36,107 @@ namespace Minesweeper
             set { spieler = value; }
         }
 
+        public GameDifficulty SelectedDifficulty 
+        { 
+            get => selectedDifficulty; 
+            set { selectedDifficulty = value; }
+        }
+
+        public MainMenu MainMenu { get; set; }
+
+        public Bestenliste Bestenlisten { get; set; }
+
+        public BestenlisteDialog BestenlisteDialog { get; set; }
+
+        public DifficultyDialog DifficultyDialog { get; set; }
+
+
+
         public MainWindow()
         {
             InitializeComponent();
-            mainMenu = new MainMenu();
-            MainContent.Content = mainMenu;
-            Spieler = new Spieler();
 
-            //  MainContent.Content = new MainMenu();
-            //  mainMenu.GetSelectedDifficulty();
-            // Spieler.Difficulty = selectedDifficulty;
+            DifficultyDialog = new DifficultyDialog();
+            BestenlisteDialog = new BestenlisteDialog();
+            MainMenu = new MainMenu();
+
+            LoadMainMenu(DifficultyDialog);
+            MainMenu.NewGameRequested += MainMenu_NewGameButton_Click;
+            MainMenu.HighscoreRequested += MainMenu_HighscoreButton_Click;
+            MainMenu.ExitRequested += MainMenu_ExitButton_Click;
+            DifficultyDialog.EasyGameRequested += MainMenu_EasyButtonClick;
+            DifficultyDialog.MediumGameRequested += MainMenu_MediumButtonClick;
+            DifficultyDialog.HardGameRequested += MainMenu_HardGameRequested;
         }
+
+        private void MainMenu_HardGameRequested(object sender, EventArgs e)
+        {
+            LoadGameInstancePage(new Hard());
+        }
+
+        private void MainMenu_MediumButtonClick(object sender, EventArgs e)
+        {
+            LoadGameInstancePage(new Medium());
+        }
+
+        // Routing Events
+        private void MainMenu_EasyButtonClick(object sender, EventArgs e)
+        {
+            LoadGameInstancePage(new Easy());
+        }
+
+        private void MainMenu_ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MainMenu_HighscoreButton_Click(object sender, EventArgs e)
+        {
+            LoadBestenListeDialog();
+        }
+
+        private void LoadBestenListeDialog()
+        {
+            bestenListeDialog = new BestenlisteDialog();
+            bestenListeDialog.ShowDialog();
+
+        }
+
+        /// <summary>
+        /// On Startup: Laedt das Hauptmenue in den Frame "MainContent"
+        /// </summary>
+        public void LoadMainMenu(DifficultyDialog difficultyDialog)
+        {
+    
+            MainMenu = new MainMenu();
+            MainContent.Content = MainMenu;
+        }
+
+        public void MainMenu_NewGameButton_Click(object sender, EventArgs e)
+        {
+            LoadDifficultyDialog();
+            
+        }
+
+        private void LoadDifficultyDialog()
+        {
+            DifficultyDialog.ShowDialog();
+        }
+
+
+
+        /// <summary>
+        /// Laedt die GameInstance mit dem gewaehlten Schwierigkeitsgrad in den Frame "MainContent"
+        /// </summary>
+        /// <param name="difficulty"></param>
+        public void LoadGameInstancePage(GameDifficulty difficulty)
+        {
+            Spieler = new Spieler();
+            Spieler.Difficulty = difficulty;
+            gameInstance = new GameInstance(difficulty);
+            MainContent.Content = gameInstance;
+
+        }
+
     }
 }

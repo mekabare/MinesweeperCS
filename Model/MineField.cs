@@ -141,7 +141,7 @@ namespace Minesweeper
 
         /// <summary>
         /// Platziert die Minen auf dem Spielfeld und verteilt die Zahlen im Feld. 
-        /// ACHTUNG: Deckt keine Felder auf. L_Click(...) muss trotzdem aufgerufen werden!
+        /// ACHTUNG: Deckt keine Felder auf. OpenTile(...) muss trotzdem aufgerufen werden!
         /// </summary>
         /// <param name="Row">x-pos des Coursors</param>
         /// <param name="Column">y-pos des Coursors</param>
@@ -225,14 +225,48 @@ namespace Minesweeper
         }//MineCounter()
 
 
-
-        public bool OpenTile(int row, int column)
+        
+        /// <summary>
+        /// Öffnet ein Tile, wenn es keine Flagge hat und gibt ein bool zurück, für den Zustand von IsMine.
+        /// </summary>
+        /// <param name="row">x-pos des Tiles</param>
+        /// <param name="column">y-pos des Tiles</param>
+        /// <returns>boolsches True, wenn das geöffnette Feld eine Mine hatte!</returns>
+        public bool OpenTile(int row, int column)       //UNFERTIG!!!
         {
+            bool ok = false;
+
+            if (Field[row, column] != null) //Existiert das Feld?
+            {
+                if (Field[row, column].IsFlagged == false)  //Hat es KEINE Flagge?
+                {
+                    Field[row, column].IsRevealed = true;   //Feld öffnen
+
+                    if (/*Field[row, column].AdjacentMines == 0*/ false)    //Keine Bomben in der Umgebung
+                    {
+                        //NullÖffner ausführen, sobald implementiert; DANN <summary> ÄNDERN!
+                    }
+                    else if (Field[row, column].AdjacentMines >= 0) //Das = entfernen, wenn NullÖffner implementiert    //Bomben in der Umgebung
+                    {
+                        if (Field[row, column-1] != null) { Field[row, column].IsRevealed = true; }     //
+                        if (Field[row, column+1] != null) { Field[row, column].IsRevealed = true; }     //
+                        if (Field[row-1, column] != null) { Field[row, column].IsRevealed = true; }     //
+                        if (Field[row-1, column-1] != null) { Field[row, column].IsRevealed = true; }   //
+                        if (Field[row-1, column+1] != null) { Field[row, column].IsRevealed = true; }   //
+                        if (Field[row+1, column] != null) { Field[row, column].IsRevealed = true; }     //
+                        if (Field[row+1, column-1] != null) { Field[row, column].IsRevealed = true; }   //
+                        if (Field[row+1, column+1] != null) { Field[row, column].IsRevealed = true; }   //umliegende öffnen
+                    }
+
+                    ok = true;
+
+                }//if IsFlagged
+            }//if != null
 
 
-
-            return false;
-        }
+            if (ok) { return Field[row, column].IsMine; }   //Wenn öffnung erfolgreich, Zustand von IsMine übergeben
+            else { return false; }                          //Sonst, von False ausgehen
+        }//OpenTile(...)
 
 
 
@@ -244,9 +278,9 @@ namespace Minesweeper
         /// <exception cref="ArgumentException">If the Bool couldn't be determined</exception>
         public void ToggleFlag(int row, int column)
         {
-            if (Field[row, column] != null)
+            if (Field[row, column] != null) //Existiert das Feld?
             {
-                if (Field[row, column].IsRevealed == false)
+                if (Field[row, column].IsRevealed == false) //Ist es noch verdeckt?
                 {
                     if (Field[row, column].IsFlagged == false) { Field[row, column].IsFlagged = true; }
                     else if (Field[row, column].IsFlagged == true) { Field[row, column].IsFlagged = false; }

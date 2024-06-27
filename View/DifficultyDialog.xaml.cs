@@ -20,40 +20,45 @@ namespace Minesweeper.View
     /// </summary>
     public partial class DifficultyDialog : Window
     {
-        private GameDifficulty gameDifficulty;
-
-        public GameDifficulty GameDifficulty
-        {
-            get => gameDifficulty;
-            set { gameDifficulty = value; }
-        }
         public DifficultyDialog()
         {
             InitializeComponent();
         }
 
+        // Events
+        public event EventHandler EasyGameRequested;
+        public event EventHandler MediumGameRequested;
+        public event EventHandler HardGameRequested;
+
+        // Event raisers
+        protected virtual void OnEasyGameRequested()
+        {
+          EasyGameRequested?.Invoke(this, EventArgs.Empty);
+        }
+        protected virtual void OnMediumGameRequested()
+        {
+            MediumGameRequested?.Invoke(this, EventArgs.Empty);
+        }
+        protected virtual void OnHardGameRequested() {
+
+            HardGameRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+
+        // Eventhandlers
         private void EasyButton_Click(object sender, RoutedEventArgs e)
         {
-            gameDifficulty = new Easy();
-            GameInstancePage gameInstancePage = new GameInstancePage(GameDifficulty);
-            this.DialogResult = true;
-            this.Close();
+            OnEasyGameRequested();
         }
-
+       
         private void MediumButton_Click(object sender, RoutedEventArgs e)
         {
-            gameDifficulty = new Medium();
-            GameInstancePage gameInstancePage = new GameInstancePage(GameDifficulty);
-            this.DialogResult = true;
-            this.Close();
+            OnMediumGameRequested();
         }
-
+      
         private void HardButton_Click(object sender, RoutedEventArgs e)
         {
-            gameDifficulty = new Hard();
-            GameInstancePage gameInstancePage = new GameInstancePage(GameDifficulty);
-            this.DialogResult = true;
-            this.Close();
+            OnHardGameRequested();
         }
     }
 }

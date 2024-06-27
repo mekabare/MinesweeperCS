@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 
 namespace Minesweeper.View
 {
-    /// <summary>
-    /// Interaction logic for GameInstancePage.xaml
-    /// </summary>
-    public partial class GameInstancePage : Page
+/// <summary>
+/// Interaction logic for GameInstance.xaml
+/// </summary>
+    public partial class GameInstance : UserControl
     {
         GameDifficulty difficulty = new Easy();
         FieldGrid fieldGrid;
         StackPanel StackPanel = new StackPanel();
-        public GameInstancePage(GameDifficulty difficulty)
+        public GameInstance(GameDifficulty difficulty)
         {
             InitializeComponent();
 
@@ -37,8 +37,8 @@ namespace Minesweeper.View
 
             MainGrid.Children.Add(StackPanel);
         }
-       
-        
+   
+    
     }
 
     public partial class FieldGrid : Grid
@@ -99,5 +99,4 @@ namespace Minesweeper.View
             }
         }
     }
-
 }

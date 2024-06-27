@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\BestenListeDialog.xaml.cs">
+      <DependentUpon>BestenListeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DifficultyDialog.xaml.cs">
       <DependentUpon>DifficultyDialog.xaml</DependentUpon>
     </Compile>
@@ -69,11 +72,15 @@
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TileButton.cs" />
+    <Page Include="View\BestenListeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DifficultyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GameInstancePage.xaml">
+    <Page Include="View\GameInstance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -81,21 +88,23 @@
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bestenliste\Bestenlisten.cs" />
+    <Compile Include="Bestenliste\Bestenliste.cs" />
     <Compile Include="Bestenliste\Spieler.cs" />
     <Compile Include="Model\GameDifficulty.cs" />
-    <Compile Include="View\GameInstancePage.xaml.cs">
-      <DependentUpon>GameInstancePage.xaml</DependentUpon>
+    <Compile Include="View\GameInstance.xaml.cs">
+      <DependentUpon>GameInstance.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Page Include="View\MainMenu.xaml">
       <SubType>Designer</SubType>
@@ -169,6 +178,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Flagged.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\backgroundtile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\tiledbg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
