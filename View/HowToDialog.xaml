@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper.View"
         mc:Ignorable="d"
-        Title="HowToDialog" Height="450" Width="800"
-		ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="HowToDialog" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Orientation="Vertical" Margin="5,10">
+            <Label HorizontalContentAlignment="Left" Content="Hilfstext: "/>
+            
+            <!--Hier steht der Text drinne, der aus der Datei importiert wird-->
+            <Label x:Name="Hilfstextbox"
+                   Margin="0,5"
+                   />
+        </StackPanel>
     </Grid>
 </Window>
