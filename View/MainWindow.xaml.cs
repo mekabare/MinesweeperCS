@@ -25,7 +25,7 @@ namespace Minesweeper
     {
         private GameDifficulty selectedDifficulty;
         private Spieler spieler;
-        private MineFieldPage mineFieldPage;
+        private GameInstancePage gameWindowInstance;
         private MainMenu mainMenu;
 
         public Spieler Spieler
@@ -40,32 +40,10 @@ namespace Minesweeper
             mainMenu = new MainMenu();
             MainContent.Content = mainMenu;
             Spieler = new Spieler();
-            Spieler.Name = "AAA";
 
             //  MainContent.Content = new MainMenu();
             //  mainMenu.GetSelectedDifficulty();
             // Spieler.Difficulty = selectedDifficulty;
-
-
-            switch (Spieler.Difficulty.ToString())
-            {
-                case "Easy":
-                    GameDifficulty easy = new Easy();
-                    mineFieldPage = new MineFieldPage(easy);
-                    break;
-                case "Medium":
-                    GameDifficulty medium = new Medium();
-                    mineFieldPage = new MineFieldPage(medium);
-                    break;
-                case "Hard":
-                    GameDifficulty hard = new Hard();
-                    mineFieldPage = new MineFieldPage(hard);
-                    break;
-            }
-
-            MainContent.Content= mineFieldPage;
-  
-
         }
     }
 }

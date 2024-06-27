@@ -62,11 +62,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\DifficultyDialog.xaml.cs">
+      <DependentUpon>DifficultyDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TileButton.cs" />
-    <Page Include="View\MineFieldPage.xaml">
+    <Page Include="View\DifficultyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameInstancePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -82,8 +89,8 @@
     <Compile Include="Bestenliste\Bestenlisten.cs" />
     <Compile Include="Bestenliste\Spieler.cs" />
     <Compile Include="Model\GameDifficulty.cs" />
-    <Compile Include="View\MineFieldPage.xaml.cs">
-      <DependentUpon>MineFieldPage.xaml</DependentUpon>
+    <Compile Include="View\GameInstancePage.xaml.cs">
+      <DependentUpon>GameInstancePage.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">

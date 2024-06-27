@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Minesweeper.View
 {
     /// <summary>
-    /// Interaction logic for MineFieldPage.xaml
+    /// Interaction logic for GameInstancePage.xaml
     /// </summary>
-    public partial class MineFieldPage : Page
+    public partial class GameInstancePage : Page
     {
         GameDifficulty difficulty = new Easy();
         FieldGrid fieldGrid;
         StackPanel StackPanel = new StackPanel();
-        public MineFieldPage(GameDifficulty difficulty)
+        public GameInstancePage(GameDifficulty difficulty)
         {
             InitializeComponent();
 

@@ -76,7 +76,7 @@ namespace Minesweeper
 
             switch(Difficulty.ToString())   //Bestimmung des Rechenfaktors
             {
-                case "MineFieldPage": {
+                case "GameInstancePage": {
                         diffValue = 1;
                         break;
                     }
@@ -192,7 +192,7 @@ namespace Minesweeper
                 {
                     difficulty = value;
                 }
-                else { throw new ArgumentException("Difficulty object must be an MineFieldPage-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
+                else { throw new ArgumentException("Difficulty object must be an GameInstancePage-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
             }
         }//Difficulty
         #endregion Getter und Setter

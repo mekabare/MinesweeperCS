@@ -30,5 +30,27 @@ namespace Minesweeper.View
             GameDifficulty gameDifficulty = new Easy();
             return gameDifficulty;
         }
+
+        private void HighscoreDialogButton_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
+        private void ExitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+        public void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            // opens diaglog to choose difficulty
+            DifficultyDialog difficultyDialog = new DifficultyDialog();
+            difficultyDialog.ShowDialog();
+            if (difficultyDialog.DialogResult == true)
+            {
+                GameInstancePage gameInstancePage = new GameInstancePage(difficultyDialog.GameDifficulty);
+            }
+
+        }
     }
 }

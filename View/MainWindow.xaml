@@ -6,26 +6,41 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="600">
-        
 
-    <Grid>
+
+    <Grid Background="{StaticResource Main}">
         <!-- Define RowDefinitions for the Grid -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Top StackPanel, Auto height adjusts to its content -->
-            <RowDefinition Height="*"/> <!-- Center Frame, * takes the remaining space -->
-            <RowDefinition Height="Auto"/> <!-- Bottom StackPanel, Auto height adjusts to its content -->
+            <RowDefinition Height="Auto"/>
+            <!-- Top StackPanel, Auto height adjusts to its content -->
+            <RowDefinition Height="*"/>
+            <!-- Center Frame, * takes the remaining space -->
+            <RowDefinition Height="Auto"/>
+            <!-- Bottom StackPanel, Auto height adjusts to its content -->
         </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions
+
+        <!-- Define ColumnDefinitions for the Grid -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45"/>
+            <!-- Left StackPanel, Auto width adjusts to its content -->
+            <ColumnDefinition Width="*"/>
+            <!-- Center Frame, * takes the remaining space -->
+            <ColumnDefinition Width="45"/>
+            <!-- Right StackPanel, Auto width adjusts to its content -->
+        </Grid.ColumnDefinitions>
 
         <!-- Top StackPanel -->
-        <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Top" Grid.Row="0"/>
+        <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+            <TextBlock FontSize="50" Text="MINESWEEPER" Grid.Column="1" FontFamily="Cascadia Code SemiBold" Padding="0,25,0,0"/>
+        </StackPanel>
 
+        
         <!-- Center Frame -->
-        <Frame x:Name="MainContent" VerticalAlignment="Stretch" Grid.Row="1"/>
+        <Frame x:Name="MainContent" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Background="{StaticResource Main}" BorderBrush="{StaticResource Stroke}" BorderThickness="2" UseLayoutRounding="True"/>
 
         <!-- Bottom StackPanel -->
-        <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Bottom" Grid.Row="2"/>
-
+        <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Bottom" Grid.Row="2" Grid.ColumnSpan="3" Background="{StaticResource Secondary}"/>
+        
+       
     </Grid>
 </Window>
