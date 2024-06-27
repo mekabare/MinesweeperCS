@@ -55,7 +55,7 @@ namespace Minesweeper
         #endregion
 
 
-        //Hier muss noch was gemacht werden
+
         #region Getter und Setter
         
         public int MaxRow
@@ -82,8 +82,12 @@ namespace Minesweeper
         {
             get => field;
             set
-            { 
-                field = value;
+            {
+                if (field != null)
+                {
+                    field = value;
+                }
+                else { throw new NullReferenceException("Field cannot be null!"); }
             }
         }//Field
         
@@ -120,7 +124,7 @@ namespace Minesweeper
         /// <param name="difficulty"></param>
         public MineField(GameDifficulty difficulty)
         {
-            Difficulty = difficulty;
+            Difficulty = difficulty;            //Variablen aus difficulty übernehmen
             MaxRow = difficulty.RowSize;
             MaxColumn = difficulty.ColumnSize;
 
@@ -142,75 +146,91 @@ namespace Minesweeper
 
         #region Methoden
 
-        private void PlaceMines(int Row, int Column)
+        /// <summary>
+        /// Platziert die Minen auf dem Spielfeld und verteilt die Zahlen im Feld. 
+        /// ACHTUNG: Deckt keine Felder auf. L_Click(...) muss trotzdem aufgerufen werden!
+        /// </summary>
+        /// <param name="Row">x-pos des Coursors</param>
+        /// <param name="Column">y-pos des Coursors</param>
+        public void PlaceMines(int Row, int Column)
         {
+            int bombsLeft = Difficulty.TotalMines;
+            bool finished = false;
+
             //Zufallsgenerator
-            Random random = new Random(2349);
+            var rand = new Random(2349);
+
+            while (!finished)   //Spielfeld solange durchlaufen, bis alle Minen platziert worden sind.
+            {
+                //Feld durchlaufen
+                for (int i = 0; i < difficulty.RowSize; i++)
+                {
+                    for (int j = 0; j < difficulty.ColumnSize; j++)
+                    {
+                        if (bombsLeft == 0) { finished = true; break; } //Wenn alle Bomben platziert wurden
+
+                        if (Field[i, j] != null)    //Existiert das Feld?
+                        {
+                            if (i != Row && j != Column ||      //
+                            i != Row && j - 1 != Column ||      //
+                            i != Row && j + 1 != Column ||      //
+                            i - 1 != Row && j != Column ||      //
+                            i - 1 != Row && j - 1 != Column ||  //
+                            i - 1 != Row && j + 1 != Column ||  //
+                            i + 1 != Row && j != Column ||      //
+                            i + 1 != Row && j - 1 != Column ||  //
+                            i + 1 != Row && j + 1 != Column)    //Ist man auf dem Couror, oder in dessen Nähe?
+                            {
+                                if (Field[i, j].IsMine == false)    //Hat es schon eine Mine?
+                                {
+                                    if (rand.Next(1001) < 25)       //Generator in der Schwelle
+                                    {
+                                        Field[i, j].IsMine = true;  //Mine Platzieren
+                                        bombsLeft--;                //Mitzählen
+                                    }
+                                }//IsMine
+                            }//Coursor
+                        }//Exist
+                    }//for Column
+                    if (finished) { break; }
+                }//for Row
+            }//while(!finished)
+
+            MineCounter();  //Umliegende Minen zählen
+
+        }//PlaceMines(...)
+
+
+        /// <summary>
+        /// Counts the Mines surrounding a Tile for every Tile and writes the number equal to the amount of counted Mines into the Tile
+        /// </summary>
+        private void MineCounter()
+        {
+            int umliegende = 0;
 
             //Feld durchlaufen
-            //  Wenn RandGen über Schwellenwert, Bomb platzieren; Mitzählen
             for (int i = 0; i < difficulty.RowSize; i++)
             {
                 for (int j = 0; j < difficulty.ColumnSize; j++)
                 {
-                    //pruefen, ob man in der Umgebung des Coursors ist
-                    //  wenn nein, Generator laufen lassen.
-                    //    Wenn über Schwelle laufen lassen Bombe platzieren, Bombe abziehen
-                    //
+                    if (Field[i, j] != null) { if (Field[i, j].IsMine == true) { umliegende++; } }          //
+                    if (Field[i, j-1] != null) { if (Field[i, j-1].IsMine == true) { umliegende++; } }      //
+                    if (Field[i, j+1] != null) { if (Field[i, j+1].IsMine == true) { umliegende++; } }      //
+                    if (Field[i-1, j] != null) { if (Field[i-1, j].IsMine == true) { umliegende++; } }      //
+                    if (Field[i-1, j-1] != null) { if (Field[i-1, j-1].IsMine == true) { umliegende++; } }  //
+                    if (Field[i-1, j+1] != null) { if (Field[i-1, j+1].IsMine == true) { umliegende++; } }  //
+                    if (Field[i+1, j] != null) { if (Field[i+1, j].IsMine == true) { umliegende++; } }      //
+                    if (Field[i+1, j-1] != null) { if (Field[i+1, j-1].IsMine == true) { umliegende++; } }  //
+                    if (Field[i+1, j+1] != null) { if (Field[i+1, j+1].IsMine == true) { umliegende++; } }  //umliegende Bomben zählen
 
+                    Field[i, j].AdjacentMines = umliegende; //gezählte Bomben in das Tile schreiben
+
+                    umliegende = 0; //umliegende zurücksetzen
                 }//for Column
             }//for Row
-
-            //AdjacentMines zählen
-        }
-
+        }//MineCounter()
 
         #endregion Methoden
-
-        /*
-        /// <summary>
-        /// Places mines randomly on field in accordance to selectedDifficulty
-        /// </summary>
-        private void PlaceMines()
-        {
-            Random random = new Random();
-            int minesPlaced = 0;
-            while (minesPlaced < Difficulty.Mines)
-            {
-                // Randomly select a cell, tries again if cell already has a mine, ends when all mines are placed
-                int row = random.Next(Rows);
-                int column = random.Next(Columns);
-                if (!Field[row][column].IsMine)
-                {
-                    Field[row][column].IsMine = true;
-                    minesPlaced++;
-                }
-            }
-        }//PlaceMines
-        */
-
-
-        /// <summary>   
-        /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
-        /// </summary>
-        private void CalculateAdjacentMines(Tile cell)
-        {
-            int row = cell.Row;
-            int column = cell.Column;
-            int adjacentMines = 0;
-
-            foreach (Tile SingleTile in Field)
-            {
-                if (Field[row,column].IsMine)
-                {
-                    adjacentMines++;
-                }
-            }
-
-            // Check all 8 directions for mines
-
-        }//CalculateAdjacentMines
-
 
 
     }//Klasse
