@@ -34,7 +34,6 @@ namespace Minesweeper.View
 
             MineField mineField = new MineField(gameDifficulty);
             fieldGrid = new FieldGrid(mineField);
-            fieldGrid.AddTiles();
 
             //fieldGrid = new FieldGrid(difficulty.RowSize,difficulty.ColumnSize );
             //fieldGrid.Width = fieldGrid.Columns * 45 ;
@@ -84,21 +83,23 @@ namespace Minesweeper.View
             set { gameDifficulty = value; }
         }
 
-        public FieldGrid(MineField mineFieldModel)
+        public FieldGrid(MineField mineFieldModel) 
         {
-            for (int i = 0; i < rows; i++)
+            this.mineFieldModel = mineFieldModel;
+            for (int i = 0; i < mineFieldModel.MaxRow; i++)
             {
                 RowDefinition row = new RowDefinition();
                 row.Height = new GridLength(1, GridUnitType.Star);
                 this.RowDefinitions.Add(row);
             }
 
-            for (int i = 0; i < columns; i++)
+            for (int i = 0; i < mineFieldModel.MaxColumn; i++)
             {
                 ColumnDefinition column = new ColumnDefinition();
                 column.Width = new GridLength(1, GridUnitType.Star);
                 this.ColumnDefinitions.Add(column);
             }
+            this.AddTiles();
         }
         public void AddTiles() {
             MineFieldModel = new MineField(gameDifficulty);
