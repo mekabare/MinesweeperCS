@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Minesweeper.View"
         mc:Ignorable="d"
         
-        Title="Choose your difficulty!" Height="400" Width="300">
+        Title="Choose your difficulty!" Height="400" Width="300"
+		ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Button">

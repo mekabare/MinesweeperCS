@@ -25,6 +25,7 @@ namespace Minesweeper.View
         public event EventHandler NewGameRequested;
         public event EventHandler ExitRequested;
         public event EventHandler HighscoreRequested;
+        public event EventHandler HowToRequested;
 
 
         public MainMenu()
@@ -48,7 +49,10 @@ namespace Minesweeper.View
             ExitRequested?.Invoke(this, EventArgs.Empty);
         }
 
-
+        protected virtual void OnHowToRequested()
+        {
+            HowToRequested?.Invoke(this, EventArgs.Empty);
+        }
 
 
         // Eventhandlers
@@ -66,5 +70,11 @@ namespace Minesweeper.View
         {
             OnExitRequested();
         }
+
+        private void HowToDialogButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

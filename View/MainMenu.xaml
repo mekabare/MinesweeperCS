@@ -15,9 +15,9 @@
             <Setter Property="Foreground" Value="{StaticResource Stroke}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Tertiary}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="10,10,10,10"/>
             <Setter Property="Width" Value="250"/>
@@ -33,19 +33,26 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button x:Name="NewGameButton" Content="NEW GAME" Grid.Row="0" Click="NewGameButton_Click">
             <Button.Effect>
                 <DropShadowEffect Color="#FF8AC1C5"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="HighscoreDialogButton" Content="HIGH SCORES" Grid.Row="1" Click="HighscoreDialogButton_Click">
+
+        <Button x:Name="HowToDialogButton" Content="HOW TO" Grid.Row="1" Click="HowToDialogButton_Click">
             <Button.Effect>
-                <DropShadowEffect Color="#FF8AC1C5"/>
+                <DropShadowEffect Color="#FF75A2B1" />
             </Button.Effect>
         </Button>
 
-        <Button x:Name="ExitGameButton" Content="EXIT GAME" Grid.Row="2" Click="ExitGameButton_Click">
+        <Button x:Name="HighscoreDialogButton" Content="HIGH SCORES" Grid.Row="2" Click="HighscoreDialogButton_Click">
+            <Button.Effect>
+                <DropShadowEffect Color="#FF75A2B1" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="ExitGameButton" Content="EXIT GAME" Click="ExitGameButton_Click" Grid.Row="3" >
             <Button.Effect>
                 <DropShadowEffect Color="#FF8AC1C5"/>
             </Button.Effect>

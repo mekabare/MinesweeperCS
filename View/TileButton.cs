@@ -16,6 +16,14 @@ namespace Minesweeper.View
         Brush c4 = new SolidColorBrush(Color.FromRgb(219, 196, 240)); // Purple
         Brush c5 = new SolidColorBrush(Brushes.LightCoral.Color);
 
+        private Tile tileModel;
+
+        public Tile TileModel
+        {
+            get => tileModel;
+            set { tileModel = value; }
+        }
+
         public Image MineImage { get; private set; }
         public Image FlagImage { get; private set; }
 

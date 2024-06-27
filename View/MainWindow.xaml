@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="600">
-
+        Title="MainWindow" Height="800" Width="600"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        MinHeight="800" MinWidth="600"
+        MaxHeight="1000" MaxWidth="1000">
 
     <Grid Background="{StaticResource Main}" Opacity="50">
         <!-- Define RowDefinitions for the Grid -->

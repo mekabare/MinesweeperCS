@@ -29,6 +29,7 @@ namespace Minesweeper.View
         public event EventHandler EasyGameRequested;
         public event EventHandler MediumGameRequested;
         public event EventHandler HardGameRequested;
+        public event EventHandler BackToMenuRequested;
 
         // Event raisers
         protected virtual void OnEasyGameRequested()
@@ -42,6 +43,11 @@ namespace Minesweeper.View
         protected virtual void OnHardGameRequested() {
 
             HardGameRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnBackToMenuRequested()
+        {
+            BackToMenuRequested?.Invoke(this, EventArgs.Empty);
         }
 
 
@@ -59,6 +65,11 @@ namespace Minesweeper.View
         private void HardButton_Click(object sender, RoutedEventArgs e)
         {
             OnHardGameRequested();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            OnBackToMenuRequested();
         }
     }
 }

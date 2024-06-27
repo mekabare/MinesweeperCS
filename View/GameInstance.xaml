@@ -6,10 +6,9 @@
       xmlns:local="clr-namespace:Minesweeper.View"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500">
-      
 
-    <Grid x:Name="MainGrid">
-
+    <Grid x:Name="MainGrid" SnapsToDevicePixels="True"
+          Width="500" Height="500">
     </Grid>
 
 

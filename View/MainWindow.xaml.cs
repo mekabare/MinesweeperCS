@@ -42,6 +42,11 @@ namespace Minesweeper.View
             set { selectedDifficulty = value; }
         }
 
+        public GameInstance GameInstance
+        {
+            get => gameInstance;
+            set { gameInstance = value; }
+        }
         public MainMenu MainMenu { get; set; }
 
         public Bestenliste Bestenlisten { get; set; }
@@ -67,21 +72,31 @@ namespace Minesweeper.View
             DifficultyDialog.EasyGameRequested += MainMenu_EasyButtonClick;
             DifficultyDialog.MediumGameRequested += MainMenu_MediumButtonClick;
             DifficultyDialog.HardGameRequested += MainMenu_HardGameRequested;
+            DifficultyDialog.BackToMenuRequested += DifficultyDialog_BackToMenuRequested;
+
+        }
+
+        private void DifficultyDialog_BackToMenuRequested(object sender, EventArgs e)
+        {
+            DifficultyDialog.Close();
         }
 
         private void MainMenu_HardGameRequested(object sender, EventArgs e)
         {
+            DifficultyDialog.Close();
             LoadGameInstancePage(new Hard());
         }
 
         private void MainMenu_MediumButtonClick(object sender, EventArgs e)
         {
+            DifficultyDialog.Close();
             LoadGameInstancePage(new Medium());
         }
 
         // Routing Events
         private void MainMenu_EasyButtonClick(object sender, EventArgs e)
         {
+            DifficultyDialog.Close();
             LoadGameInstancePage(new Easy());
         }
 
