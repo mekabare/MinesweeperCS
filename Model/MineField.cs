@@ -37,13 +37,11 @@ namespace Minesweeper
 
     /// <summary>
     /// Klasse, die das Spielfeld repräsentiert
-    /// <param name= "Cell">Objektinstanz für Kästchen</field>
-    /// <param name="Field">Liste von Zellen, die das Spielfeld repräsentieren</param>
-    /// <param name="Rows">Anzahl der Zeilen des Spielfelds</param>
-    /// <param name="Columns">Anzahl der Spalten des Spielfelds</param>
-    /// <param name="Difficulty">Schwierigkeitsgrad der Session</param>
-    /// <param name="Bounds">Objektinstanz für die Grenzen des Spielfelds</param>
     /// </summary>
+    /// <param name="Field">2D-Array von Zellen, die das Spielfeld repräsentieren</param>
+    /// <param name="MaxRow">Anzahl der Zeilen des Spielfelds</param>
+    /// <param name="MaxColumn">Anzahl der Spalten des Spielfelds</param>
+    /// <param name="Difficulty">Schwierigkeitsgrad des Felds</param>
     public class MineField
     {
         #region Felder
@@ -109,11 +107,6 @@ namespace Minesweeper
         }//Difficulty
         #endregion Getter und Setter
 
-
-
-        // In MineField class
-        //public Bounds Bounds => new Bounds(Rows, Columns);
-
         
 
         #region Konstruktoren
@@ -121,7 +114,7 @@ namespace Minesweeper
         /// <summary>
         /// Allg. Konstruktor. Erzeugt ein leeres Feld.
         /// </summary>
-        /// <param name="difficulty"></param>
+        /// <param name="difficulty">Schwierigkeitsgrad des Felds</param>
         public MineField(GameDifficulty difficulty)
         {
             Difficulty = difficulty;            //Variablen aus difficulty übernehmen
@@ -201,6 +194,7 @@ namespace Minesweeper
         }//PlaceMines(...)
 
 
+
         /// <summary>
         /// Counts the Mines surrounding a Tile for every Tile and writes the number equal to the amount of counted Mines into the Tile
         /// </summary>
@@ -230,11 +224,40 @@ namespace Minesweeper
             }//for Row
         }//MineCounter()
 
+
+
+        public bool OpenTile(int row, int column)
+        {
+
+
+
+            return false;
+        }
+
+
+
+        /// <summary>
+        /// Toggles the IsFlagged bool of a Tile in the Field
+        /// </summary>
+        /// <param name="row">x-pos of the Tile</param>
+        /// <param name="column">y-pos of the Tile</param>
+        /// <exception cref="ArgumentException">If the Bool couldn't be determined</exception>
+        public void ToggleFlag(int row, int column)
+        {
+            if (Field[row, column] != null)
+            {
+                if (Field[row, column].IsRevealed == false)
+                {
+                    if (Field[row, column].IsFlagged == false) { Field[row, column].IsFlagged = true; }
+                    else if (Field[row, column].IsFlagged == true) { Field[row, column].IsFlagged = false; }
+                    else { throw new ArgumentException("Couldn't determine state of bool.", "IsFlagged"); }
+                }//ff (IsRevealed)
+            }//if (!= null)
+        }//ToggleFlag(...)
+
         #endregion Methoden
 
-
     }//Klasse
-  
 }//Namespace
 
 
