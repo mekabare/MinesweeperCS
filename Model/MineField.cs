@@ -141,7 +141,7 @@ namespace Minesweeper
 
         /// <summary>
         /// Platziert die Minen auf dem Spielfeld und verteilt die Zahlen im Feld. 
-        /// ACHTUNG: Deckt keine Felder auf. L_Click(...) muss trotzdem aufgerufen werden!
+        /// ACHTUNG: Deckt keine Felder auf. OpenTile(...) muss trotzdem aufgerufen werden!
         /// </summary>
         /// <param name="Row">x-pos des Coursors</param>
         /// <param name="Column">y-pos des Coursors</param>

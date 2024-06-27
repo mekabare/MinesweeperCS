@@ -69,7 +69,7 @@ namespace Minesweeper
         {
             bool ok = false;
             string line = "";
-            int number; //Hilfsvariable für numerische Konvertierungen mit TryParse()
+            int number;             //Hilfsvariable für numerische Konvertierungen mit TryParse()
             Spieler spieler = null;
             int easyCount = 0;
             int mediumCount = 0;
@@ -108,7 +108,7 @@ namespace Minesweeper
 
                                             switch (items[2])
                                             {
-                                                case "MineFieldPage":
+                                                case "Easy":
                                                     {
                                                         spieler.Difficulty = new Easy();        //selectedDifficulty
 
