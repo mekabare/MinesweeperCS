@@ -14,6 +14,7 @@ namespace Minesweeper.View
         Brush c2 = new SolidColorBrush(Color.FromRgb(212, 226, 212)); // Teal
         Brush c3 = new SolidColorBrush(Color.FromRgb(255, 202, 204)); // Deep Pink
         Brush c4 = new SolidColorBrush(Color.FromRgb(219, 196, 240)); // Purple
+        Brush c5 = new SolidColorBrush(Brushes.LightCoral.Color);
 
         public Image MineImage { get; private set; }
         public Image FlagImage { get; private set; }
@@ -54,6 +55,7 @@ namespace Minesweeper.View
             this.IsMine = false;
             this.IsRevealed = false;
             this.IsFlagged = false;
+            this.Margin = new Thickness(1);
             AdjacentMines = 0;
 
             this.Background = c1;
@@ -89,8 +91,8 @@ namespace Minesweeper.View
         #region Methods
         public void SetBackground()
         {
-            this.Background = IsRevealed ? c2 : c1;
-            this.BorderBrush = IsRevealed ? c4 : c3;
+            this.Background = IsRevealed ? c3 : c1;
+            this.BorderBrush = IsRevealed ? c3 : c3;
             MineImage.Visibility = IsRevealed && IsMine ? Visibility.Visible : Visibility.Collapsed;
             FlagImage.Visibility = IsFlagged ? Visibility.Visible : Visibility.Collapsed;
         }

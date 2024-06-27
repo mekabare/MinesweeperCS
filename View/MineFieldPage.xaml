@@ -8,7 +8,9 @@
       d:DesignHeight="500" d:DesignWidth="500"
       Title="Easy">
 
-    <Grid x:Name="MainGrid" Height="500" Width="500">
-        
+    <Grid x:Name="MainGrid">
+
     </Grid>
-</Page>
+    
+    
+  </Page>

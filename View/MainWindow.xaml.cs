@@ -64,6 +64,8 @@ namespace Minesweeper
             }
 
             MainContent.Content= mineFieldPage;
+  
+
         }
     }
 }

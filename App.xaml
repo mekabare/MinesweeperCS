@@ -4,5 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Minesweeper"
     StartupUri="View/MainWindow.xaml">
-    <Application.Resources />
+    <Application.Resources>
+
+    
+        <!--Color brushes for Stroke, Main, Highlight, Secondary, Tertiary-->
+
+        <SolidColorBrush x:Key="Stroke" Color="#272343"></SolidColorBrush>
+        <SolidColorBrush x:Key="Main" Color="#fffffe"></SolidColorBrush>
+        <SolidColorBrush x:Key="Highlight" Color="#ffd804"></SolidColorBrush>
+        <SolidColorBrush x:Key="Secondary" Color="#e3f6f5"></SolidColorBrush>
+        <SolidColorBrush x:Key="Tertiary" Color="#bae8e8"></SolidColorBrush>
+        
+
+
+
+    </Application.Resources>
+
+
 </Application>
