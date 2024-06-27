@@ -33,7 +33,8 @@ namespace Minesweeper.View
             InitializeComponent();
 
             MineField mineField = new MineField(gameDifficulty);
-            fieldGrid = new FieldGrid(mineField.MaxRow, mineField.MaxColumn);
+            fieldGrid = new FieldGrid(mineField);
+            fieldGrid.AddTiles();
 
             //fieldGrid = new FieldGrid(difficulty.RowSize,difficulty.ColumnSize );
             //fieldGrid.Width = fieldGrid.Columns * 45 ;
@@ -83,7 +84,7 @@ namespace Minesweeper.View
             set { gameDifficulty = value; }
         }
 
-        public FieldGrid(int rows, int columns)
+        public FieldGrid(MineField mineFieldModel)
         {
             for (int i = 0; i < rows; i++)
             {
@@ -99,36 +100,24 @@ namespace Minesweeper.View
                 this.ColumnDefinitions.Add(column);
             }
         }
-        public void AddTiles(MineField MineField) {
-            for (int i = 0; i < Rows; i++)
+        public void AddTiles() {
+            MineFieldModel = new MineField(gameDifficulty);
+            for (int i = 0; i < MineFieldModel.MaxRow; i++)
             {
-                for (int j = 0; j < Columns; j++)
+                for (int j = 0; j < MineFieldModel.MaxColumn; j++)
                 {
-                    TileButton tile = new TileButton();
-                    tile.Row = i;
-                    tile.Column = j;
-                    tile.Margin = new Thickness(0);
-                    this.Children.Add(tile);
-                    Grid.SetRow(tile, i);
-                    Grid.SetColumn(tile, j);
+                    TileButton tileView = new TileButton();
+                    Tile tileModel = new Tile(i,j);
+                    tileView.Row = tileModel.Row;
+                    tileView.Column = tileModel.Column;
+                    
 
-                }
-            }
+                    MineFieldModel.Field[i, j] = tileModel;
+                    tileView.Margin = new Thickness(0);
+                    this.Children.Add(tileView);
+                    Grid.SetRow(tileView, i);
+                    Grid.SetColumn(tileView, j);
 
-            void SetMines(int totalMines)
-            {
-                Random random = new Random();
-                int mines = 0;
-                while (mines < totalMines)
-                {
-                    int row = random.Next(0, Rows);
-                    int column = random.Next(0, Columns);
-                    TileButton tile = (TileButton)this.Children.Cast<TileButton>().First(e => Grid.GetRow(e) == row && Grid.GetColumn(e) == column);
-                    if (!tile.IsMine)
-                    {
-                        tile.IsMine = true;
-                        mines++;
-                    }
                 }
             }
         }

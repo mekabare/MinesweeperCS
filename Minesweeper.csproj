@@ -206,5 +206,11 @@
   <ItemGroup>
     <Resource Include="Assets\tiledbg.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\HowTo.txt">
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

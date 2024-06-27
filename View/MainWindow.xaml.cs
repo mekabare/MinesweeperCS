@@ -29,6 +29,7 @@ namespace Minesweeper.View
         private Bestenliste bestenlisten;
         private BestenlisteDialog bestenListeDialog;
         private DifficultyDialog difficultyDialog;
+        private HowToDialog howToDialog;
 
         public Spieler Spieler
         {
@@ -55,6 +56,8 @@ namespace Minesweeper.View
 
         public DifficultyDialog DifficultyDialog { get; set; }
 
+        public HowToDialog HowToDialog { get; set; }
+
 
 
         public MainWindow()
@@ -63,17 +66,24 @@ namespace Minesweeper.View
 
             DifficultyDialog = new DifficultyDialog();
             BestenlisteDialog = new BestenlisteDialog();
+            HowToDialog = new HowToDialog();
             MainMenu = new MainMenu();
 
             LoadMainMenu(DifficultyDialog);
             MainMenu.NewGameRequested += MainMenu_NewGameButton_Click;
             MainMenu.HighscoreRequested += MainMenu_HighscoreButton_Click;
             MainMenu.ExitRequested += MainMenu_ExitButton_Click;
+            MainMenu.HowToRequested += MainMenu_HowToRequested;
             DifficultyDialog.EasyGameRequested += MainMenu_EasyButtonClick;
             DifficultyDialog.MediumGameRequested += MainMenu_MediumButtonClick;
             DifficultyDialog.HardGameRequested += MainMenu_HardGameRequested;
             DifficultyDialog.BackToMenuRequested += DifficultyDialog_BackToMenuRequested;
 
+        }
+
+        private void MainMenu_HowToRequested(object sender, EventArgs e)
+        {
+            HowToDialog.ShowDialog();
         }
 
         private void DifficultyDialog_BackToMenuRequested(object sender, EventArgs e)

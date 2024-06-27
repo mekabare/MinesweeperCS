@@ -58,7 +58,7 @@ namespace Minesweeper
                 {
                     field = value;
                 }
-                else { throw new NullReferenceException("Field cannot be null!"); }
+                //else { throw new NullReferenceException("Field cannot be null!"); }
             }
         }//Field
         
@@ -100,7 +100,9 @@ namespace Minesweeper
             {
                 for (int j = 0; j < difficulty.ColumnSize; j++)
                 {
-                    Field[i, j] = new Tile(i, j);                           //Alle Felder einsetzen
+                    // populate Field with Mines
+                    Field[i, j] = new Tile(i, j);
+
                 }//for Column
             }//for Row
 
