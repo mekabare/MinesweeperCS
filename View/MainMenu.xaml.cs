@@ -73,7 +73,7 @@ namespace Minesweeper.View
 
         private void HowToDialogButton_Click(object sender, RoutedEventArgs e)
         {
-
+            OnHowToRequested();
         }
 
     }

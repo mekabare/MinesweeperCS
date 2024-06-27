@@ -5,15 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper.View"
         mc:Ignorable="d"
-        Title="HowToDialog" Height="450" Width="800">
+        Title="HowToDialog" Height="450" Width="400"
+		ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+	<Window.Resources>
+		
+		<Style TargetType="Label">
+			<Setter Property="Background" Value="#7FFFD804"/>
+			<Setter Property="Foreground" Value="{StaticResource Stroke}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="FontSize" Value="25"/>
+			<Setter Property="FontWeight" Value="Normal"/>
+			<Setter Property="FontFamily" Value="Sprint 2"/>
+			<Setter Property="Padding" Value="10,5"/>
+			<Setter Property="Height" Value="Auto"/>
+			<Setter Property="Width" Value="Auto"/>
+			</Style>
+		
+		<Style TargetType="Button">
+			<Setter Property="Background" Value="{StaticResource Highlight}"/>
+			<Setter Property="Foreground" Value="{StaticResource Stroke}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource Stroke}"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="FontFamily" Value="Cascadia Code SemiBold"/>
+			<Setter Property="Padding" Value="10,5"/>
+			<Setter Property="Margin" Value="0,0,0,5"/>
+			<Setter Property="Width" Value="110"/>
+			<Setter Property="Height" Value="45"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="FontWeight" Value="DemiBold"/>
+			</Style>
+		
+	</Window.Resources>
+	
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="5,10">
-            <Label HorizontalContentAlignment="Left" Content="Hilfstext: "/>
-            
+		<Grid.RowDefinitions>
+			<RowDefinition Height="75"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="50"/>
+		</Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Margin="5,10" Grid.Row="0">
+            <Label HorizontalContentAlignment="Left" Content="How to play: "/>
+            <Label HorizontalContentAlignment="Center" Margin="0,5,0,5"/>
             <!--Hier steht der Text drinne, der aus der Datei importiert wird-->
-            <Label x:Name="Hilfstextbox"
+            <TextBlock x:Name="Hilfstextbox"
                    Margin="0,5"
-                   />
+                   Grid.Row="1"
+				   FontSize="20"
+				   FontFamily="Cascadia Code"
+				TextWrapping="Wrap"
+				   />
+			
         </StackPanel>
-    </Grid>
+		<Button Content="OK COOL" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Click="OKButton_Clicked"/>
+	</Grid>
 </Window>

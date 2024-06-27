@@ -1,0 +1,8 @@
+﻿Willkommen in Minesweeper!
+
+In diesem Spiel geht es darum, alle Minen im Feld zu finden!
+Du findest Minen, in dem du die Zahlen auf dem Spielfeld nutzt, um die Position einer Mine zu ermitteln. Dabei sagt ein Feld mit einer 1 aus, dass um dieses Feld herum genau eine Bombe sein muss. Manchmal muss man raten.
+Wenn du eine Bombe ermittelt hast, kannst du sie mit einer Flagge markieren. Wenn du ein Feld mit einer Bombe öffnest, verlierst du das Spiel.
+Deine Zeit wird beim Spielen gemessen und die 10 besten des Schwierigkeitsgrades werden in die Bestenliste eingetragen!
+
+Viel Glück und viel Spaß!
