@@ -37,13 +37,11 @@ namespace Minesweeper
 
     /// <summary>
     /// Klasse, die das Spielfeld repräsentiert
-    /// <param name= "Cell">Objektinstanz für Kästchen</field>
-    /// <param name="Field">Liste von Zellen, die das Spielfeld repräsentieren</param>
-    /// <param name="Rows">Anzahl der Zeilen des Spielfelds</param>
-    /// <param name="Columns">Anzahl der Spalten des Spielfelds</param>
-    /// <param name="Difficulty">Schwierigkeitsgrad der Session</param>
-    /// <param name="Bounds">Objektinstanz für die Grenzen des Spielfelds</param>
     /// </summary>
+    /// <param name="Field">2D-Array von Zellen, die das Spielfeld repräsentieren</param>
+    /// <param name="MaxRow">Anzahl der Zeilen des Spielfelds</param>
+    /// <param name="MaxColumn">Anzahl der Spalten des Spielfelds</param>
+    /// <param name="Difficulty">Schwierigkeitsgrad des Felds</param>
     public class MineField
     {
         #region Felder
@@ -55,20 +53,16 @@ namespace Minesweeper
         #endregion
 
 
-        //Hier muss noch was gemacht werden
+
         #region Getter und Setter
-        public int[,] Size
-        {
-            get => Size;
-            set { }
-        }//Size
         
         public int MaxRow
         {
             get => maxRow;
             set
             {
-                maxRow = value;
+                if (value >= 0) { maxRow = value; }
+                else { throw new ArgumentOutOfRangeException("maxRow", "Value must be larger or equal than zero!"); }
             }
         }//MaxRow
 
@@ -77,7 +71,8 @@ namespace Minesweeper
             get => maxColumn;
             set
             {
-                maxColumn = value;
+                if (value >= 0) { maxColumn = value; }
+                else { throw new ArgumentOutOfRangeException("maxColumn", "Value must be larger or equal than zero!"); }
             }
         }//MaxColumn
 
@@ -85,8 +80,12 @@ namespace Minesweeper
         {
             get => field;
             set
-            { 
-                field = value;
+            {
+                if (field != null)
+                {
+                    field = value;
+                }
+                else { throw new NullReferenceException("Field cannot be null!"); }
             }
         }//Field
         
@@ -95,103 +94,170 @@ namespace Minesweeper
             get => difficulty;
             set
             {
-                difficulty = value;
+                if (value == null) { throw new ArgumentNullException("difficulty", "Difficulty object cannot be null!"); }
+                else if (value is Easy ||
+                    value is Medium ||
+                    value is Hard ||
+                    value is Custom)
+                {
+                    difficulty = value;
+                }
+                else { throw new ArgumentException("Difficulty object must be an Easy-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
             }
         }//Difficulty
         #endregion Getter und Setter
 
-
-
-        // In MineField class
-        //public Bounds Bounds => new Bounds(Rows, Columns);
-
-        /*
-        // Konstruktor, der das Spielfeld erstellt
-        public MineField(GameDifficulty selectedDifficulty)
-        {
-            Difficulty = selectedDifficulty;
-            
-            Field = new List<List<Tile>>();
-            for (int i = 0; i < Rows; i++)
-            {
-                Field.Add(new List<Tile>());
-                for (int j = 0; j < Columns; j++)
-                {
-                    Field[i].Add(new Tile(i, j));
-                }
-            }
-            // TODO: Erst nach dem ersten Klicken werden die Minen platziert!! 
-            PlaceMines();
-            CalculateAdjacentMines();
-        }
-        */
-
-
-
+        
 
         #region Konstruktoren
 
+        /// <summary>
+        /// Allg. Konstruktor. Erzeugt ein leeres Feld.
+        /// </summary>
+        /// <param name="difficulty">Schwierigkeitsgrad des Felds</param>
         public MineField(GameDifficulty difficulty)
         {
-            Difficulty = difficulty;
+            Difficulty = difficulty;            //Variablen aus difficulty übernehmen
+            MaxRow = difficulty.RowSize;
+            MaxColumn = difficulty.ColumnSize;
 
+            Field = new Tile[difficulty.RowSize, difficulty.ColumnSize];    //Arraygroesse setzen
 
+            for (int i = 0; i < difficulty.RowSize; i++)
+            {
+                for (int j = 0; j < difficulty.ColumnSize; j++)
+                {
+                    Field[i, j] = new Tile(i, j);                           //Alle Felder einsetzen
+                }//for Column
+            }//for Row
 
-
-        }
+        }//Allg.
 
         #endregion Konstruktoren
 
 
 
-
-        /*
+        #region Methoden
 
         /// <summary>
-        /// Places mines randomly on field in accordance to selectedDifficulty
+        /// Platziert die Minen auf dem Spielfeld und verteilt die Zahlen im Feld. 
+        /// ACHTUNG: Deckt keine Felder auf. L_Click(...) muss trotzdem aufgerufen werden!
         /// </summary>
-        private void PlaceMines()
+        /// <param name="Row">x-pos des Coursors</param>
+        /// <param name="Column">y-pos des Coursors</param>
+        public void PlaceMines(int Row, int Column)
         {
-            Random random = new Random();
-            int minesPlaced = 0;
-            while (minesPlaced < Difficulty.Mines)
+            int bombsLeft = Difficulty.TotalMines;
+            bool finished = false;
+
+            //Zufallsgenerator
+            var rand = new Random(2349);
+
+            while (!finished)   //Spielfeld solange durchlaufen, bis alle Minen platziert worden sind.
             {
-                // Randomly select a cell, tries again if cell already has a mine, ends when all mines are placed
-                int row = random.Next(Rows);
-                int column = random.Next(Columns);
-                if (!Field[row][column].IsMine)
+                //Feld durchlaufen
+                for (int i = 0; i < difficulty.RowSize; i++)
                 {
-                    Field[row][column].IsMine = true;
-                    minesPlaced++;
-                }
-            }
-        }//PlaceMines
-        */
-        /// <summary>   
-        /// Zählt die Minen in den benachbarten Zellen für jede Zelle im Spielfeld
+                    for (int j = 0; j < difficulty.ColumnSize; j++)
+                    {
+                        if (bombsLeft == 0) { finished = true; break; } //Wenn alle Bomben platziert wurden
+
+                        if (Field[i, j] != null)    //Existiert das Feld?
+                        {
+                            if (i != Row && j != Column ||      //
+                            i != Row && j - 1 != Column ||      //
+                            i != Row && j + 1 != Column ||      //
+                            i - 1 != Row && j != Column ||      //
+                            i - 1 != Row && j - 1 != Column ||  //
+                            i - 1 != Row && j + 1 != Column ||  //
+                            i + 1 != Row && j != Column ||      //
+                            i + 1 != Row && j - 1 != Column ||  //
+                            i + 1 != Row && j + 1 != Column)    //Ist man auf dem Couror, oder in dessen Nähe?
+                            {
+                                if (Field[i, j].IsMine == false)    //Hat es schon eine Mine?
+                                {
+                                    if (rand.Next(1001) < 25)       //Generator in der Schwelle
+                                    {
+                                        Field[i, j].IsMine = true;  //Mine Platzieren
+                                        bombsLeft--;                //Mitzählen
+                                    }
+                                }//IsMine
+                            }//Coursor
+                        }//Exist
+                    }//for Column
+                    if (finished) { break; }
+                }//for Row
+            }//while(!finished)
+
+            MineCounter();  //Umliegende Minen zählen
+
+        }//PlaceMines(...)
+
+
+
+        /// <summary>
+        /// Counts the Mines surrounding a Tile for every Tile and writes the number equal to the amount of counted Mines into the Tile
         /// </summary>
-        private void CalculateAdjacentMines(Tile cell)
+        private void MineCounter()
         {
-            int row = cell.Row;
-            int column = cell.Column;
-            int adjacentMines = 0;
+            int umliegende = 0;
 
-            foreach (Tile SingleTile in Field)
+            //Feld durchlaufen
+            for (int i = 0; i < difficulty.RowSize; i++)
             {
-                if (Field[row,column].IsMine)
+                for (int j = 0; j < difficulty.ColumnSize; j++)
                 {
-                    adjacentMines++;
-                }
-            }
+                    if (Field[i, j] != null) { if (Field[i, j].IsMine == true) { umliegende++; } }          //
+                    if (Field[i, j-1] != null) { if (Field[i, j-1].IsMine == true) { umliegende++; } }      //
+                    if (Field[i, j+1] != null) { if (Field[i, j+1].IsMine == true) { umliegende++; } }      //
+                    if (Field[i-1, j] != null) { if (Field[i-1, j].IsMine == true) { umliegende++; } }      //
+                    if (Field[i-1, j-1] != null) { if (Field[i-1, j-1].IsMine == true) { umliegende++; } }  //
+                    if (Field[i-1, j+1] != null) { if (Field[i-1, j+1].IsMine == true) { umliegende++; } }  //
+                    if (Field[i+1, j] != null) { if (Field[i+1, j].IsMine == true) { umliegende++; } }      //
+                    if (Field[i+1, j-1] != null) { if (Field[i+1, j-1].IsMine == true) { umliegende++; } }  //
+                    if (Field[i+1, j+1] != null) { if (Field[i+1, j+1].IsMine == true) { umliegende++; } }  //umliegende Bomben zählen
 
-            // Check all 8 directions for mines
+                    Field[i, j].AdjacentMines = umliegende; //gezählte Bomben in das Tile schreiben
 
-        }//CalculateAdjacentMines
+                    umliegende = 0; //umliegende zurücksetzen
+                }//for Column
+            }//for Row
+        }//MineCounter()
 
 
+
+        public bool OpenTile(int row, int column)
+        {
+
+
+
+            return false;
+        }
+
+
+
+        /// <summary>
+        /// Toggles the IsFlagged bool of a Tile in the Field
+        /// </summary>
+        /// <param name="row">x-pos of the Tile</param>
+        /// <param name="column">y-pos of the Tile</param>
+        /// <exception cref="ArgumentException">If the Bool couldn't be determined</exception>
+        public void ToggleFlag(int row, int column)
+        {
+            if (Field[row, column] != null)
+            {
+                if (Field[row, column].IsRevealed == false)
+                {
+                    if (Field[row, column].IsFlagged == false) { Field[row, column].IsFlagged = true; }
+                    else if (Field[row, column].IsFlagged == true) { Field[row, column].IsFlagged = false; }
+                    else { throw new ArgumentException("Couldn't determine state of bool.", "IsFlagged"); }
+                }//ff (IsRevealed)
+            }//if (!= null)
+        }//ToggleFlag(...)
+
+        #endregion Methoden
 
     }//Klasse
-  
 }//Namespace
 
 
