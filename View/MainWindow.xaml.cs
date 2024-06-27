@@ -73,7 +73,7 @@ namespace Minesweeper.View
             MainMenu.NewGameRequested += MainMenu_NewGameButton_Click;
             MainMenu.HighscoreRequested += MainMenu_HighscoreButton_Click;
             MainMenu.ExitRequested += MainMenu_ExitButton_Click;
-            MainMenu.HowToRequested += MainMenu_HowToRequested;
+            MainMenu.HowToDialogButton.Click += MainMenu_HowToDialogButton_Click;
             DifficultyDialog.EasyGameRequested += MainMenu_EasyButtonClick;
             DifficultyDialog.MediumGameRequested += MainMenu_MediumButtonClick;
             DifficultyDialog.HardGameRequested += MainMenu_HardGameRequested;
@@ -81,14 +81,18 @@ namespace Minesweeper.View
 
         }
 
-        private void MainMenu_HowToRequested(object sender, EventArgs e)
+        private void MainMenu_HowToDialogButton_Click(object sender, EventArgs e)
         {
-            HowToDialog.ShowDialog();
+            HowToDialog = new HowToDialog();
+            if (HowToDialog != null)
+                HowToDialog.ShowDialog();
         }
 
         private void DifficultyDialog_BackToMenuRequested(object sender, EventArgs e)
         {
-            DifficultyDialog.Close();
+            DifficultyDialog = new DifficultyDialog();
+            if (DifficultyDialog != null)
+                DifficultyDialog.Close();
         }
 
         private void MainMenu_HardGameRequested(object sender, EventArgs e)

@@ -81,11 +81,8 @@ namespace Minesweeper
 
     public class Easy : GameDifficulty
     {
-        public Easy() : base()
+        public Easy() : base(9, 9, 10)
         {
-            RowSize = 9;
-            ColumnSize = 9;
-            TotalMines = 10;
         }
 
         public override string ToString() { return "Easy"; }
@@ -95,11 +92,8 @@ namespace Minesweeper
 
     public class Medium : GameDifficulty
     {
-        public Medium() : base()
+        public Medium() : base(16, 16, 40)
         {
-            RowSize = 16;
-            ColumnSize = 16;
-            TotalMines = 40;
         }
 
         public override string ToString() { return "Medium"; }
@@ -109,11 +103,9 @@ namespace Minesweeper
 
     public class Hard : GameDifficulty
     {
-        public Hard() : base()
+        public Hard() : base(37, 30, 99)
         {
-            RowSize = 16;
-            ColumnSize = 30;
-            TotalMines = 99;
+
         }
 
         public override string ToString() { return "Hard"; }

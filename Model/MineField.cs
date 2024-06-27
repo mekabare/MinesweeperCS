@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
@@ -23,6 +24,8 @@ namespace Minesweeper
         private Tile[,] field;                  //Das Spielfeld
 
         private GameDifficulty difficulty;      //Schwierigkeitsgrad
+
+        private int totalMines;
         #endregion
 
 
@@ -54,13 +57,24 @@ namespace Minesweeper
             get => field;
             set
             {
-                if (field != null)
+                if (value != null)
                 {
                     field = value;
                 }
                 //else { throw new NullReferenceException("Field cannot be null!"); }
             }
         }//Field
+
+        public int TotalMines
+        {
+
+            get => totalMines;
+            set
+            {
+                if (value >= 0) { totalMines = value; }
+                else { throw new ArgumentOutOfRangeException("totalMines", "Value must be larger or equal than zero!"); }
+            }
+        }
         
         public GameDifficulty Difficulty
         {
@@ -90,7 +104,32 @@ namespace Minesweeper
         /// <param name="difficulty">Schwierigkeitsgrad des Felds</param>
         public MineField(GameDifficulty difficulty)
         {
-            Difficulty = difficulty;            //Variablen aus difficulty übernehmen
+            switch (difficulty)
+            {
+                case Easy e:
+                    Difficulty = new Easy();
+                    break;
+                case Medium m:
+                    Difficulty = new Medium();
+                    break;
+                case Hard h:
+                    Difficulty = new Hard();
+                    break;
+                case Custom c:
+                    Difficulty = new Custom(MaxRow,MaxColumn, TotalMines);
+                    break;
+                default:
+                    throw new ArgumentException("Difficulty object must be an Easy-, Medium-, Hard-, or Custom-Objekt.", "Difficulty");
+            }
+
+            if (difficulty != null)
+            {
+                Difficulty = difficulty;
+            }
+            else
+            {
+                Difficulty = new Easy();
+            }
             MaxRow = difficulty.RowSize;
             MaxColumn = difficulty.ColumnSize;
 

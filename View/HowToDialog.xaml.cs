@@ -83,6 +83,7 @@ namespace Minesweeper.View
         private void OKButton_Clicked(object sender, RoutedEventArgs e)
         {
             this.Close();
+  
         }
     }//partial class
 }//Namespace
