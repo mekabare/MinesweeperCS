@@ -54,7 +54,7 @@ namespace Minesweeper
             get => field;
             set
             {
-                if (field != null)
+                if (value != null)
                 {
                     field = value;
                 }
