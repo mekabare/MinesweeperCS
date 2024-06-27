@@ -35,6 +35,5 @@
         <Button x:Name="EasyButton" Content="EASY" HorizontalAlignment="Center" VerticalAlignment="Center" Click="EasyButton_Click" FontSize="40" Padding="10,5" Margin="0,0,0,10" Grid.Row="0" Width="200" Height="90"/>
         <Button x:Name="MediumButton" Content="MEDIUM" HorizontalAlignment="Center" VerticalAlignment="Center" Click="MediumButton_Click" FontSize="40" Padding="10,5" Margin="0,0,0,10" Grid.Row="1" Width="200" Height="90"/>
         <Button x:Name="HardButton" Content="HARD" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HardButton_Click" FontSize="40" Padding="10,5" Margin="0,0,0,10" Grid.Row="2" Width="200" Height="90"/>
-
     </Grid>
 </Window>

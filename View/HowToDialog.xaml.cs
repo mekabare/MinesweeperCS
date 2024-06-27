@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace Minesweeper.View
 {
     /// <summary>
-    /// Interaction logic for BestenlisteDialog.xaml
+    /// Interaction logic for HowToDialog.xaml
     /// </summary>
-    public partial class BestenlisteDialog : Window
+    public partial class HowToDialog : Window
     {
-        public BestenlisteDialog()
+        public HowToDialog()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

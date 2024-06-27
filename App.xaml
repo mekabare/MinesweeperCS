@@ -14,8 +14,8 @@
         <SolidColorBrush x:Key="Highlight" Color="#ffd804"></SolidColorBrush>
         <SolidColorBrush x:Key="Secondary" Color="#e3f6f5"></SolidColorBrush>
         <SolidColorBrush x:Key="Tertiary" Color="#bae8e8"></SolidColorBrush>
-        <ImageBrush x:Key="Background" ImageSource="Assets/tiledbg.jpg" TileMode="FlipXY" Viewport="0,0,150,150" ViewportUnits="Absolute"></ImageBrush>
-
+        <ImageBrush x:Key="Background" ImageSource="Assets/tiledbg.jpg" TileMode="Tile" Viewport="0,0,200,200" ViewportUnits="Absolute"></ImageBrush>
+        <FontFamily x:Key="Roboto">/Minesweeper;component/Assets/Roboto-Black.ttf#Roboto Black</FontFamily>
 
 
 

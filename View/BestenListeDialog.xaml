@@ -8,11 +8,31 @@
         Title="BestenListeDialog" Height="450" Width="400">
 
     <Window.Resources>
-        
-        
-        
+
+        <Style TargetType="Label">
+            <Setter Property="Background" Value="#7FFFD804"/>
+            <Setter Property="Foreground" Value="{StaticResource Stroke}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontFamily" Value="Sprint 2"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource Stroke}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontFamily" Value="Sprint 2"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
     </Window.Resources>
-    <Grid x:Name="ListGrid">
+    <Grid x:Name="ListGrid" Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -26,13 +46,14 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Content="NAME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0"/>
-        <Label Content="MODE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="1"/>
-        <Label Content="TIME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2"/>
+        <Label Content="NAME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="MODE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="TIME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        
 
 
 
