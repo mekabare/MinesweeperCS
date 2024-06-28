@@ -59,7 +59,7 @@ namespace Minesweeper.View
 
             try {
                 // add new path to the help file at /Assets/HowTo.txt
-                string path = "Assets/HowTo.txt";
+                string path = @"Hilfstext.txt";
                 using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     if (fs.CanRead)
@@ -67,7 +67,7 @@ namespace Minesweeper.View
 
                         using (StreamReader sr = new StreamReader(fs))
                         {
-                            text = sr.ReadLine();       //Text einlesen
+                            text = sr.ReadToEnd();       //Text einlesen
                         }
 
                     }//if fs.CanRead

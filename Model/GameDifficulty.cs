@@ -83,6 +83,7 @@ namespace Minesweeper
     {
         public Easy() : base(9, 9, 10)
         {
+
         }
 
         public override string ToString() { return "Easy"; }
@@ -94,6 +95,7 @@ namespace Minesweeper
     {
         public Medium() : base(16, 16, 40)
         {
+
         }
 
         public override string ToString() { return "Medium"; }
@@ -103,7 +105,7 @@ namespace Minesweeper
 
     public class Hard : GameDifficulty
     {
-        public Hard() : base(37, 30, 99)
+        public Hard() : base(16, 30, 99)
         {
 
         }
