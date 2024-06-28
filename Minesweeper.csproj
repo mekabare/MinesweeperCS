@@ -152,6 +152,7 @@
     <Resource Include="Fonts\Roboto-ThinItalic.ttf" />
     <Resource Include="Fonts\PressStart2P-Regular.ttf" />
     <Resource Include="Fonts\sprint-2.ttf" />
+    <None Include="Klassendiagramm.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

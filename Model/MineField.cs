@@ -76,7 +76,7 @@ namespace Minesweeper
             }
         }
         
-        public GameDifficulty Difficulty
+        internal GameDifficulty Difficulty
         {
             get => difficulty;
             set

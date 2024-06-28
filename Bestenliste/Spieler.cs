@@ -179,7 +179,7 @@ namespace Minesweeper
             }
         }//Time
 
-        public GameDifficulty Difficulty
+        internal GameDifficulty Difficulty
         {
             get => difficulty;
             set
