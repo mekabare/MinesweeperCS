@@ -1,60 +1,173 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Minesweeper.Tile">
-    <Position X="20.5" Y="0.75" Width="1.5" />
+    <Position X="23.5" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAgAAAAAAAAgAABAIQICwAECAoAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Tile.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Minesweeper.MineField">
-    <Position X="14.25" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAAABABAAAwAQAABAEAAAAgAAAAYAAAAEEAAAgAA=</HashCode>
-      <FileName>Model\MineField.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="difficulty" />
-    </ShowAsAssociation>
-  </Class>
   <Class Name="System.Object" Collapsed="true">
-    <Position X="15" Y="0.75" Width="1.5" />
+    <Position X="14" Y="0.75" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Minesweeper.GameDifficulty" Collapsed="true">
-    <Position X="17.75" Y="2.25" Width="1.5" />
+  <Class Name="Minesweeper.GameDifficulty">
+    <Position X="18.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAgAAAAAQAAAAQAAAAkAAAAAQA=</HashCode>
       <FileName>Model\GameDifficulty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Minesweeper.Easy" Collapsed="true">
-    <Position X="16.75" Y="3.25" Width="1.5" />
+  <Class Name="Minesweeper.Easy">
+    <Position X="16.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\GameDifficulty.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.Medium" Collapsed="true">
-    <Position X="16.75" Y="4.25" Width="1.5" />
+    <Position X="16.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\GameDifficulty.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.Hard" Collapsed="true">
-    <Position X="16.75" Y="5.25" Width="1.5" />
+    <Position X="16.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\GameDifficulty.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.Custom" Collapsed="true">
-    <Position X="16.75" Y="6.25" Width="1.5" />
+    <Position X="16.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\GameDifficulty.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="Minesweeper.MineField">
+    <Position X="21" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAABABAAAwAQAABAEAAAAgAAAAYAAAAEEAAAgAA=</HashCode>
+      <FileName>Model\MineField.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="field" />
+      <Field Name="difficulty" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Minesweeper.Spieler">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAABAAAAAQAAAAAAAAQAAAAEAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Bestenliste\Spieler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Minesweeper.Bestenliste">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAICAEAASAAAAAABAAAAAAAAAAg=</HashCode>
+      <FileName>Bestenliste\Bestenliste.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="easyList" />
+      <Field Name="hardList" />
+      <Field Name="mediumList" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Minesweeper.View.BestenlisteDialog" Collapsed="true">
+    <Position X="8.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQAAAQIIAEQAAgAAABAAQAiSAAAAAQE=</HashCode>
+      <FileName>View\BestenListeDialog.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Minesweeper.View.TileButton" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAIAAgEAAgQAQAAEABAAAAgwAGCAgAEAABAAAAAEAA=</HashCode>
+      <FileName>View\TileButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Minesweeper.View.DifficultyDialog" Collapsed="true">
+    <Position X="4.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAAIBAAAAAQAAQAAAAAAQAAEAAAEAAAACACAAAAA=</HashCode>
+      <FileName>View\DifficultyDialog.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Window" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Controls.Button" Collapsed="true">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Minesweeper.View.GameInstance" Collapsed="true">
+    <Position X="10.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAgAAAAAAAAAAAAAAAAAAAgAAAAAAEAAEAAAAAAEA=</HashCode>
+      <FileName>View\GameInstance.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Minesweeper.View.FieldGrid">
+    <Position X="14.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAEAAAABAAgAAAAAQAAAACAEAAAgBAAA=</HashCode>
+      <FileName>View\GameInstance.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gameDifficulty" />
+      <Field Name="mineFieldModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Windows.Controls.UserControl" Collapsed="true">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Controls.Grid" Collapsed="true">
+    <Position X="13.5" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Controls.ContentControl" Collapsed="true">
+    <Position X="9" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Minesweeper.View.HowToDialog" Collapsed="true">
+    <Position X="6.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAACAAAAAAAAAAAQAIAAEIAAEAAAAAAA=</HashCode>
+      <FileName>View\HowToDialog.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Minesweeper.View.MainMenu" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAAIAAAICAIAEAAAAAABIAAAAAAAIgAAAAgAA=</HashCode>
+      <FileName>View\MainMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Minesweeper.View.MainWindow" Collapsed="true">
+    <Position X="3" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAQAQAAAAAAAAAAAEoEACRABEQUAARAACEAAAoAEE=</HashCode>
+      <FileName>View\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Controls.Primitives.ButtonBase" Collapsed="true">
+    <Position X="7.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

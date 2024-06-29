@@ -41,12 +41,12 @@ namespace Minesweeper.View
 
         public HowToDialog()
         {
-
+            
             InitializeComponent();
 
             OpenHowToDialog();
 
-            Hilfstextbox.Text = ReadHelpTextFromFile();
+            this.Hilfstextbox.Text = ReadHelpTextFromFile();
 
 
         }//HowToDialog

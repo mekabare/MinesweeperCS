@@ -41,7 +41,7 @@
 	
     <Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="75"/>
+			<RowDefinition Height="350"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="50"/>
 		</Grid.RowDefinitions>
@@ -49,14 +49,17 @@
             <Label HorizontalContentAlignment="Left" Content="How to play: "/>
             <Label HorizontalContentAlignment="Center" Margin="0,5,0,5"/>
             <!--Hier steht der Text drinne, der aus der Datei importiert wird-->
-            <TextBlock x:Name="Hilfstextbox"
+            <TextBox x:Name="Hilfstextbox"
+                   
+                   IsReadOnly="False"
                    Margin="0,5"
                    Grid.Row="1"
-				   FontSize="20"
+				   FontSize="12"
 				   FontFamily="Cascadia Code"
 				TextWrapping="Wrap"
 				   />
-			
+            <!-- Height="280" Width="350" -->
+
         </StackPanel>
 		<Button Content="OK COOL" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Click="OKButton_Clicked"/>
 	</Grid>
