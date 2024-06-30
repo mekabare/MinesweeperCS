@@ -19,54 +19,57 @@ namespace Minesweeper.View
     /// </summary>
     public partial class BestenlisteDialog : Window
     {
-        event EventHandler EditableDialogOpened;
         event EventHandler EnterNameRequested;
         event EventHandler NameEntered;
+        event EventHandler ValidNameEntered;
 
         TextBox EnterNameBox;
         Label ResultDifficulty, ResultTime;
         string Name, Difficulty, Time;
+        Spieler player = new Spieler();
 
-        public BestenlisteDialog()
-        {
-            InitializeComponent();
-        }
+
         public BestenlisteDialog(bool wonGame)
         {
             InitializeComponent();
 
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            player = mainWindow.Spieler;
+
             if (wonGame)
             {
-                EnterNameBox = new TextBox();
-                ResultDifficulty = new Label();
-                ResultTime = new Label();
-                EnterNameBox.TextChanged += EnterNameBox_Changed;
-                EnterNameBox.AcceptsReturn = true;
-                ListGrid.Children.Add(EnterNameBox);
-                ListGrid.Children.Add(ResultDifficulty);
-                ListGrid.Children.Add(ResultTime);
+                OnEnterNameRequested();
             }
 
         }
-
         protected virtual void OnEnterNameRequested()
         {
-            EnterNameRequested?.Invoke(this, EventArgs.Empty);
+            EnterNameBox = new TextBox();
+            ResultDifficulty = new Label();
+            ResultTime = new Label();
+            EnterNameBox.TextChanged += EnterNameBox_Changed;
+            EnterNameBox.AcceptsReturn = true;
+            ListGrid.Children.Add(EnterNameBox);
+            ListGrid.Children.Add(ResultDifficulty);
+            ListGrid.Children.Add(ResultTime);
+            EnterNameBox.Focus();
+
+
         }
 
-        protected virtual void OnNameEntered()
-        {
-            NameEntered?.Invoke(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnEditableDialogOpened()
-        {
-            EditableDialogOpened?.Invoke(this, EventArgs.Empty);
-        }
 
         private void EnterNameBox_Changed(object sender, RoutedEventArgs e)
         {
-            OnEnterNameRequested();
+                if (EnterNameBox.Text.Length > 3)
+                {
+                    EnterNameBox.Text = EnterNameBox.Text.ToUpper().Substring(0, 3);
+                    OnValidNameEntered();
+                }
+        }
+
+        private void OnValidNameEntered()
+        {
+            EnterNameBox.AcceptsReturn = true;
         }
 
         private void ReturnKey_Pressed(object sender, RoutedEventArgs e)
@@ -74,18 +77,28 @@ namespace Minesweeper.View
             OnNameEntered();
         }
 
+        protected virtual void OnNameEntered()
+        {
+            this.Hide();
+            player.Name = EnterNameBox.Text;
+            player.Time = Int32.Parse(Time);
+
+            SaveBestenliste();
+            NameEntered?.Invoke(this, EventArgs.Empty);
+        }
         public void LoadBestenliste(string name, string difficulty, string time)
         {
-            Name = name;
-            Difficulty = difficulty;
-            Time = time;
-            ResultDifficulty.Content = Difficulty;
-            ResultTime.Content = Time;
+            Bestenliste bestenliste = new Bestenliste();
+            bestenliste.ReadLists();
         }
 
         public void SaveBestenliste()
         {
-            // Save the name, difficulty and time to the database
+            Bestenliste bestenliste = new Bestenliste();
+            bestenliste.InsertSorted(player);
+            bestenliste.SaveBest();
+           
+
         }
 
         public void SortBestenliste()

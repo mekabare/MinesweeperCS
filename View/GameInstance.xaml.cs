@@ -103,17 +103,37 @@ namespace Minesweeper.View
             window.TimerDisplay.Content = $"{elapsed.Seconds}";
         }
 
+        protected virtual void OnFirstClick(int row, int col)
+        {
+            MineField.PlaceMines(SelectedDifficulty.TotalMines, row, col);
+            firstClick = false;
+            startTime = DateTime.Now;
+            timer.Start();
+        }
         protected virtual void OnGameOver()
         {
             timer.Stop();
+           
+            MineField.RevealAllMines();
+            UpdateTileButtons();
+
+
             MessageBox.Show("You died.");
+            MainGrid.Children.Remove(FieldGrid);
+            ReturnToMainMenu();
             GameOver?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnGameWon()
         {
             timer.Stop();
+            BestenlisteDialog bestenlisteDialog = new BestenlisteDialog(true);
+            bestenlisteDialog.ShowDialog();
             GameWon?.Invoke(this, EventArgs.Empty);
+            if (bestenlisteDialog.DialogResult == true)
+            {
+                ReturnToMainMenu();
+            }
         }
 
         internal void OnEasyGameRequested(object sender, EventArgs e)
@@ -153,10 +173,7 @@ namespace Minesweeper.View
 
             if (firstClick)
             {
-                MineField.PlaceMines(SelectedDifficulty.TotalMines,tileButton.Row, tileButton.Column); // Example: Place 10 mines
-                firstClick = false;
-                startTime = DateTime.Now;
-                timer.Start();
+               OnFirstClick(tileButton.Row, tileButton.Column);
             }
 
             int row = tileButton.Row;
@@ -164,9 +181,7 @@ namespace Minesweeper.View
 
             if (MineField.HasMine(row, col))
             {
-                MainGrid.Children.Remove(FieldGrid);
                 OnGameOver();
-                ReturnToMainMenu();
             }
             else
             {
@@ -177,7 +192,7 @@ namespace Minesweeper.View
 
             if (MineField.CheckWinCondition())
             {
-                MainGrid.Children.Remove(FieldGrid);
+ 
                 OnGameWon();
                 ReturnToMainMenu();
             }

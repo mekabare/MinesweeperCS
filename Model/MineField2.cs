@@ -55,7 +55,7 @@ namespace Minesweeper
                 int row = rand.Next(maxRows);
                 int col = rand.Next(maxColumns);
 
-                if (!tiles[row, col].HasMine && tiles[row,col] != tiles[selectedRow,selectedCol])
+                if (!tiles[row, col].HasMine && tiles[row, col] != tiles[selectedRow, selectedCol])
                 {
                     tiles[row, col].HasMine = true;
                     placedMines++;
@@ -189,6 +189,7 @@ namespace Minesweeper
             tiles[row, col].IsFlagged = value;
         }
 
+        #endregion
 
         /// <summary>
         /// Algorithmus zum Aufdecken von benachbarten Tiles ohne Minen, WIP
@@ -215,7 +216,7 @@ namespace Minesweeper
         /// <returns></returns>
         internal bool CheckWinCondition()
         {
-          if (flaggedTiles == totalMines)
+            if (flaggedTiles == totalMines)
             {
                 foreach (Tile tile in tiles)
                 {
@@ -227,6 +228,18 @@ namespace Minesweeper
                 return true;
             }
             return false;
+        }
+
+        internal void RevealAllMines()
+        {
+            foreach (Tile tile in tiles)
+            {
+                if (tile.HasMine)
+                {
+                    tile.IsRevealed = true;
+                }
+
+            }
         }
     }
 }
