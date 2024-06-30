@@ -15,6 +15,11 @@ namespace Minesweeper
         private int totalMines;
         private int flaggedTiles;
 
+        /// <summary>
+        /// Erstellt ein Feld mit der angegebenen Anzahl an Reihen und Spalten und initialisiert alle Tiles
+        /// </summary>
+        /// <param name="rows"></param>
+        /// <param name="columns"></param>
         public MineField(int rows, int columns)
         {
             this.maxRows = rows;
@@ -32,6 +37,13 @@ namespace Minesweeper
 
         public Tile[,] Tiles => tiles;
 
+
+        /// <summary>
+        /// Randomisiert die Positionen der Minen auf dem Spielfeld und platziert sie
+        /// </summary>
+        /// <param name="mineCount"></param>
+        /// <param name="selectedRow"></param>
+        /// <param name="selectedCol"></param>
         public void PlaceMines(int mineCount, int selectedRow, int selectedCol)
         {
             Random rand = new Random();
@@ -52,8 +64,17 @@ namespace Minesweeper
             }
         }
 
+        /// <summary>
+        /// Simple rechnung um die Anzahl der verbleibenden Minen zu berechnen
+        /// </summary>
         public int RemainingMines => totalMines - flaggedTiles;
 
+
+        /// <summary>
+        /// Toggelt den Flag-Status eines Tiles und erhöht oder verringert die Anzahl der geflaggten Tiles im Feld
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
         public void ToggleFlag(int row, int col)
         {
             if (tiles[row, col].IsFlagged)
@@ -68,6 +89,12 @@ namespace Minesweeper
             }
         }
 
+        /// <summary>
+        /// Holt die benachbarten Tiles eines bestimmten Tiles
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public List<Tile> GetAdjacentTiles(int row, int column)
         {
             List<Tile> adjacentTiles = new List<Tile>();
@@ -99,6 +126,12 @@ namespace Minesweeper
             return adjacentTiles;
         }
 
+        /// <summary>
+        /// Getter der AdjacentMines eines bestimmten Tiles
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public int GetAdjacentMines(int row, int column)
         {
             int count = 0;
@@ -109,6 +142,11 @@ namespace Minesweeper
             return count;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mineRow"></param>
+        /// <param name="mineCol"></param>
         private void UpdateAdjacentMines(int mineRow, int mineCol)
         {
             for (int i = mineRow - 1; i <= mineRow + 1; i++)
@@ -122,6 +160,9 @@ namespace Minesweeper
                 }
             }
         }
+
+
+        #region Getter und Setter der Tile-States
 
         public bool HasMine(int row, int col)
         {
@@ -148,6 +189,12 @@ namespace Minesweeper
             tiles[row, col].IsFlagged = value;
         }
 
+
+        /// <summary>
+        /// Algorithmus zum Aufdecken von benachbarten Tiles ohne Minen, WIP
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
         public void FloodFill(int row, int col)
         {
             // Base case: if the tile is out of bounds, revealed, flagged, or has a mine, stop the recursion
@@ -162,6 +209,10 @@ namespace Minesweeper
             // TODO - Implement the flood fill algorithm
         }
 
+        /// <summary>
+        /// Untersucht, ob die Gewinnbedingung erfüllt ist
+        /// </summary>
+        /// <returns></returns>
         internal bool CheckWinCondition()
         {
           if (flaggedTiles == totalMines)
