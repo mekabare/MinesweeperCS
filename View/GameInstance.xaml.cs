@@ -33,6 +33,7 @@ namespace Minesweeper.View
         private DispatcherTimer timer;
         private DateTime startTime;
         private MainWindow window;
+        private bool isLost = false;
 
         private GameDifficulty _selectedDifficulty;
 
@@ -117,6 +118,7 @@ namespace Minesweeper.View
             MineField.RevealAllMines();
             UpdateTileButtons();
 
+            isLost = true;
 
             MessageBox.Show("You died.");
             MainGrid.Children.Remove(FieldGrid);
@@ -126,13 +128,16 @@ namespace Minesweeper.View
 
         protected virtual void OnGameWon()
         {
-            timer.Stop();
-            BestenlisteDialog bestenlisteDialog = new BestenlisteDialog(true);
-            bestenlisteDialog.ShowDialog();
-            GameWon?.Invoke(this, EventArgs.Empty);
-            if (bestenlisteDialog.DialogResult == true)
+            if (isLost = false) //Wurde das Spiel noch nicht verloren.
             {
-                ReturnToMainMenu();
+                timer.Stop();
+                BestenlisteDialog bestenlisteDialog = new BestenlisteDialog(true);
+                bestenlisteDialog.ShowDialog();
+                GameWon?.Invoke(this, EventArgs.Empty);
+                if (bestenlisteDialog.DialogResult == true)
+                {
+                    ReturnToMainMenu();
+                }
             }
         }
 
