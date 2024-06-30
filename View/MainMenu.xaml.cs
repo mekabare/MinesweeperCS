@@ -21,6 +21,7 @@ namespace Minesweeper.View
     /// </summary>
     public partial class MainMenu : UserControl
     {
+        private MainWindow mainWindow;
         // Events
         public event EventHandler NewGameRequested;
         public event EventHandler ExitRequested;
@@ -31,6 +32,12 @@ namespace Minesweeper.View
         public MainMenu()
         {
             InitializeComponent();
+
+            mainWindow = (MainWindow)Application.Current.MainWindow; 
+
+
+
+
         }
 
 

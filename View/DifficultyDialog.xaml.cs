@@ -25,9 +25,6 @@ namespace Minesweeper.View
         {
             InitializeComponent();
 
-          
-
-
         }
 
         // Events
@@ -59,7 +56,6 @@ namespace Minesweeper.View
         // Eventhandlers
         private void EasyButton_Click(object sender, RoutedEventArgs e)
         {
-            GameDifficulty seletedDifficulty = new Easy();
             OnEasyGameRequested();
         }
        

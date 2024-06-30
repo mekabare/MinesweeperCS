@@ -27,12 +27,12 @@ namespace Minesweeper.View
     {
         private FieldGrid fieldGrid;
         private StackPanel stackPanel;
-        Spieler spieler = new Spieler();
+        private Spieler spieler = new Spieler();
         private MineField _mineField;
         private bool firstClick = true;
         private DispatcherTimer timer;
         private DateTime startTime;
-        private TextBlock timerTextBlock;
+        private MainWindow window;
 
         private GameDifficulty _selectedDifficulty;
 
@@ -70,6 +70,8 @@ namespace Minesweeper.View
         {
             InitializeComponent();
 
+            window = Application.Current.MainWindow as MainWindow;
+
             SelectedDifficulty = selectedDifficulty;
 
             MineField = new MineField(selectedDifficulty.RowSize, selectedDifficulty.ColumnSize);
@@ -83,9 +85,9 @@ namespace Minesweeper.View
 
 
 
-            timerTextBlock = new TextBlock() { Text = "Time: 0" };
-            stackPanel.Children.Add(timerTextBlock);
-            stackPanel.Children.Add(new TextBlock() { Text = "Mines: " + MineField.RemainingMines });
+            window.TimerDisplay.Content = "0";
+            window.MineCounter.Content = selectedDifficulty.TotalMines;
+
         }
 
         private void InitializeTimer()
@@ -98,12 +100,13 @@ namespace Minesweeper.View
         private void Timer_Tick(object sender, EventArgs e)
         {
             var elapsed = DateTime.Now - startTime;
-            timerTextBlock.Text = $"Time: {elapsed.Seconds}";
+            window.TimerDisplay.Content = $"{elapsed.Seconds}";
         }
 
         protected virtual void OnGameOver()
         {
             timer.Stop();
+            MessageBox.Show("You died.");
             GameOver?.Invoke(this, EventArgs.Empty);
         }
 
@@ -130,6 +133,17 @@ namespace Minesweeper.View
 
         public void TileButton_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
+            var tileButton = sender as TileButton;
+            if (tileButton == null) return;
+
+            int row = tileButton.Row;
+            int col = tileButton.Column;
+
+            MineField.ToggleFlag(row, col);
+
+            UpdateTileButtons();
+            UpdateRemainingMines();
         }
 
         public void TileButton_Click(object sender, RoutedEventArgs e)
@@ -139,7 +153,7 @@ namespace Minesweeper.View
 
             if (firstClick)
             {
-                MineField.PlaceMines(10); // Example: Place 10 mines
+                MineField.PlaceMines(SelectedDifficulty.TotalMines,tileButton.Row, tileButton.Column); // Example: Place 10 mines
                 firstClick = false;
                 startTime = DateTime.Now;
                 timer.Start();
@@ -196,9 +210,9 @@ namespace Minesweeper.View
 
         private void UpdateRemainingMines()
         {
-            stackPanel.Children.Clear();
-            stackPanel.Children.Add(timerTextBlock);
-            stackPanel.Children.Add(new TextBlock() { Text = "Mines: " + MineField.RemainingMines });
+
+            window.MineCounter.Content = MineField.RemainingMines;
+
         }
 
         private void ReturnToMainMenu()
@@ -206,15 +220,49 @@ namespace Minesweeper.View
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
-                mainWindow.MainContent.Content = new MainMenu();
+                mainWindow.LoadMainMenu();
+                mainWindow.Logo.Visibility = Visibility.Visible;
+                mainWindow.TimerDisplay.Visibility = Visibility.Hidden;
+                mainWindow.MineCounter.Visibility = Visibility.Hidden;
             }
+            ResetGame();
         }
+        public void ResetGame()
+        {
+           
+            firstClick = true;
+
+           
+            if (timer != null)
+            {
+                timer.Stop();
+                timer.Tick -= Timer_Tick; // Unsubscribe to avoid memory leaks
+            }
+            InitializeTimer(); 
+
+            
+            MineField = new MineField(SelectedDifficulty.RowSize, SelectedDifficulty.ColumnSize);
+
+           
+            MainGrid.Children.Remove(FieldGrid);
+            MainGrid.Children.Add(InitializeField()); 
+
+            // Reset UI elements
+            window.TimerDisplay.Content = "0";
+            window.MineCounter.Content = SelectedDifficulty.TotalMines;
+
+
+        }
+
     }
 
     public partial class FieldGrid : Grid
     {
         public int Rows { get; set; }
         public int Columns { get; set; }
+
+        public RowDefinition RowDefinition { get; set; }
+        public ColumnDefinition ColumnDefinition { get; set; }
 
         public FieldGrid(int rows, int columns)
         {
@@ -223,19 +271,19 @@ namespace Minesweeper.View
             // Set the grid's row and column definitions
             for (int i = 0; i < Rows; i++)
             {
-                RowDefinition rowDefinition = new RowDefinition()
+                RowDefinition = new RowDefinition()
                 {
                     Height = new GridLength(1, GridUnitType.Star)
                 };
-                RowDefinitions.Add(rowDefinition);
+                RowDefinitions.Add(RowDefinition);
             }
-            for (int i = 0; i < Columns; i++)
+            for (int j = 0; j < Columns; j++)
             {
-                ColumnDefinition columnDefinition = new ColumnDefinition()
+                ColumnDefinition ColumnDefinition = new ColumnDefinition()
                 {
                     Width = new GridLength(1, GridUnitType.Star)
                 };
-                ColumnDefinitions.Add(new ColumnDefinition());
+                ColumnDefinitions.Add(ColumnDefinition);
             }
         }
 
@@ -246,10 +294,12 @@ namespace Minesweeper.View
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    var tileButton = new TileButton(mineField) { Row = i, Column = j };
-                    Children.Add(tileButton);
+                    var tileButton = new TileButton(mineField); // Assuming constructor modification to accept MineField
                     SetRow(tileButton, i);
                     SetColumn(tileButton, j);
+                    tileButton.Row = i; // Assigning row
+                    tileButton.Column = j; // Assigning column
+                    Children.Add(tileButton);
                 }
             }
         }

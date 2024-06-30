@@ -79,10 +79,10 @@ namespace Minesweeper.View
             MainMenu = new MainMenu(); // Publisher
 
             LoadMainMenu();
-            MainMenu.NewGameRequested += MainMenu_NewGameButton_Click;
-            MainMenu.HighscoreRequested += MainMenu_HighscoreButton_Click;
-            MainMenu.ExitRequested += MainMenu_ExitButton_Click;
-            MainMenu.HowToDialogButton.Click += MainMenu_HowToDialogButton_Click;
+            MainMenu.NewGameRequested += NewGameButton_Click;
+            MainMenu.HighscoreRequested += HighscoreButton_Click;
+            MainMenu.ExitRequested += ExitButton_Click;
+            MainMenu.HowToDialogButton.Click += HowToDialogButton_Click;
             DifficultyDialog.EasyGameRequested += GameInstance_OnEasyGameRequested; // OnEasyGameRequested
             DifficultyDialog.MediumGameRequested += GameInstance_OnMediumGameRequested; // OnMediumGameRequested
             DifficultyDialog.HardGameRequested += GameInstance_OnHardGameRequested; // OnHardGameRequested
@@ -92,47 +92,61 @@ namespace Minesweeper.View
 
         private void GameInstance_OnEasyGameRequested(object sender, EventArgs e)
         {
-            DifficultyDialog.Close();
+            DifficultyDialog.Hide();
             var gameInstance = new GameInstance(new Easy());
 
             MainContent.Content= gameInstance;
-            
+            TimerDisplay.Visibility = Visibility.Visible;
+            MineCounter.Visibility = Visibility.Visible;
+            Logo.Visibility = Visibility.Hidden;
+
+
         }
 
         private void GameInstance_OnMediumGameRequested(object sender, EventArgs e)
         {
-            DifficultyDialog.Close();
+            DifficultyDialog.Hide();
             gameInstance = new GameInstance(new Medium());
+
             MainContent.Content = gameInstance;
+            TimerDisplay.Visibility = Visibility.Visible;
+            MineCounter.Visibility = Visibility.Visible;
+            Logo.Visibility = Visibility.Hidden;
+
         }
 
         private void GameInstance_OnHardGameRequested(object sender, EventArgs e)
         {
-            DifficultyDialog.Close();
+            DifficultyDialog.Hide();
             gameInstance = new GameInstance(new Hard());
             MainContent.Content = gameInstance;
+            TimerDisplay.Visibility = Visibility.Visible;
+            MineCounter.Visibility = Visibility.Visible;
+            Logo.Visibility = Visibility.Hidden;
         }
 
-        private void MainMenu_HowToDialogButton_Click(object sender, EventArgs e)
+        private void HowToDialogButton_Click(object sender, EventArgs e)
         {
             HowToDialog = new HowToDialog();
             if (HowToDialog != null)
                 HowToDialog.ShowDialog();
+
         }
 
         private void DifficultyDialog_BackToMenuRequested(object sender, EventArgs e)
         {
             DifficultyDialog = new DifficultyDialog();
+
             if (DifficultyDialog != null)
-                DifficultyDialog.Close();
+                DifficultyDialog.Hide();
         }
 
-        private void MainMenu_ExitButton_Click(object sender, EventArgs e)
+        private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void MainMenu_HighscoreButton_Click(object sender, EventArgs e)
+        private void HighscoreButton_Click(object sender, EventArgs e)
         {
             LoadBestenListeDialog();
         }
@@ -149,12 +163,10 @@ namespace Minesweeper.View
         /// </summary>
         public void LoadMainMenu()
         {
-    
-            MainMenu = new MainMenu();
             MainContent.Content = MainMenu;
         }
 
-        public void MainMenu_NewGameButton_Click(object sender, EventArgs e)
+        public void NewGameButton_Click(object sender, EventArgs e)
         {
             LoadDifficultyDialog();
             

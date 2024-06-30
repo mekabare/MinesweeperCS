@@ -37,10 +37,9 @@ namespace Minesweeper.View
         #endregion
 
         #region Constructor
-        public TileButton(MineField mineField)
+        public TileButton(MineField sharedMineField)
         {
-            this.mineField = mineField; // Initialize the MineField reference
-
+            this.mineField = sharedMineField;
             // Initialize the content grid and images within the constructor
             Grid contentGrid = new Grid();
             MineImage = new Image

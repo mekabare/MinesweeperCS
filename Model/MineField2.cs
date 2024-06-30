@@ -30,7 +30,9 @@ namespace Minesweeper
             }
         }
 
-        public void PlaceMines(int mineCount)
+        public Tile[,] Tiles => tiles;
+
+        public void PlaceMines(int mineCount, int selectedRow, int selectedCol)
         {
             Random rand = new Random();
             int placedMines = 0;
@@ -41,7 +43,7 @@ namespace Minesweeper
                 int row = rand.Next(maxRows);
                 int col = rand.Next(maxColumns);
 
-                if (!tiles[row, col].HasMine)
+                if (!tiles[row, col].HasMine && tiles[row,col] != tiles[selectedRow,selectedCol])
                 {
                     tiles[row, col].HasMine = true;
                     placedMines++;

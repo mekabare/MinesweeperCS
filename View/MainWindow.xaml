@@ -31,14 +31,17 @@
             <!-- Right StackPanel, Auto width adjusts to its content -->
         </Grid.ColumnDefinitions>
 
-        <!-- Top StackPanel -->
-        <StackPanel x:Name="TopPanel" Height="150" Grid.Row="0" Grid.ColumnSpan="3" >
-            <Label FontSize="72" Content="MINESWEEPER" Grid.Column="1" Grid.ColumnSpan="3" FontFamily="Roboto Black" Foreground="{DynamicResource Stroke}" FontWeight="Black" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-        </StackPanel>
+        <!-- Top Grid -->
+        <Grid x:Name="TopPanel" Height="150" Grid.Row="0" Grid.ColumnSpan="3" >
+            <Label x:Name="Logo" FontSize="72" Content="MINESWEEPER" Grid.Column="1" Grid.ColumnSpan="3" FontFamily="Roboto Black" Foreground="{DynamicResource Stroke}" FontWeight="Black" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+            <Label x:Name="MineCounter" Content="0"  VerticalAlignment="Bottom" FontFamily="Sprint 2" Margin="30,0,0,20" Foreground="{StaticResource Highlight}" Background="{StaticResource Stroke}" Height="50" Width="50" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Collapsed"/>
+            <Label x:Name="TimerDisplay" HorizontalAlignment="Right" Content="0" VerticalAlignment="Bottom" FontFamily="Sprint 2" Margin="0,0,30,20" Foreground="{StaticResource Highlight}" Background="{StaticResource Stroke}" Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Collapsed"/>
+
+        </Grid>
 
 
         <!-- Center Frame -->
-        <Border x:Name="ContentFrame" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" UseLayoutRounding="True" Background="{StaticResource Background}" BorderBrush="{DynamicResource Tertiary}" BorderThickness="0" >
+        <Border x:Name="ContentFrame" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" UseLayoutRounding="True" Background="{StaticResource Secondary}" BorderBrush="{DynamicResource Tertiary}" BorderThickness="0" >
             <ContentPresenter x:Name="MainContent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
