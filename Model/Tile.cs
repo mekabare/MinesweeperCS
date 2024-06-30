@@ -18,6 +18,8 @@ namespace Minesweeper
         private bool isMine, isRevealed, isFlagged;     //Hat Mine, Ist Aufgedeckt, Hat Flagge
 
         private int adjacentMines;                      //umliegende Minen
+
+        private Tile[] adjacentTiles;                       //umliegende Tiles
         #endregion Properties
 
 
@@ -69,13 +71,41 @@ namespace Minesweeper
 
         public int AdjacentMines
         {
-            get => adjacentMines;
-            set
+            get
+            {
+                {
+                    int count = 0;
+                    foreach (Tile tile in AdjacentTiles)
+                    {
+                        if (tile.IsMine) { count++; }
+                    }
+                    adjacentMines = count;
+                }
+                return adjacentMines;
+            }
+                set
             {
                 if (value >= 0) { adjacentMines = value; }
                 else { throw new ArgumentException("value must be larger than or equal to zero!", "adjacentMines"); }
             }
         }
+        public Tile[] AdjacentTiles
+        {
+            get { 
+                Tile Ntile = new Tile(row - 1, column);
+                Tile NEtile = new Tile(row - 1, column + 1);
+                Tile Etile = new Tile(row, column + 1);
+                Tile SEtile = new Tile(row + 1, column + 1);
+                Tile Stile = new Tile(row + 1, column);
+                Tile SWtile = new Tile(row + 1, column - 1);
+                Tile Wtile = new Tile(row, column - 1);
+                Tile NWtile = new Tile(row - 1, column - 1);
+
+                adjacentTiles = new Tile[] { Ntile, NEtile, Etile, SEtile, Stile, SWtile, Wtile, NWtile };
+                return adjacentTiles;
+            }
+            set { value = adjacentTiles; }
+        }//AdjacentTiles
 
         #endregion
 
@@ -97,7 +127,7 @@ namespace Minesweeper
             IsFlagged = false;
 
         }
-        #endregion
+        #endregion       
 
     }//Klasse
 }//Namespace
