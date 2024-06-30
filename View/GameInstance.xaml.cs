@@ -190,12 +190,6 @@ namespace Minesweeper.View
                 UpdateRemainingMines();
             }
 
-            if (MineField.CheckWinCondition())
-            {
- 
-                OnGameWon();
-                ReturnToMainMenu();
-            }
         }
 
         private void UpdateTileButtons()

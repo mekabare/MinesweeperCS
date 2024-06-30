@@ -10,11 +10,11 @@ namespace Minesweeper.View
     public partial class TileButton : Button
     {
         #region Properties 
-        Brush c1 = new SolidColorBrush(Color.FromRgb(250, 243, 240)); // Light Pink
+        Brush c1 = new SolidColorBrush(Color.FromRgb(252,253,158)); // Light Yellow
         Brush c2 = new SolidColorBrush(Color.FromRgb(212, 226, 212)); // Teal
-        Brush c3 = new SolidColorBrush(Color.FromRgb(255, 202, 204)); // Deep Pink
+        Brush c3 = new SolidColorBrush(Color.FromRgb(255, 216, 4)); // Highlight
         Brush c4 = new SolidColorBrush(Color.FromRgb(219, 196, 240)); // Purple
-        Brush c5 = new SolidColorBrush(Brushes.LightCoral.Color);
+        Brush c5 = new SolidColorBrush(Color.FromRgb(204, 126, 11));
 
         private Tile tileModel;
         private MineField mineField; // Reference to the MineField object
@@ -62,7 +62,7 @@ namespace Minesweeper.View
             this.Click += TileButton_Click;
             this.MouseRightButtonDown += TileButton_MouseRightButtonDown;
 
-            this.Margin = new Thickness(1);
+            this.Margin = new Thickness(0);
 
             this.Background = c1;
             this.BorderBrush = c3;

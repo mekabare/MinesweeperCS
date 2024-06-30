@@ -32,23 +32,36 @@ namespace Minesweeper.View
         public BestenlisteDialog(bool wonGame)
         {
             InitializeComponent();
-
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+  
             player = mainWindow.Spieler;
 
             if (wonGame)
             {
+                TextBox EnterNameBox = new TextBox();
+                this.ListGrid.Children.Add(EnterNameBox);
                 OnEnterNameRequested();
+
             }
 
         }
+
+        private void EnterNameBox_Changed(object sender, TextChangedEventArgs e)
+        {
+            KeyEventArgs keyEventArgs = new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Return);
+            if (EnterNameBox.Text.Length > 3)
+            {
+                EnterNameBox.Text = EnterNameBox.Text.ToUpper().Substring(0, 3);
+                OnValidNameEntered(sender, keyEventArgs);
+            }
+        }
+
         protected virtual void OnEnterNameRequested()
         {
             EnterNameBox = new TextBox();
             ResultDifficulty = new Label();
             ResultTime = new Label();
-            EnterNameBox.TextChanged += EnterNameBox_Changed;
-            EnterNameBox.AcceptsReturn = true;
+            EnterNameBox.AcceptsReturn = false;
             ListGrid.Children.Add(EnterNameBox);
             ListGrid.Children.Add(ResultDifficulty);
             ListGrid.Children.Add(ResultTime);
@@ -58,23 +71,19 @@ namespace Minesweeper.View
         }
 
 
-        private void EnterNameBox_Changed(object sender, RoutedEventArgs e)
+        private void OnValidNameEntered(object sender, KeyEventArgs e)
         {
-                if (EnterNameBox.Text.Length > 3)
-                {
-                    EnterNameBox.Text = EnterNameBox.Text.ToUpper().Substring(0, 3);
-                    OnValidNameEntered();
-                }
-        }
-
-        private void OnValidNameEntered()
-        {
-            EnterNameBox.AcceptsReturn = true;
+          if (e.Key == Key.Return)
+            {
+                ReturnKey_Pressed(sender, e);
+            }
         }
 
         private void ReturnKey_Pressed(object sender, RoutedEventArgs e)
         {
+
             OnNameEntered();
+
         }
 
         protected virtual void OnNameEntered()

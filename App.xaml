@@ -12,6 +12,8 @@
         <SolidColorBrush x:Key="Stroke" Color="#272343"></SolidColorBrush>
         <SolidColorBrush x:Key="Main" Color="#fffffe"></SolidColorBrush>
         <SolidColorBrush x:Key="Highlight" Color="#ffd804"></SolidColorBrush>
+        <SolidColorBrush x:Key="SoftHighlight" Color="#FFFCFD9E"></SolidColorBrush>
+        <SolidColorBrush x:Key="DarkHighlight" Color="#FFCC7E0B"></SolidColorBrush>
         <SolidColorBrush x:Key="Secondary" Color="#e3f6f5"></SolidColorBrush>
         <SolidColorBrush x:Key="Tertiary" Color="#bae8e8"></SolidColorBrush>
         <ImageBrush x:Key="Background" ImageSource="Assets/tiledbg.jpg" TileMode="Tile" Viewport="0,0,200,200" ViewportUnits="Absolute"></ImageBrush>
