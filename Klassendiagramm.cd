@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Minesweeper.Tile">
-    <Position X="23.5" Y="1" Width="1.5" />
+    <Position X="23" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAgAAAAAAAAgAABAIQICwAECAoAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAgAABAIQICwAUCAoAAAAAAAAAAAAQ=</HashCode>
       <FileName>Model\Tile.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -40,21 +40,20 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.Custom" Collapsed="true">
-    <Position X="16.25" Y="5.75" Width="1.5" />
+    <Position X="16.25" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\GameDifficulty.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.MineField">
-    <Position X="21" Y="2" Width="1.5" />
+    <Position X="20.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAABABAAAwAQAABAEAAAAgAAAAYAAAAEEAAAgAA=</HashCode>
-      <FileName>Model\MineField.cs</FileName>
+      <HashCode>AIAgAAAAAAAAAkACAABAAACAQgWDgAYAAAEEAAAAABA=</HashCode>
+      <FileName>Model\MineField2.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="field" />
-      <Field Name="difficulty" />
+      <Field Name="tiles" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Minesweeper.Spieler">
@@ -63,6 +62,9 @@
       <HashCode>AAABAAABAAAAAQAAAAAAAAQAAAAEAAAAAAAAAAAAAQA=</HashCode>
       <FileName>Bestenliste\Spieler.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="difficulty" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Minesweeper.Bestenliste">
     <Position X="9.25" Y="0.5" Width="1.5" />
@@ -72,14 +74,14 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="easyList" />
-      <Field Name="hardList" />
       <Field Name="mediumList" />
+      <Field Name="hardList" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Minesweeper.View.BestenlisteDialog" Collapsed="true">
-    <Position X="8.25" Y="6.25" Width="1.5" />
+    <Position X="9.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAQAAAQIIAEQAAgAAABAAQAiSAAAAAQE=</HashCode>
+      <HashCode>AAAAAAIAAAAAAQAAAQIIAAQAAgAAABABQACSAACAAQE=</HashCode>
       <FileName>View\BestenListeDialog.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -87,12 +89,12 @@
   <Class Name="Minesweeper.View.TileButton" Collapsed="true">
     <Position X="5.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAIAAgEAAgQAQAAEABAAAAgwAGCAgAEAABAAAAAEAA=</HashCode>
+      <HashCode>IAAAAEgEAAgQAQAAEABAAAAgwAGCAgAEAABAAAAAEAA=</HashCode>
       <FileName>View\TileButton.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.View.DifficultyDialog" Collapsed="true">
-    <Position X="4.75" Y="6.25" Width="1.5" />
+    <Position X="5.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IgAAAAIBAAAAAQAAQAAAAAAQAAEAAAEAAAACACAAAAA=</HashCode>
       <FileName>View\DifficultyDialog.xaml.cs</FileName>
@@ -108,30 +110,30 @@
     <TypeIdentifier />
   </Class>
   <Class Name="Minesweeper.View.GameInstance" Collapsed="true">
-    <Position X="10.5" Y="5.75" Width="1.5" />
+    <Position X="12.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAgAAAAAAAAAAAAAAAAAAAgAAAAAAEAAEAAAAAAEA=</HashCode>
-      <FileName>View\GameInstance.xaml.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Minesweeper.View.FieldGrid">
-    <Position X="14.25" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAEAAAABAAgAAAAAQAAAACAEAAAgBAAA=</HashCode>
+      <HashCode>ggQAiAAAEAhAAIFAUQAgAABAgEAAAAANAAEAQBAAAEA=</HashCode>
       <FileName>View\GameInstance.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="gameDifficulty" />
-      <Field Name="mineFieldModel" />
+      <Field Name="_mineField" />
+      <Field Name="_selectedDifficulty" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Minesweeper.View.FieldGrid">
+    <Position X="14.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAQAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>View\GameInstance.xaml.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Class Name="System.Windows.Controls.UserControl" Collapsed="true">
     <Position X="11.25" Y="4" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="System.Windows.Controls.Grid" Collapsed="true">
-    <Position X="13.5" Y="4" Width="1.5" />
+    <Position X="14.5" Y="2.25" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
@@ -141,7 +143,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Minesweeper.View.HowToDialog" Collapsed="true">
-    <Position X="6.5" Y="6.25" Width="1.5" />
+    <Position X="7.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAACAAAAAAAAAAAQAIAAEIAAEAAAAAAA=</HashCode>
       <FileName>View\HowToDialog.xaml.cs</FileName>
@@ -149,17 +151,17 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Minesweeper.View.MainMenu" Collapsed="true">
-    <Position X="12.25" Y="5.75" Width="1.5" />
+    <Position X="11.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CCAAAAAAAIAAAICAIAEAAAAAABIAAAAAAAIgAAAAgAA=</HashCode>
+      <HashCode>ACAAAAAAAIAAAQAAIAEAAAAADAIAAAAgAAIgAACAgAA=</HashCode>
       <FileName>View\MainMenu.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Minesweeper.View.MainWindow" Collapsed="true">
-    <Position X="3" Y="6.25" Width="1.5" />
+    <Position X="4" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAQAQAAAAAAAAAAAEoEACRABEQUAARAACEAAAoAEE=</HashCode>
+      <HashCode>AEAAQAAAAAAAAIAAIAEokAARgDMQUAARAAAGBAABAEA=</HashCode>
       <FileName>View\MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
