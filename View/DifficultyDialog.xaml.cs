@@ -20,9 +20,14 @@ namespace Minesweeper.View
     /// </summary>
     public partial class DifficultyDialog : Window
     {
+        private GameDifficulty selectedDifficulty;
         public DifficultyDialog()
         {
             InitializeComponent();
+
+          
+
+
         }
 
         // Events
@@ -54,11 +59,13 @@ namespace Minesweeper.View
         // Eventhandlers
         private void EasyButton_Click(object sender, RoutedEventArgs e)
         {
+            GameDifficulty seletedDifficulty = new Easy();
             OnEasyGameRequested();
         }
        
         private void MediumButton_Click(object sender, RoutedEventArgs e)
         {
+
             OnMediumGameRequested();
         }
       

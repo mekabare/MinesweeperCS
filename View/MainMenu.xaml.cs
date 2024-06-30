@@ -34,46 +34,46 @@ namespace Minesweeper.View
         }
 
 
-        // Event raisers
-        protected virtual void OnHighscoreRequested()
+        // Event raisers, die die Events auslösen (Publisher)
+        protected virtual void NotifyHighscoreRequested()
         {
             HighscoreRequested?.Invoke(this, EventArgs.Empty);
         }
-        protected virtual void OnNewGameRequested()
+        protected virtual void NotifyNewGameRequested()
         {
             NewGameRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnExitRequested()
+        protected virtual void NotifyExitRequested()
         {
             ExitRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnHowToRequested()
+        protected virtual void NotifyHowToRequested()
         {
             HowToRequested?.Invoke(this, EventArgs.Empty);
         }
 
 
-        // Eventhandlers
+        // Event handler mit Event raisers verknüpfen
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
-            OnNewGameRequested();
+            NotifyNewGameRequested();
         }
 
         private void HighscoreDialogButton_Click(object sender, RoutedEventArgs e)
         {
-            OnHighscoreRequested();
+            NotifyHighscoreRequested();
         }
 
         private void ExitGameButton_Click(object sender, RoutedEventArgs e)
         {
-            OnExitRequested();
+            NotifyExitRequested();
         }
 
         private void HowToDialogButton_Click(object sender, RoutedEventArgs e)
         {
-            OnHowToRequested();
+            NotifyHowToRequested();
         }
 
     }

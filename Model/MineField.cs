@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
+using 
 
 namespace Minesweeper
 {
@@ -16,7 +18,7 @@ namespace Minesweeper
     /// <param name="MaxRow">Anzahl der Zeilen des Spielfelds</param>
     /// <param name="MaxColumn">Anzahl der Spalten des Spielfelds</param>
     /// <param name="Difficulty">Schwierigkeitsgrad des Felds</param>
-    public class MineField
+    public class MineField : INotifyPropertyChanged
     {
         #region Felder
         private int _maxRow = 0, maxColumn = 0;  //Groesse des Spielfleds
@@ -26,12 +28,14 @@ namespace Minesweeper
         private GameDifficulty _difficulty;      //Schwierigkeitsgrad
 
         private int _totalMines;
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
 
 
         #region Getter und Setter
-        
+
         public int MaxRow
         {
             get => _maxRow;
@@ -81,15 +85,9 @@ namespace Minesweeper
             get => _difficulty;
             set
             {
-                if (value == null) { throw new ArgumentNullException("_difficulty", "Difficulty object cannot be null!"); }
-                else if (value is Easy ||
-                    value is Medium ||
-                    value is Hard ||
-                    value is Custom)
-                {
-                    _difficulty = value;
-                }
+              if (_difficulty is Easy || _difficulty is Medium || _difficulty is Hard || _difficulty is Custom) { _difficulty = value; }
                 else { throw new ArgumentException("Difficulty object must be an Easy-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
+
             }
         }//Difficulty
         #endregion Getter und Setter
@@ -114,6 +112,10 @@ namespace Minesweeper
 
         #region Methoden
 
+        /// <summary>
+        /// Methode um Field mit Tiles zu fuellen
+        /// </summary>
+        /// <exception cref="ArgumentException"></exception>
 
         public void AddTiles()
         {
@@ -136,14 +138,6 @@ namespace Minesweeper
                     throw new ArgumentException("Difficulty object must be an Easy-, Medium-, Hard-, or Custom-Objekt.", "Difficulty");
             }
 
-            if (_difficulty != null)
-            {
-                Difficulty = _difficulty;
-            }
-            else
-            {
-                Difficulty = new Easy();
-            }
             MaxRow = _difficulty.RowSize;
             MaxColumn = _difficulty.ColumnSize;
 
@@ -212,6 +206,10 @@ namespace Minesweeper
 
         }//PlaceMines(...) */
 
+
+        /// <summary>
+        /// Platziert Mienen, ignoriert das geklickte Tile
+        /// </summary>
         public void PlaceMines(Tile clickedTile)
         {
             int row, column;
@@ -226,7 +224,7 @@ namespace Minesweeper
                 row = rand.Next(0, MaxRow);
                 column = rand.Next(0, MaxColumn);
 
-                if (Field[row, column].IsMine == false || Field[row, column] == clickedTile)
+                if (Field[row, column].IsMine == false || Field[row, column] != clickedTile)
                 {
                     Field[row, column].IsMine = true;
                     minesLeft--;

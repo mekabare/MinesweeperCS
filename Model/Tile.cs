@@ -15,11 +15,19 @@ namespace Minesweeper
 
         private int row, column;                        //Reihe, Spalte
 
-        private bool isMine, isRevealed, isFlagged;     //Hat Mine, Ist Aufgedeckt, Hat Flagge
+        private bool hasMine, isRevealed, isFlagged;     //Hat Mine, Ist Aufgedeckt, Hat Flagge
+    
+           
+        private int adjacentMines;
 
-        private int adjacentMines;                      //umliegende Minen
+        public int AdjacentMines
+        {
+            get => adjacentMines;
+            set => adjacentMines = value;
+        }
+       
 
-        private Tile[] adjacentTiles;                       //umliegende Tiles
+
         #endregion Properties
 
 
@@ -51,11 +59,11 @@ namespace Minesweeper
             }
         }//Column
 
-        public bool IsMine
+        public bool HasMine
         {
-            get => isMine;
-            set { isMine = value; }
-        }//IsMine
+            get => hasMine;
+            set { hasMine = value; }
+        }//HasMine
 
         public bool IsRevealed
         {
@@ -68,44 +76,6 @@ namespace Minesweeper
             get => isFlagged;
             set { isFlagged = value; }
         }//IsFlagged
-
-        public int AdjacentMines
-        {
-            get
-            {
-                {
-                    int count = 0;
-                    foreach (Tile tile in AdjacentTiles)
-                    {
-                        if (tile.IsMine) { count++; }
-                    }
-                    adjacentMines = count;
-                }
-                return adjacentMines;
-            }
-                set
-            {
-                if (value >= 0) { adjacentMines = value; }
-                else { throw new ArgumentException("value must be larger than or equal to zero!", "adjacentMines"); }
-            }
-        }
-        public Tile[] AdjacentTiles
-        {
-            get { 
-                Tile Ntile = new Tile(row - 1, column);
-                Tile NEtile = new Tile(row - 1, column + 1);
-                Tile Etile = new Tile(row, column + 1);
-                Tile SEtile = new Tile(row + 1, column + 1);
-                Tile Stile = new Tile(row + 1, column);
-                Tile SWtile = new Tile(row + 1, column - 1);
-                Tile Wtile = new Tile(row, column - 1);
-                Tile NWtile = new Tile(row - 1, column - 1);
-
-                adjacentTiles = new Tile[] { Ntile, NEtile, Etile, SEtile, Stile, SWtile, Wtile, NWtile };
-                return adjacentTiles;
-            }
-            set { value = adjacentTiles; }
-        }//AdjacentTiles
 
         #endregion
 
@@ -122,7 +92,7 @@ namespace Minesweeper
         public Tile(int row, int column)
         {
             Position = new int[row, column];
-            IsMine = false;
+            HasMine = false;
             IsRevealed = false;
             IsFlagged = false;
 

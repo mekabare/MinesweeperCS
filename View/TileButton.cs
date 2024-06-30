@@ -17,6 +17,7 @@ namespace Minesweeper.View
         Brush c5 = new SolidColorBrush(Brushes.LightCoral.Color);
 
         private Tile tileModel;
+        private MineField mineField; // Reference to the MineField object
 
         public Tile TileModel
         {
@@ -27,17 +28,19 @@ namespace Minesweeper.View
         public Image MineImage { get; private set; }
         public Image FlagImage { get; private set; }
 
-        public bool IsMine { get; set; }
-        public bool IsRevealed { get; set; }
-        public bool IsFlagged { get; set; }
+        public bool IsMine => mineField.HasMine(Row, Column); // Property to check if the tile has a mine
+        public bool IsRevealed => mineField.IsRevealed(Row, Column); // Property to check if the tile is revealed
+        public bool IsFlagged => mineField.IsFlagged(Row, Column); // Property to check if the tile is flagged
         public int Row { get; set; }
         public int Column { get; set; }
-        public int AdjacentMines { get; set; }
+        public int AdjacentMines => mineField.GetAdjacentMines(Row, Column); // Property to get adjacent mines
         #endregion
 
         #region Constructor
-        public TileButton()
+        public TileButton(MineField mineField)
         {
+            this.mineField = mineField; // Initialize the MineField reference
+
             // Initialize the content grid and images within the constructor
             Grid contentGrid = new Grid();
             MineImage = new Image
@@ -60,11 +63,7 @@ namespace Minesweeper.View
             this.Click += TileButton_Click;
             this.MouseRightButtonDown += TileButton_MouseRightButtonDown;
 
-            this.IsMine = false;
-            this.IsRevealed = false;
-            this.IsFlagged = false;
             this.Margin = new Thickness(1);
-            AdjacentMines = 0;
 
             this.Background = c1;
             this.BorderBrush = c3;
@@ -76,22 +75,21 @@ namespace Minesweeper.View
         #endregion
 
         #region Event Handlers
-        private void TileButton_Click(object sender, RoutedEventArgs e)
+        public void TileButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsFlagged)
             {
-                IsRevealed = true;
+                mineField.FloodFill(Row, Column);
                 SetBackground();
             }
         }
 
-        private void TileButton_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        public void TileButton_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!IsRevealed)
             {
-                IsFlagged = !IsFlagged;
+                mineField.SetFlagged(Row, Column, !IsFlagged);
                 SetBackground();
-                e.Handled = true; // Prevents further handling of the event
             }
         }
         #endregion
@@ -103,12 +101,10 @@ namespace Minesweeper.View
             this.BorderBrush = IsRevealed ? c3 : c3;
             MineImage.Visibility = IsRevealed && IsMine ? Visibility.Visible : Visibility.Collapsed;
             FlagImage.Visibility = IsFlagged ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        public void SetAdjacentMines(int adjacentMines)
-        {
-            AdjacentMines = adjacentMines;
-            this.Content = AdjacentMines > 0 ? AdjacentMines.ToString() : string.Empty;
+            if (IsRevealed && !IsMine)
+            {
+                this.Content = AdjacentMines > 0 ? AdjacentMines.ToString() : string.Empty;
+            }
         }
         #endregion
     }

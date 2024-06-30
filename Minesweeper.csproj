@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\MineField2.cs" />
     <Compile Include="View\BestenListeDialog.xaml.cs">
       <DependentUpon>BestenListeDialog.xaml</DependentUpon>
     </Compile>
@@ -120,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Tile.cs" />
-    <Compile Include="Model\MineField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

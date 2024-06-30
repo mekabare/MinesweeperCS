@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +32,13 @@ namespace Minesweeper.View
         private BestenlisteDialog bestenListeDialog;
         private DifficultyDialog difficultyDialog;
         private HowToDialog howToDialog;
+        
+        public DependencyPropertyChangedEventHandler PropertyChanged { get; private set; }
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new DependencyPropertyChangedEventArgs());
+        }
 
         public Spieler Spieler
         {
@@ -64,21 +73,44 @@ namespace Minesweeper.View
         {
             InitializeComponent();
 
-            DifficultyDialog = new DifficultyDialog();
+            DifficultyDialog = new DifficultyDialog(); // Subscriber
             BestenlisteDialog = new BestenlisteDialog();
             HowToDialog = new HowToDialog();
-            MainMenu = new MainMenu();
+            MainMenu = new MainMenu(); // Publisher
 
-            LoadMainMenu(DifficultyDialog);
+            LoadMainMenu();
             MainMenu.NewGameRequested += MainMenu_NewGameButton_Click;
             MainMenu.HighscoreRequested += MainMenu_HighscoreButton_Click;
             MainMenu.ExitRequested += MainMenu_ExitButton_Click;
             MainMenu.HowToDialogButton.Click += MainMenu_HowToDialogButton_Click;
-            DifficultyDialog.EasyGameRequested += MainMenu_EasyButtonClick;
-            DifficultyDialog.MediumGameRequested += MainMenu_MediumButtonClick;
-            DifficultyDialog.HardGameRequested += MainMenu_HardGameRequested;
+            DifficultyDialog.EasyGameRequested += GameInstance_OnEasyGameRequested; // OnEasyGameRequested
+            DifficultyDialog.MediumGameRequested += GameInstance_OnMediumGameRequested; // OnMediumGameRequested
+            DifficultyDialog.HardGameRequested += GameInstance_OnHardGameRequested; // OnHardGameRequested
             DifficultyDialog.BackToMenuRequested += DifficultyDialog_BackToMenuRequested;
 
+        }
+
+        private void GameInstance_OnEasyGameRequested(object sender, EventArgs e)
+        {
+            DifficultyDialog.Close();
+            var gameInstance = new GameInstance(new Easy());
+
+            MainContent.Content= gameInstance;
+            
+        }
+
+        private void GameInstance_OnMediumGameRequested(object sender, EventArgs e)
+        {
+            DifficultyDialog.Close();
+            gameInstance = new GameInstance(new Medium());
+            MainContent.Content = gameInstance;
+        }
+
+        private void GameInstance_OnHardGameRequested(object sender, EventArgs e)
+        {
+            DifficultyDialog.Close();
+            gameInstance = new GameInstance(new Hard());
+            MainContent.Content = gameInstance;
         }
 
         private void MainMenu_HowToDialogButton_Click(object sender, EventArgs e)
@@ -93,25 +125,6 @@ namespace Minesweeper.View
             DifficultyDialog = new DifficultyDialog();
             if (DifficultyDialog != null)
                 DifficultyDialog.Close();
-        }
-
-        private void MainMenu_HardGameRequested(object sender, EventArgs e)
-        {
-            DifficultyDialog.Close();
-            LoadGameInstancePage(new Hard());
-        }
-
-        private void MainMenu_MediumButtonClick(object sender, EventArgs e)
-        {
-            DifficultyDialog.Close();
-            LoadGameInstancePage(new Medium());
-        }
-
-        // Routing Events
-        private void MainMenu_EasyButtonClick(object sender, EventArgs e)
-        {
-            DifficultyDialog.Close();
-            LoadGameInstancePage(new Easy());
         }
 
         private void MainMenu_ExitButton_Click(object sender, EventArgs e)
@@ -134,7 +147,7 @@ namespace Minesweeper.View
         /// <summary>
         /// On Startup: Laedt das Hauptmenue in den Frame "MainContent"
         /// </summary>
-        public void LoadMainMenu(DifficultyDialog difficultyDialog)
+        public void LoadMainMenu()
         {
     
             MainMenu = new MainMenu();

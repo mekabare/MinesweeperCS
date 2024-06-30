@@ -54,7 +54,7 @@ namespace Minesweeper
         /// </summary>
         /// <param name="fieldSize"></param>
         /// <param name="totalMines"></param>
-        public GameDifficulty(int rowSize, int ColumnSize, int totalMines)
+        public GameDifficulty(int rowSize, int columnSize, int totalMines)
         {
             RowSize = rowSize;
             ColumnSize = columnSize;
@@ -81,9 +81,9 @@ namespace Minesweeper
 
     public class Easy : GameDifficulty
     {
-        public Easy() : base(9, 9, 10)
+        public Easy() : base(9,9,10)
         {
-
+          
         }
 
         public override string ToString() { return "Easy"; }
