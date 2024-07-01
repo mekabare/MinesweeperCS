@@ -57,8 +57,8 @@ namespace Minesweeper.View
 
             }
 
-            BestenlisteTest bestenlisteTest = new BestenlisteTest(wonGame);    //BESTENLISTETEST!!!!!!!!!!!!!!!
-            bestenlisteTest.Show();
+            //BestenlisteTest bestenlisteTest = new BestenlisteTest(wonGame);    //BESTENLISTETEST!!!!!!!!!!!!!!!
+            //bestenlisteTest.Show();
         }
 
         private void EnterNameBox_Changed(object sender, TextChangedEventArgs e)

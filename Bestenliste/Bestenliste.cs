@@ -240,7 +240,7 @@ namespace Minesweeper
                  *     wird der Platz der Stelle in int platz eingetragen und ok = true gesetzt.
                  * - Wenn keine Stelle past, bleibt ok = false.
                  */
-                case "GameInstance":
+                case "Easy":
                     {
                         arrLength = easyList.Length;
                         for (int i = 0; i < arrLength; i++) {

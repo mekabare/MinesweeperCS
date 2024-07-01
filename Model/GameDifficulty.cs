@@ -19,7 +19,10 @@ namespace Minesweeper
         public int RowSize
         {
             get => rowSize;
-            set { rowSize = value; }      //pot. set Leer setzen und durch extra Funktion ersetzen.
+            set
+            { 
+                rowSize = value;
+            }      //pot. set Leer setzen und durch extra Funktion ersetzen.
         }//RowSize
 
         public int ColumnSize
