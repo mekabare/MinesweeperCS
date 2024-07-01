@@ -50,7 +50,7 @@ namespace Minesweeper
 
                 if (wonGame)
                 {
-
+                    //Hier muss noch was hin
                 }
 
                 Show();
