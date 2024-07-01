@@ -312,7 +312,7 @@ namespace Minesweeper
                      *     geziehlt verloren.
                      * - Am Ende wird das neue Element an der Stelle Array[platzierung] eingesetzt
                      */
-                    case "GameInstance": {
+                    case "Easy": {
                             if(easyList == null) { ok = false; break; }
                             arrLength = easyList.Length;
                             if (arrLength == 1) { easyList[platzierung] = new Spieler(player); break; }
