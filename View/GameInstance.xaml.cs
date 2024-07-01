@@ -33,9 +33,11 @@ namespace Minesweeper.View
         private DispatcherTimer timer;
         private DateTime startTime;
         private MainWindow window;
-        private bool isLost = false;
 
         private GameDifficulty _selectedDifficulty;
+
+        private bool isLost = false;    //Um den Sieg, nach der Niderlage zu verhindern
+        private int felderLeft;         //Um die übrigen Felder für die Siegbedingung zu zählen
 
         public MineField MineField
         {
@@ -67,6 +69,10 @@ namespace Minesweeper.View
         event EventHandler GameOver;
         event EventHandler GameWon;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="selectedDifficulty"></param>
         public GameInstance(GameDifficulty selectedDifficulty)
         {
             InitializeComponent();
@@ -76,6 +82,9 @@ namespace Minesweeper.View
             SelectedDifficulty = selectedDifficulty;
 
             MineField = new MineField(selectedDifficulty.RowSize, selectedDifficulty.ColumnSize);
+
+            //Felder left = Reihen * Spalten abzüglich Menge an Minen.
+            felderLeft = (selectedDifficulty.RowSize * selectedDifficulty.ColumnSize) - selectedDifficulty.TotalMines;
 
             MainGrid.Children.Add(InitializeField());
 
@@ -128,7 +137,7 @@ namespace Minesweeper.View
 
         protected virtual void OnGameWon()
         {
-            if (isLost = false) //Wurde das Spiel noch nicht verloren.
+            if (isLost == false) //Wurde das Spiel noch nicht verloren.
             {
                 timer.Stop();
                 BestenlisteDialog bestenlisteDialog = new BestenlisteDialog(true);
@@ -184,6 +193,11 @@ namespace Minesweeper.View
             int row = tileButton.Row;
             int col = tileButton.Column;
 
+            if (MineField.IsRevealed(row, col) == true)    //Wenn das Feld noch nicht geöffnet wurde
+            {
+                felderLeft--;                   //Felder Left abziehen
+            }
+
             if (MineField.HasMine(row, col))
             {
                 OnGameOver();
@@ -193,6 +207,11 @@ namespace Minesweeper.View
                 MineField.FloodFill(row, col);
                 UpdateTileButtons();
                 UpdateRemainingMines();
+
+                if (felderLeft == 0)                //Wenn FelderLeft == 0 -> Sieg
+                {
+                    OnGameWon();                    //Siegmethode
+                }
             }
 
         }
