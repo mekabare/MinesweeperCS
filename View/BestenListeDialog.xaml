@@ -23,14 +23,15 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Foreground" Value="{StaticResource Stroke}"/>
-            <Setter Property="BorderBrush" Value="{x:Null}"/>
-            <Setter Property="FontFamily" Value="Sprint 2"/>
+            <Setter Property="Background" Value="{StaticResource Stroke}"/>
+            <Setter Property="Foreground" Value="{StaticResource Highlight}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Width" Value="134"/>
         </Style>
     </Window.Resources>
     <Grid x:Name="ListGrid" Background="{StaticResource Background}">
@@ -48,8 +49,8 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="NAME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Label Content="MODE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -57,28 +58,7 @@
         <Label Content="aaa" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="1" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
         <Label Content="EASY" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="1" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
         <Label Content="420" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="1" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="2" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="2" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="2" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="3" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="3" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="3" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="4" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="4" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="4" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="5" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="5" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="5" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="6" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="6" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="6" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="7" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="7" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="7" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="8" Grid.Column="0" Height="45" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="8" Grid.Column="1" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-        <Label Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="8" Grid.Column="2" Height="45" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFD8A800" Background="{DynamicResource Stroke}"/>
-
+        
 
 
 

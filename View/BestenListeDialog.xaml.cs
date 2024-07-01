@@ -33,6 +33,7 @@ namespace Minesweeper.View
         {
             InitializeComponent();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            LoadBestenliste();
   
             player = mainWindow.Spieler;
 
@@ -95,10 +96,29 @@ namespace Minesweeper.View
             SaveBestenliste();
             NameEntered?.Invoke(this, EventArgs.Empty);
         }
-        public void LoadBestenliste(string name, string difficulty, string time)
+        public void LoadBestenliste()
         {
-            Bestenliste bestenliste = new Bestenliste();
-            bestenliste.ReadLists();
+            int numberOfTextBoxes = 3; // For example, for name, difficulty, and time
+            int numberOfRows = 9;
+            for (int j = 2; j < numberOfRows; j++)
+            {
+                for (int i = 0; i < numberOfTextBoxes; i++)
+                {
+                    TextBox textBox = new TextBox();
+                    // Assuming you want to add each TextBox to a new row
+                    Grid.SetColumn(textBox, i);
+                    Grid.SetRow(textBox, j);
+                    ListGrid.Children.Add(textBox);
+                    textBox.IsReadOnly = true;
+                    textBox.Cursor = Cursors.Arrow;
+                    textBox.IsHitTestVisible = false;
+
+
+
+
+
+                }
+            }
         }
 
         public void SaveBestenliste()
