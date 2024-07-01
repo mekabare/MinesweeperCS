@@ -28,6 +28,10 @@ namespace Minesweeper.View
         string Name, Difficulty, Time;
         Spieler player = new Spieler();
 
+        Bestenliste bestenliste = new Bestenliste();    //Bestenlisten Member
+        GameDifficulty gameDifficulty = null;
+        int listDifficulty = 0; //0 = none    1 = Easy    2 = Medium    3 = Hard
+
 
         public BestenlisteDialog(bool wonGame)
         {
@@ -37,6 +41,14 @@ namespace Minesweeper.View
   
             player = mainWindow.Spieler;
 
+            if (player != null)                                                          //
+            {                                                                            //
+                player.Difficulty = gameDifficulty;                                      //listDifficulty setzen
+                if (gameDifficulty.ToString() == "Easy") { listDifficulty = 1; }         //
+                else if (gameDifficulty.ToString() == "Medium") { listDifficulty = 2; }  //
+                else if (gameDifficulty.ToString() == "Hard") { listDifficulty = 3; }    //
+            }                                                                            //
+
             if (wonGame)
             {
                 TextBox EnterNameBox = new TextBox();
@@ -45,6 +57,8 @@ namespace Minesweeper.View
 
             }
 
+            BestenlisteTest bestenlisteTest = new BestenlisteTest(wonGame);    //BESTENLISTETEST!!!!!!!!!!!!!!!
+            bestenlisteTest.Show();
         }
 
         private void EnterNameBox_Changed(object sender, TextChangedEventArgs e)
@@ -72,7 +86,7 @@ namespace Minesweeper.View
         }
 
 
-        private void OnValidNameEntered(object sender, KeyEventArgs e)
+        private void OnValidNameEntered(object sender, KeyEventArgs e)  //Wenn Enter gedrückt wird
         {
           if (e.Key == Key.Return)
             {
@@ -98,9 +112,28 @@ namespace Minesweeper.View
         }
         public void LoadBestenliste()
         {
+            switch (listDifficulty) //Schwierigkeitsgrad
+            {
+                case 1: //Easy
+                    {
+                        bestenliste.PlatzhalterList = bestenliste.EasyList;
+                        break;
+                    }
+                case 2: //Medium
+                    {
+                        bestenliste.PlatzhalterList = bestenliste.MediumList;
+                        break;
+                    }
+                case 3: //Hard
+                    {
+                        bestenliste.PlatzhalterList = bestenliste.HardList;
+                        break;
+                    }
+            }//switch
+
             int numberOfTextBoxes = 3; // For example, for name, difficulty, and time
             int numberOfRows = 9;
-            for (int j = 2; j < numberOfRows; j++)
+            for (int j = 1; j < numberOfRows; j++)
             {
                 for (int i = 0; i < numberOfTextBoxes; i++)
                 {
@@ -113,8 +146,31 @@ namespace Minesweeper.View
                     textBox.Cursor = Cursors.Arrow;
                     textBox.IsHitTestVisible = false;
 
-
-
+                    //BestenlistenElement bestücken
+                    if (IsInitialized)
+                    {
+                        /*
+                        switch (i)
+                        {
+                            case 0:
+                                {
+                                    textBox.Text = bestenliste.PlatzhalterList[j - 1].Name; //Name einfügen
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    textBox.Text = bestenliste.PlatzhalterList[j - 1].Difficulty.ToString();
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    textBox.Text = bestenliste.PlatzhalterList[j - 1].Time.ToString(); //Zeit einfügen
+                                    break;
+                                }
+                        }//switch
+                        */
+                    }
+                        
 
 
                 }
@@ -123,10 +179,10 @@ namespace Minesweeper.View
 
         public void SaveBestenliste()
         {
-            Bestenliste bestenliste = new Bestenliste();
+            /*
             bestenliste.InsertSorted(player);
             bestenliste.SaveBest();
-           
+            */
 
         }
 

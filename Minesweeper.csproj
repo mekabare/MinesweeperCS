@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\BestenlisteTest.xaml.cs">
+      <DependentUpon>BestenlisteTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\MineField2.cs" />
     <Compile Include="View\BestenListeDialog.xaml.cs">
       <DependentUpon>BestenListeDialog.xaml</DependentUpon>
@@ -76,6 +79,10 @@
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TileButton.cs" />
+    <Page Include="View\BestenlisteTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BestenListeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

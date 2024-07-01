@@ -21,6 +21,8 @@ namespace Minesweeper
         private Spieler[] easyList = null;
         private Spieler[] mediumList = null;
         private Spieler[] hardList = null;
+
+        private Spieler[] platzhalterList = null;
         #endregion Felder
 
 
@@ -352,7 +354,31 @@ namespace Minesweeper
 
 
         #region Getter und Setter
-        //nicht nötig.
+
+        public Spieler[] EasyList
+        {
+            get => easyList;
+            set { easyList = value; }
+        }
+
+        public Spieler[] MediumList
+        {
+            get => mediumList;
+            set { mediumList = value; }
+        }
+
+        public Spieler[] HardList
+        {
+            get => hardList;
+            set { hardList = value; }
+        }
+
+        public Spieler[] PlatzhalterList
+        {
+            get => platzhalterList;
+            set { platzhalterList = value; }
+        }
+
         #endregion Getter und Setter
 
     }//Klasse

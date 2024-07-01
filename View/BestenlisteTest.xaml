@@ -1,0 +1,89 @@
+﻿<Window x:Class="Minesweeper.BestenlisteTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Minesweeper"
+        mc:Ignorable="d"
+        Title="BestenlisteTest" Height="500" Width="300">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5,5">
+
+            <!-- Radio Buttons -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <RadioButton x:Name="EasyRadio" Content="Easy" Width="100" Checked="EasyRadio_Checked"/>
+                <RadioButton x:Name="MediumRadio" Content="Medium" Width="100" Checked="MediumRadio_Checked"/>
+                <RadioButton x:Name="HardRadio" Content="Hard" Width="100" Checked="HardRadio_Checked"/>
+
+            </StackPanel>
+
+            <!-- Tabellen head -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="NAME              |          MODE          |          TIME"/>
+            </StackPanel>
+            
+            <!-- Player -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="1."/>
+                <TextBox x:Name="SpielerOneName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerOneModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="2."/>
+                <TextBox x:Name="SpielerTwoName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerTwoModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="3."/>
+                <TextBox x:Name="SpielerThreeName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerThreeModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="4."/>
+                <TextBox x:Name="SpielerFourName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerFourModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="5."/>
+                <TextBox x:Name="SpielerFiveName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerFiveModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="6."/>
+                <TextBox x:Name="SpielerSixName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerSixModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="7."/>
+                <TextBox x:Name="SpielerSevenName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerSevenModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="8."/>
+                <TextBox x:Name="SpielerEightName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerEightModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="9."/>
+                <TextBox x:Name="SpielerNineName" IsReadOnly="True" Width="60"/>
+                <Label x:Name="SpielerNineModeTime" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="10."/>
+                <TextBox x:Name="SpielerTenName" IsReadOnly="True" Width="55"/>
+                <Label x:Name="SpielerTenModeTime" Width="210"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+    </Grid>
+</Window>
