@@ -16,7 +16,7 @@ namespace Minesweeper
     public class Bestenliste
     {
         #region Felder
-        private const string path = @"Bestenliste.txt";
+        private const string path = @"Bestenlisten.txt";
 
         private Spieler[] easyList = null;
         private Spieler[] mediumList = null;
@@ -108,7 +108,7 @@ namespace Minesweeper
 
                                             switch (items[2])
                                             {
-                                                case "MineFieldPage":
+                                                case "Easy":
                                                     {
                                                         spieler.Difficulty = new Easy();        //selectedDifficulty
 
