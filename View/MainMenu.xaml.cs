@@ -35,7 +35,7 @@ namespace Minesweeper.View
 
             mainWindow = (MainWindow)Application.Current.MainWindow; 
 
-            Bestenliste list = new Bestenliste();
+
 
 
         }
