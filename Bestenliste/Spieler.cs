@@ -18,6 +18,8 @@ namespace Minesweeper
 
         private int time;                   //Zeit, die er für ein Spiel gebraucht hat
 
+        private int score;                  //Score, den der Spieler erziehlt hat. Errechneter Wert, kein Set.
+
         private GameDifficulty difficulty;  //Schwierigkeit, auf die der Spieler gespielt hat
 
         //private int score;                //Score, den der Spieler erziehlt hat. Errechneter Wert, kein Set.
@@ -69,14 +71,14 @@ namespace Minesweeper
 
 
         #region Methoden
-        /*
+        
         public void calculateScore()    //Wenn score implementiert wird
         {
             int diffValue = 0;
 
             switch(Difficulty.ToString())   //Bestimmung des Rechenfaktors
             {
-                case "GameInstance": {
+                case "Easy": {
                         diffValue = 1;
                         break;
                     }
@@ -91,9 +93,13 @@ namespace Minesweeper
                 default: { break; }
             }//switch
 
-            Score = diffValue / Time;   //Berechnung des Scores
-        }*///calculateScore()
-        
+            if (time > 0)
+            {
+                score = diffValue / Time;
+            }//Berechnung des Scores
+            else { throw new ArgumentOutOfRangeException("time", "Time cannot be (less than) zero!"); }
+        }///calculateScore()
+
 
         #endregion Methoden
 
@@ -178,6 +184,15 @@ namespace Minesweeper
                 else { throw new ArgumentOutOfRangeException("time", "A Player cannot achive less than zero time!"); }
             }
         }//Time
+
+        public int Score
+        {
+            get => score;
+            set
+            {
+                if (score >= 0) { score = value; }
+            }//Score
+        }
 
         internal GameDifficulty Difficulty
         {

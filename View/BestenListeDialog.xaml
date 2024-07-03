@@ -32,33 +32,41 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Height" Value="45"/>
             <Setter Property="Width" Value="134"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
         </Style>
     </Window.Resources>
+
+    
+ 
     <Grid x:Name="ListGrid" Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Content="NAME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="NAME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
         <Label Content="MODE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="TIME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="TIME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <DockPanel x:Name="BottomDock" Grid.RowSpan="9"  Grid.ColumnSpan="4" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="{StaticResource Tertiary}">
+            <RadioButton x:Name="Descending" Content="Descending Sort" Width="Auto" HorizontalAlignment="Stretch" Margin="50,0,0,0" VerticalAlignment="Center" IsChecked="True" FontFamily="Sprint 2" FontSize="9" VerticalContentAlignment="Center" Foreground="{DynamicResource Stroke}" BorderBrush="{DynamicResource Secondary}"/>
+            <RadioButton x:Name="Ascending" Content="Ascending Sort" Width="Auto" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="Sprint 2" FontSize="9" VerticalContentAlignment="Center" Foreground="{DynamicResource Stroke}" BorderBrush="{DynamicResource Secondary}" />
+        </DockPanel>
+        <ScrollViewer x:Name="ScrollViewer" Background="{DynamicResource Secondary}" BorderBrush="{DynamicResource Stroke}" Foreground="{DynamicResource Tertiary}" VerticalScrollBarVisibility="Disabled" Grid.RowSpan="9" Grid.Column="3"></ScrollViewer>
+
         <!-- Hier kamen Platzhalter Labels rein -->
-
-
-
-
     </Grid>
 </Window>

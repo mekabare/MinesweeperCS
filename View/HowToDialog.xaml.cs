@@ -36,7 +36,7 @@ namespace Minesweeper.View
 
         public void OpenHowToDialog()
         {
-
+            this.Hilfstextbox.Text = ReadHelpTextFromFile();
         }
 
         public HowToDialog()
@@ -46,7 +46,7 @@ namespace Minesweeper.View
 
             OpenHowToDialog();
 
-            this.Hilfstextbox.Text = ReadHelpTextFromFile();
+
 
 
         }//HowToDialog

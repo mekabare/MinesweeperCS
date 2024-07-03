@@ -74,7 +74,6 @@ namespace Minesweeper.View
             InitializeComponent();
 
             DifficultyDialog = new DifficultyDialog(); // Subscriber
-            BestenlisteDialog = new BestenlisteDialog(false);
             HowToDialog = new HowToDialog();
             MainMenu = new MainMenu(); // Publisher
 
@@ -148,14 +147,10 @@ namespace Minesweeper.View
 
         private void HighscoreButton_Click(object sender, EventArgs e)
         {
-            LoadBestenListeDialog();
-        }
 
-        private void LoadBestenListeDialog()
-        {
-            bestenListeDialog = new BestenlisteDialog(false);
-            bestenListeDialog.ShowDialog();
-
+           bestenListeDialog = new BestenListeImMenu();
+            if (bestenListeDialog != null)
+                bestenListeDialog.ShowDialog();
         }
 
         /// <summary>

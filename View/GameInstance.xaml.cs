@@ -140,7 +140,7 @@ namespace Minesweeper.View
             if (isLost == false) //Wurde das Spiel noch nicht verloren.
             {
                 timer.Stop();
-                BestenlisteDialog bestenlisteDialog = new BestenlisteDialog(true);
+                BestenlisteDialog bestenlisteDialog = new BestenListeNachGameWin();
                 bestenlisteDialog.ShowDialog();
                 GameWon?.Invoke(this, EventArgs.Empty);
                 if (bestenlisteDialog.DialogResult == true)

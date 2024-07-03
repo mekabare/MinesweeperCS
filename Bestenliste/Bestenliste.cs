@@ -18,9 +18,7 @@ namespace Minesweeper
         #region Felder
         private const string path = @"Bestenlisten.txt";
 
-        private Spieler[] easyList = null;
-        private Spieler[] mediumList = null;
-        private Spieler[] hardList = null;
+        private Spieler[] playerList;
 
         private Spieler[] platzhalterList = null;
         #endregion Felder
@@ -34,7 +32,7 @@ namespace Minesweeper
         /// </summary>
         public Bestenliste()   //Hier macht nur ein Default-Konstruktor sinn, weil die Klasse effektiv nur mit Dateien arbeitet
         {
-            ReadLists();        //Bestückt die Listen.
+            ReadList();      //Bestückt die Listen.
         }//default
 
         #endregion Konstruktoren
@@ -50,9 +48,9 @@ namespace Minesweeper
          * - Da jeder Datensatz aus einem Spieler-Objekt besteht, sind die einzelnen Datensätze in sich
          *   mit ';' getrennt.
          * - Die Reihenfolge der Datenelemente eines Datensatzes ist:
-         *   items[0] = Name
-         *   items[1] = Time
-         *   items[2] = Difficulty.ToString()
+         *   param[0] = Name
+         *   param[1] = Time
+         *   param[2] = Difficulty.ToString()
          * - Insgesamt sollte es 30 Datensätze geben (3 Bestenliste á 10 Spielern)
          */
 
@@ -67,15 +65,14 @@ namespace Minesweeper
         /// <exception cref="IOException"></exception>
         /// <exception cref="UnauthorizedAccessException"></exception>
         /// <exception cref="PathTooLongException"></exception>
-        public bool ReadLists()
+        public bool ReadList()
         {
             bool ok = false;
             string line = "";
             int number;             //Hilfsvariable für numerische Konvertierungen mit TryParse()
             Spieler spieler = null;
-            int easyCount = 0;
-            int mediumCount = 0;
-            int hardCount = 0;
+            int entryCount = 0;     //Zählt die Anzahl der eingelesenen Datensätze, erlaubt dynamische Generierung des UIs
+
 
             if (File.Exists(path))
             {
@@ -96,54 +93,39 @@ namespace Minesweeper
                                 {
 
                                     //Trennen der Datensatz-Items
-                                    string[] items = player.Split(';');
-                                    if (!string.IsNullOrEmpty(items[0])) //Ist der DS gültig?
+                                    string[] param = player.Split(';');
+                                    if (!string.IsNullOrEmpty(param[0])) //Ist der DS gültig?
                                     {
                                         spieler = new Spieler();
 
-                                        spieler.Name = items[0];                                //Name
+                                        spieler.Name = param[0];                                //Name
 
-                                        ok = int.TryParse(items[1], out number);
+                                        ok = int.TryParse(param[1], out number);
                                         if (ok)
                                         {
                                             spieler.Time = number;                              //Time
 
-                                            switch (items[2])
+                                            switch (param[2])
                                             {
                                                 case "Easy":
                                                     {
-                                                        spieler.Difficulty = new Easy();        //selectedDifficulty
-
-                                                        //in die Liste
-                                                        Array.Resize<Spieler>(ref easyList, easyCount + 1);
-                                                        easyList[easyCount] = new Spieler(spieler);
-                                                        easyCount++;
-                                                        break;
+                                                        spieler.Difficulty = new Easy();
+                                                        break; //selectedDifficulty
                                                     }
 
                                                 case "Medium":
                                                     {
                                                         spieler.Difficulty = new Medium();      //selectedDifficulty
-
-                                                        //in die Liste
-                                                        Array.Resize<Spieler>(ref mediumList, mediumCount + 1);
-                                                        mediumList[mediumCount] = new Spieler(spieler);
-                                                        mediumCount++;
                                                         break;
+
                                                     }
 
                                                 case "Hard":
                                                     {
                                                         spieler.Difficulty = new Hard();        //selectedDifficulty
-
-                                                        //in die Liste
-                                                        Array.Resize<Spieler>(ref hardList, hardCount + 1);
-                                                        hardList[hardCount] = new Spieler(spieler);
-                                                        hardCount++;
                                                         break;
-                                                    }
 
-                                                //Custom werden nicht gespeichert, und deswegen nicht eingelesen
+                                                    }
 
                                                 default:
                                                     {
@@ -151,10 +133,16 @@ namespace Minesweeper
                                                         break;
                                                     }
                                             }//switch
+                                            Array.Resize<Spieler>(ref playerList, entryCount + 1);
+                                            playerList[entryCount] = new Spieler(spieler);
+                                            entryCount++;
+                                            break;
+                                            //Custom werden nicht gespeichert, und deswegen nicht eingelesen
+
+
                                         }//if(ok)
 
-                                        else
-                                            break;  //Wenn die Konvertierung eines Objekts scheitert, bricht die Methode ab
+                                        //Wenn die Konvertierung eines Objekts scheitert, bricht die Methode ab
                                     }//if(string != null)
                                 }//foreach
                             }//if
@@ -181,33 +169,18 @@ namespace Minesweeper
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write)) {
                 if (fs.CanWrite)    //Kann die Datei zum Schreiben geöffnet werden? 
                 {
-                    foreach (Spieler player in easyList) {  //easyList speichern
+                    foreach (Spieler player in playerList) {  //easyList speichern
                         using (StreamWriter sw = new StreamWriter(fs)) {
-                            sw.Write("{0};{1};{2}#",
-                                    player.Name,
-                                    player.Time.ToString(),
-                                    player.Difficulty.ToString());
+                            sw.Write("{0};{1};{2};{3}#",
+
+                            player.Name,
+                            player.Time.ToString(),
+                            player.Difficulty.ToString());
+                            player.Score.ToString();
+
                             sw.Flush();
                         }//using
-                    }//froeach easyList
-                    foreach (Spieler player in mediumList) {    //mediumList speichern
-                        using (StreamWriter sw = new StreamWriter(fs)) {
-                            sw.Write("{0};{1};{2}#",
-                                    player.Name,
-                                    player.Time.ToString(),
-                                    player.Difficulty.ToString());
-                            sw.Flush();
-                        }//using
-                    }//froeach mediumList
-                    foreach (Spieler player in hardList) {  //hardList speichern
-                        using (StreamWriter sw = new StreamWriter(fs)) {
-                            sw.Write("{0};{1};{2}#",
-                                    player.Name,
-                                    player.Time.ToString(),
-                                    player.Difficulty.ToString());
-                            sw.Flush();
-                        }//using
-                    }//froeach hardList
+                    }//froeach
                     ok = true;  //alles hat geklappt
                 }//if
             }//using
@@ -224,130 +197,78 @@ namespace Minesweeper
         /// 1.Platz -> Platzierung = 0
         /// 2.Platz -> Platzierung = 1 usw.</param>
         /// <returns>boolsches True, wenn der player in seiner Liste einen PLatz kriegt</returns>
-        public bool CheckBest(Spieler player, out int platz)
+
+        //SortList
+        public void SortListAscending()
         {
-            bool ok = false;
-            platz = 0;
-            int arrLength;
+            if (ReadList())
 
-            switch (player.Difficulty.ToString())
-            {
-                /*
-                 * Ablauf eines case:
-                 * - bestimmt die groesse des Arrays.
-                 * - for durchläuft das Array von vorne nach hinten:
-                 *   - Wenn eine Stelle die gleiche, oder eine schlechtere Zeit hat, wie der Contester,
-                 *     wird der Platz der Stelle in int platz eingetragen und ok = true gesetzt.
-                 * - Wenn keine Stelle past, bleibt ok = false.
-                 */
-                case "GameInstance":
-                    {
-                        arrLength = easyList.Length;
-                        for (int i = 0; i < arrLength; i++) {
-                            if (easyList[i].Time <= player.Time) {
-                                platz = i;
-                                ok = true;
-                                break;
-                            }
-                        }
-                        break;
-                    }//GameInstance
-                case "Medium": {
-                        arrLength = mediumList.Length;
-                        for (int i = 0; i < arrLength; i++) {
-                            if (mediumList[i].Time <= player.Time) {
-                                platz = i;
-                                ok = true;
-                                break;
-                            }
-                        }
-                        break;
-                    }//Medium
-                case "Hard": {
-                        arrLength = hardList.Length;
-                        for (int i = 0; i < arrLength; i++) {
-                            if (hardList[i].Time <= player.Time) {
-                                platz = i;
-                                ok = true;
-                                break;
-                            }
-                        }
-                        break;
-                    }//Hard
-                default: { ok = false; break; } //Wenn weder GameInstance, Medium oder Hard.
-            }//switch
+                foreach (Spieler player in playerList)
+                {
+                    // sort by score
 
-            return ok;
-        }//CeckBest
+                    Array.Sort(playerList, (x, y) => x.Score.CompareTo(y.Score));
 
+                    // sortingdirection is ascending
+
+                }
+        }
+
+        public void SortListDescending
+            ()
+        {
+            if (ReadList())
+
+                foreach (Spieler player in playerList)
+                {
+                    // sort by score
+
+                    Array.Sort(playerList, (x, y) => y.Score.CompareTo(x.Score));
+
+                    // sortingdirection is descending
+
+                }
+        }
 
         /// <summary>
-        /// Fügt ein Spieler-Objekt in eine Bestenliste ein, sofern es nach der Funktion CheckBest(...) in die
-        /// entsprechende Bestenliste gehört.
+        /// Vergleicht die Score des Users und ermittelt den Rang in der Bestenliste, erweitert die Liste am Insertion Index
+        /// Wird genutzt, um bei Win die richtige Grid.Row zu fuellen, hoechste score ist oben, liste ist descending
         /// </summary>
-        /// <param name="player">Spieler-Objekt, der in die Bestenliste eingefügt werden soll.</param>
-        /// <returns>boolsches True, Wenn das einfügen Funktioniert hat.</returns>
-        public bool InsertSorted(Spieler player)
+        /// <param name="player"></param>
+        public int GetRankInList(Spieler player)
         {
-            bool ok = true;
-            int platzierung;
-            int arrLength;
-
-            //ruft selber CheckBest auf und setzt dann an der Stelle Platz ein.
-            if (CheckBest(player, out platzierung))
+            SortListDescending();
+            int index = 0;
+            if (playerList.Length == 0) // Falls die Liste leer ist
             {
-                switch (player.Difficulty.ToString())
+                Array.Resize(ref playerList, 1);
+                playerList[0] = player;
+                return index;
+            }
+            else // Falls die Liste nicht leer ist
+            {
+                for (int i = 0; i < playerList.Length; i++)
                 {
-                    /*
-                     * Ablauf der Cases:
-                     * - Wenn das Array == null ist, wird nichts gemacht.
-                     * - Groesse des Arrays wird bestimmt
-                     * - Wenn das Array nur einen Eintrag hat, wird dieser überschrieben und die
-                     *   for-Schleife übersprungen.
-                     * - for-Schleife
-                     *   - int i wird hinten angesetzt.
-                     *   - durchläuft das Array bis einschließlich int platzierung
-                     *   - verlegt dabei alle Elemente, einschließlich Array[platzierung] um eins
-                     *     nach hinten (8->9, 7->8, usw.). Dabei geht das letzte Element der Liste
-                     *     geziehlt verloren.
-                     * - Am Ende wird das neue Element an der Stelle Array[platzierung] eingesetzt
-                     */
-                    case "GameInstance": {
-                            if(easyList == null) { ok = false; break; }
-                            arrLength = easyList.Length;
-                            if (arrLength == 1) { easyList[platzierung] = new Spieler(player); break; }
-                            for (int i = arrLength - 2; i >= platzierung; i--) {
-                                easyList[i] = easyList[i + 1];
-                            }
-                            easyList[platzierung] = new Spieler(player);
-                            break;
-                        }//GameInstance
-                    case "Medium": {
-                            if (mediumList == null) { ok = false; break; }
-                            arrLength = mediumList.Length;
-                            if (arrLength == 1) { mediumList[platzierung] = new Spieler(player); break; }
-                            for (int i = arrLength - 2; i >= platzierung; i--) {
-                                mediumList[i] = mediumList[i + 1];
-                            }
-                            mediumList[platzierung] = new Spieler(player);
-                            break;
-                        }//Medium
-                    case "Hard": {
-                            if (hardList == null) { ok = false; break; }
-                            arrLength = hardList.Length;
-                            if (arrLength == 1) { hardList[platzierung] = new Spieler(player); break; }
-                            for (int i = arrLength - 2; i >= platzierung; i--) {
-                                hardList[i] = hardList[i + 1];
-                            }
-                            hardList[platzierung] = new Spieler(player);
-                            break;
-                        }//Hard
-                    default: { ok = false; break; } //Wenn das Spieler-Objekt weder GameInstance, Medium oder Hard ist.
-                }//switch(selectedDifficulty)
-            }//if(CheckBest)
-            else { ok = false; }    //Wenn CheckBest sagt, Nein.
-            return ok;
-        }//InsertSorted
+                    if (playerList[i].Score < player.Score)
+                    {
+                        index = i;
+                        break;
+                    }
+                    else
+                    {
+                        index = playerList.Length;
+                    }
+                }
+                Array.Resize(ref playerList, playerList.Length + 1);
+
+                for (int i = playerList.Length - 1; i > index; i--) // Verschiebt die Liste um 1 nach unten, von hinten nach vorne
+                {
+                    playerList[i] = playerList[i - 1];
+                }
+              return index+1; // plus 1 weil Grid.Row=0 die listenheader sind
+            }
+
+        }//GetRankInList
 
         #endregion Methoden
 
@@ -355,22 +276,10 @@ namespace Minesweeper
 
         #region Getter und Setter
 
-        public Spieler[] EasyList
+        public Spieler[] PlayerList
         {
-            get => easyList;
-            set { easyList = value; }
-        }
-
-        public Spieler[] MediumList
-        {
-            get => mediumList;
-            set { mediumList = value; }
-        }
-
-        public Spieler[] HardList
-        {
-            get => hardList;
-            set { hardList = value; }
+            get => playerList;
+            set { playerList = value; }
         }
 
         public Spieler[] PlatzhalterList
