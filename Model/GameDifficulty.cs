@@ -89,19 +89,19 @@ namespace Minesweeper
           
         }
 
-        public override string ToString() { return "Easy"; }
+        public override string ToString() { return "EASY"; }
 
     }//Klasse
 
 
-    public class Medium : GameDifficulty
+    public class Intermediate : GameDifficulty
     {
-        public Medium() : base(16, 16, 40)
+        public Intermediate() : base(16, 16, 40)
         {
 
         }
 
-        public override string ToString() { return "Medium"; }
+        public override string ToString() { return "NORM"; }
 
     }//Klasse
 

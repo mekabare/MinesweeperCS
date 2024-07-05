@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,7 +83,7 @@ namespace Minesweeper
                         diffValue = 1;
                         break;
                     }
-                case "Medium": {
+                case "Intermediate": {
                         diffValue = 2;
                         break;
                     }
@@ -201,16 +202,49 @@ namespace Minesweeper
             {
                 if (value == null) { throw new ArgumentNullException("selectedDifficulty", "Difficulty object cannot be null!"); }
                 else if (value is Easy ||
-                    value is Medium ||
+                    value is Intermediate ||
                     value is Hard ||
                     value is Custom)
                 {
                     difficulty = value;
                 }
-                else { throw new ArgumentException("Difficulty object must be an GameInstance-, Medium-, Hard-, or Custom-Objekt.", "Difficulty"); }
+                else { throw new ArgumentException("Difficulty object must be an GameInstance-, Intermediate-, Hard-, or Custom-Objekt.", "Difficulty"); }
             }
         }//Difficulty
         #endregion Getter und Setter
 
+        public override string ToString()
+        {
+            return Name + ";" + Difficulty + ";" + Time + ";" + Score + "#";
+        }//ToString
+
+        public string[] GetIndividualStrings()
+        {
+            string[] parts = new string[4];
+            parts[0] = Name;
+            parts[1] = Difficulty.ToString();
+            parts[2] = Time.ToString();
+            parts[3] = Score.ToString();
+            return parts;
+        }//GetIndividualStrings
+
+        public Spieler FromString(string s)
+        {
+            Spieler player = new Spieler();
+            string[] parts = s.Split(';');
+            player.Name = parts[0].ToUpper();
+            switch (parts[1])
+            {
+                case "Easy": { player.Difficulty = new Easy(); break; }
+                case "Intermediate": { player.Difficulty = new Intermediate(); break; }
+                case "Hard": { player.Difficulty = new Hard(); break; }
+                default: { break; }
+            }//switch
+            player.Time = Convert.ToInt32(parts[2]);
+            player.Score = Convert.ToInt32(parts[3]);
+
+            return player;
+
+        }//FromString
     }//Klasse
 }//Namespace

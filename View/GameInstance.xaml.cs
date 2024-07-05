@@ -157,7 +157,7 @@ namespace Minesweeper.View
 
         internal void OnMediumGameRequested(object sender, EventArgs e)
         {
-            this.SelectedDifficulty = new Medium();
+            this.SelectedDifficulty = new Intermediate();
         }
 
         internal void OnHardGameRequested(object sender, EventArgs e)

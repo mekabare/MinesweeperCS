@@ -1,72 +1,133 @@
-﻿<Window x:Class="Minesweeper.View.BestenlisteDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Minesweeper.View"
-        mc:Ignorable="d"
-        Title="BestenListeDialog" Height="450" Width="400"
-		ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="Minesweeper.View.BestenlisteDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Minesweeper.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="BestenListeDialog"
+    Width="400"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
 
     <Window.Resources>
 
         <Style TargetType="Label">
-            <Setter Property="Background" Value="#7FFFD804"/>
-            <Setter Property="Foreground" Value="{StaticResource Stroke}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontFamily" Value="Sprint 2"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Background" Value="#7FFFD804" />
+            <Setter Property="Foreground" Value="{StaticResource Stroke}" />
+            <Setter Property="BorderBrush" Value="{StaticResource SoftHighlight}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="19" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontFamily" Value="Sprint 2" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="110" />
+            <Setter Property="Margin" Value="0.5,2,0.5,2"/>
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="{StaticResource Stroke}"/>
-            <Setter Property="Foreground" Value="{StaticResource Highlight}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="45"/>
-            <Setter Property="Width" Value="134"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Background" Value="{StaticResource Stroke}" />
+            <Setter Property="Foreground" Value="{StaticResource Highlight}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="19" />
+            <Setter Property="FontFamily" Value="Sprint 2" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="45" />
+            <Setter Property="Width" Value="134" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Margin" Value="0.5,0,0.5,0" />
         </Style>
     </Window.Resources>
 
-    
- 
-    <Grid x:Name="ListGrid" Background="{StaticResource Background}">
+
+
+    <Grid x:Name="ListGrid" Background="{StaticResource Main}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="TopRow" Height="Auto" />
+            <RowDefinition x:Name="BottomRow" Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition x:Name="Name" Width="*" />
+            <ColumnDefinition x:Name="Mode" Width="*" />
+            <ColumnDefinition x:Name="Time" Width="*" />
+            <ColumnDefinition x:Name="Score" Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Label Content="NAME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0" Width="134" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        <Label Content="MODE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="TIME" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Width="134" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <DockPanel x:Name="BottomDock" Grid.RowSpan="9"  Grid.ColumnSpan="4" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="{StaticResource Tertiary}">
-            <RadioButton x:Name="Descending" Content="Descending Sort" Width="Auto" HorizontalAlignment="Stretch" Margin="50,0,0,0" VerticalAlignment="Center" IsChecked="True" FontFamily="Sprint 2" FontSize="9" VerticalContentAlignment="Center" Foreground="{DynamicResource Stroke}" BorderBrush="{DynamicResource Secondary}"/>
-            <RadioButton x:Name="Ascending" Content="Ascending Sort" Width="Auto" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="Sprint 2" FontSize="9" VerticalContentAlignment="Center" Foreground="{DynamicResource Stroke}" BorderBrush="{DynamicResource Secondary}" />
-        </DockPanel>
-        <ScrollViewer x:Name="ScrollViewer" Background="{DynamicResource Secondary}" BorderBrush="{DynamicResource Stroke}" Foreground="{DynamicResource Tertiary}" VerticalScrollBarVisibility="Disabled" Grid.RowSpan="9" Grid.Column="3"></ScrollViewer>
+        <Label
+            Grid.Column="0"
+            Content="NAME"
+            />
+        <Label
+            Grid.Column="1"
+            Content="MODE"
+             />
+        <Label
+            Grid.Column="2"
 
-        <!-- Hier kamen Platzhalter Labels rein -->
+            Content="TIME"
+            />
+        <Label
+            Grid.Column="3"
+            Content="SCORE"
+              />
+
+        <ScrollViewer
+    x:Name="ScrollViewer"
+    Grid.RowSpan="9"
+    Grid.Column="4"
+    Background="{DynamicResource Secondary}"
+    BorderBrush="{DynamicResource Stroke}"
+    Foreground="{DynamicResource Tertiary}"
+    VerticalScrollBarVisibility="Disabled" >
+     </ScrollViewer>
+        <DockPanel
+            x:Name="BottomDock"
+            Grid.RowSpan="9"
+            Grid.ColumnSpan="4"
+            Height="30"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Background="{StaticResource Tertiary}">
+            <RadioButton
+                x:Name="Descending"
+                Width="Auto"
+                Margin="50,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                BorderBrush="{DynamicResource Secondary}"
+                Checked="RadioButton_Checked"
+                Content="Descending Sort"
+                FontFamily="Sprint 2"
+                FontSize="9"
+                Foreground="{DynamicResource Stroke}"
+                IsChecked="True" />
+            <RadioButton
+                x:Name="Ascending"
+                Width="Auto"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                BorderBrush="{DynamicResource Secondary}"
+                Checked="RadioButton_Checked"
+                Content="Ascending Sort"
+                FontFamily="Sprint 2"
+                FontSize="9"
+                Foreground="{DynamicResource Stroke}" />
+        </DockPanel>
+        
+
     </Grid>
 </Window>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,10 @@ namespace Minesweeper.View
 
        public abstract void SaveBestenliste();
 
-
         // TODO event handler for radio buttons
+
+        public abstract void RadioButton_Checked(object sender, EventArgs e);
+        
+
     }
 }

@@ -81,6 +81,7 @@ namespace Minesweeper.View
             MainMenu.NewGameRequested += NewGameButton_Click;
             MainMenu.HighscoreRequested += HighscoreButton_Click;
             MainMenu.ExitRequested += ExitButton_Click;
+            this.Closing += ExitButton_Click;
             MainMenu.HowToDialogButton.Click += HowToDialogButton_Click;
             DifficultyDialog.EasyGameRequested += GameInstance_OnEasyGameRequested; // OnEasyGameRequested
             DifficultyDialog.MediumGameRequested += GameInstance_OnMediumGameRequested; // OnMediumGameRequested
@@ -105,7 +106,7 @@ namespace Minesweeper.View
         private void GameInstance_OnMediumGameRequested(object sender, EventArgs e)
         {
             DifficultyDialog.Hide();
-            gameInstance = new GameInstance(new Medium());
+            gameInstance = new GameInstance(new Intermediate());
 
             MainContent.Content = gameInstance;
             TimerDisplay.Visibility = Visibility.Visible;

@@ -60,6 +60,11 @@ namespace Minesweeper.View
         {
             throw new NotImplementedException();
         }
+
+        public override void RadioButton_Checked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

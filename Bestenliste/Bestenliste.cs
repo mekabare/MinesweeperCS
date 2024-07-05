@@ -20,7 +20,6 @@ namespace Minesweeper
 
         private Spieler[] playerList;
 
-        private Spieler[] platzhalterList = null;
         #endregion Felder
 
 
@@ -32,7 +31,7 @@ namespace Minesweeper
         /// </summary>
         public Bestenliste()   //Hier macht nur ein Default-Konstruktor sinn, weil die Klasse effektiv nur mit Dateien arbeitet
         {
-            ReadList();      //Bestückt die Listen.
+            //Bestückt die Listen.
         }//default
 
         #endregion Konstruktoren
@@ -68,8 +67,7 @@ namespace Minesweeper
         public bool ReadList()
         {
             bool ok = false;
-            string line = "";
-            int number;             //Hilfsvariable für numerische Konvertierungen mit TryParse()
+            string line = "";            //Hilfsvariable für numerische Konvertierungen mit TryParse()
             Spieler spieler = null;
             int entryCount = 0;     //Zählt die Anzahl der eingelesenen Datensätze, erlaubt dynamische Generierung des UIs
 
@@ -89,6 +87,8 @@ namespace Minesweeper
                             {
                                 string[] list = line.Split('#'); //Es sollten 30 Datensätze dabei entstehen.
 
+                                playerList = new Spieler[list.Length];
+
                                 foreach (string player in list)
                                 {
 
@@ -100,43 +100,40 @@ namespace Minesweeper
 
                                         spieler.Name = param[0];                                //Name
 
-                                        ok = int.TryParse(param[1], out number);
+                                        ok = int.TryParse(param[2], out var number);
+                                        ok = int.TryParse(param[3], out var number2);
                                         if (ok)
                                         {
-                                            spieler.Time = number;                              //Time
+                                            spieler.Time = number;
+                                            spieler.Score = number2;
+                                            spieler.Score = CalculateScore(spieler);
 
-                                            switch (param[2])
+                                            switch (param[1].ToUpper())
                                             {
-                                                case "Easy":
+                                                case "EASY":
                                                     {
                                                         spieler.Difficulty = new Easy();
                                                         break; //selectedDifficulty
                                                     }
 
-                                                case "Medium":
+                                                case "MEDIUM":
                                                     {
-                                                        spieler.Difficulty = new Medium();      //selectedDifficulty
+                                                        spieler.Difficulty = new Intermediate();      //selectedDifficulty
                                                         break;
 
                                                     }
 
-                                                case "Hard":
+                                                case "HARD":
                                                     {
                                                         spieler.Difficulty = new Hard();        //selectedDifficulty
                                                         break;
 
                                                     }
 
-                                                default:
-                                                    {
-                                                        ok = false;
-                                                        break;
-                                                    }
                                             }//switch
                                             Array.Resize<Spieler>(ref playerList, entryCount + 1);
                                             playerList[entryCount] = new Spieler(spieler);
                                             entryCount++;
-                                            break;
                                             //Custom werden nicht gespeichert, und deswegen nicht eingelesen
 
 
@@ -201,7 +198,8 @@ namespace Minesweeper
         //SortList
         public void SortListAscending()
         {
-            if (ReadList())
+            if (playerList != null) 
+            { 
 
                 foreach (Spieler player in playerList)
                 {
@@ -212,12 +210,14 @@ namespace Minesweeper
                     // sortingdirection is ascending
 
                 }
+             ReadList();
+            }
         }
 
-        public void SortListDescending
-            ()
+        public void SortListDescending()
         {
-            if (ReadList())
+            if (playerList != null)
+            {
 
                 foreach (Spieler player in playerList)
                 {
@@ -228,6 +228,8 @@ namespace Minesweeper
                     // sortingdirection is descending
 
                 }
+                ReadList();
+            }
         }
 
         /// <summary>
@@ -270,6 +272,24 @@ namespace Minesweeper
 
         }//GetRankInList
 
+        internal int CalculateScore(Spieler player)
+        {
+            int multiplier = 0;
+            switch (player.Difficulty)
+            {  case Easy e:
+                    multiplier = 1 + (30 /player.Time); // based on average times to win reported online
+                    break;
+                case Intermediate m:
+                    multiplier = 2 + (60 /player.Time);
+                    break;
+                case Hard h:
+                    multiplier = 3 + (90/ player.Time);
+                    break;
+            }
+           player.Score = multiplier * 1000; // make big number, prettyyyyyyy, funnnnn
+           return player.Score;
+        }
+
         #endregion Methoden
 
 
@@ -282,12 +302,7 @@ namespace Minesweeper
             set { playerList = value; }
         }
 
-        public Spieler[] PlatzhalterList
-        {
-            get => platzhalterList;
-            set { platzhalterList = value; }
-        }
-
+      
         #endregion Getter und Setter
 
     }//Klasse
